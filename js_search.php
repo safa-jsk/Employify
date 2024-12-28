@@ -68,33 +68,33 @@
                                             $company_query_run = mysqli_query($con, $company_query);
                                             $company = mysqli_fetch_assoc($company_query_run);
                                 ?>
-                                            <tr>
-                                                <td><?= htmlspecialchars($items['A_id']); ?></td>
-                                                <td><?= htmlspecialchars($items['Name']); ?></td>
-                                                <td><?= htmlspecialchars($company['CName']); ?></td>
-                                                <td><?= htmlspecialchars($items['Deadline']); ?></td>
-                                                <td><?= htmlspecialchars($items['Field']); ?></td>
-                                                <td><?= htmlspecialchars($items['Salary']); ?></td>
-                                                <td><?= htmlspecialchars($items['Description']); ?></td>
-                                                <td><a href="js_apply.php?A_id=<?= htmlspecialchars($items['A_id']); ?>"
-                                                        class="btn btn-primary" name="apply">Apply</a></td>
-                                                <td><a href="js_bookmark.php?A_id=<?= htmlspecialchars($items['A_id']); ?>"
-                                                        class="btn btn-primary" name="bookmark">Bookmark</a></td>
-                                            </tr>
-                                        <?php
+                                <tr>
+                                    <td><?= htmlspecialchars($items['A_id']); ?></td>
+                                    <td><?= htmlspecialchars($items['Name']); ?></td>
+                                    <td><?= htmlspecialchars($company['CName']); ?></td>
+                                    <td><?= htmlspecialchars($items['Deadline']); ?></td>
+                                    <td><?= htmlspecialchars($items['Field']); ?></td>
+                                    <td><?= htmlspecialchars($items['Salary']); ?></td>
+                                    <td><?= htmlspecialchars($items['Description']); ?></td>
+                                    <td><a href="js_apply.php?A_id=<?= htmlspecialchars($items['A_id']); ?>"
+                                            class="btn btn-primary" name="apply">Apply</a></td>
+                                    <td><a href="js_bookmark.php?A_id=<?= htmlspecialchars($items['A_id']); ?>"
+                                            class="btn btn-primary" name="bookmark">Bookmark</a></td>
+                                </tr>
+                                <?php
                                         }
                                     } else {
                                         ?>
-                                        <tr>
-                                            <td colspan="9">No Record Found</td>
-                                        </tr>
-                                    <?php
+                                <tr>
+                                    <td colspan="9">No Record Found</td>
+                                </tr>
+                                <?php
                                     }
                                 } else {
                                     ?>
-                                    <tr>
-                                        <td colspan="9">Please enter a search term.</td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="9">Please enter a search term.</td>
+                                </tr>
                                 <?php
                                 }
                                 mysqli_close($con);

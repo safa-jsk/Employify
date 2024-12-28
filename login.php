@@ -12,7 +12,8 @@ if (isset($_POST['login'])) {
     $stmt = $con->prepare("SELECT 'job_seeker' AS role, password FROM seeker
                             WHERE Email = ?
                             UNION
-                            SELECT 'employer' AS role, password FROM recruiter WHERE Email = ?");
+                            SELECT 'employer' AS role, password FROM recruiter 
+                            WHERE Email = ?");
     $stmt->bind_param("ss", $username, $username);
     $stmt->execute();
     $stmt->store_result();

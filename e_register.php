@@ -34,7 +34,7 @@ if (isset($_POST['e_register'])) {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // Insert data
-        $stmt = $conn->prepare("INSERT INTO `recruiter` (`R_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `CName`, `CDescription`, `Contact`) 
+        $stmt = $con->prepare("INSERT INTO `recruiter` (`R_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `CName`, `CDescription`, `Contact`) 
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         $stmt->bind_param("sssisssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $company_name, $company_description, $contact_number);

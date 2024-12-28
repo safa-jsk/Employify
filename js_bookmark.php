@@ -40,5 +40,5 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
 }
 
 mysqli_close($con);
-header("Location: js_search.php?message=" . urlencode($message));
+header("Location: js_bookmarks.php");
 exit;
