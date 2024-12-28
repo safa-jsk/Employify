@@ -1,0 +1,29 @@
+CSE370 Project To-Do
+
+1. Fix CSS
+2. For Job Seeker
+	Check already existing user_id in register [Similar to Email check]
+	Account Details (UPDATE Query)
+	Show all application for EMPTY search query
+	Dashboard (SELECT Queries with COUNT and LIMIT)
+	Add Company Name to Search query [js_search.php]
+	Add Apply Button to Bookmarked Jobs (Optional)
+	Fix Apply and Bookmark Button (resets Search table)
+
+2. For Employer
+	Check already existing user_id in register
+	Account Details (UPDATE Query)
+	Dashboard (SELECT Queries with COUNT and LIMIT)
+	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]
+	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]
+	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]
+	Search all job seekers by skill and experience (SELECT Query) [Similar to js_search.php]
+
+3. Shortlisted Candidates
+	View Profile Button (SELECT Query)
+	Send Acceptance Letter Button (Dummy Button, popup shows email sent)
+
+4. Registration and Login
+	Verify Email address format in input
+	
+5. Admin Panel
