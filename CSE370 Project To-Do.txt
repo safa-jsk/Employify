@@ -6,9 +6,9 @@ CSE370 Project To-Do
 	Account Details (UPDATE Query)
 	Show all application for EMPTY search query 
 	Dashboard (SELECT Queries with COUNT and LIMIT)
-	Add Company Name to Search query [js_search.php]
+	Add Company Name to Search query [js_search.php] {optional}
 	Add Apply Button to Bookmarked Jobs (Optional)
-	Fix Apply and Bookmark Button (resets Search table)
+	Fix Apply and Bookmark Button (resets Search table and alert!!)
 	Bookmark remove button
 
 2. For Employer
