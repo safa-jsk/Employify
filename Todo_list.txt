@@ -1,0 +1,26 @@
+CSE370 Project To-Do
+
+1. Fix CSS
+2. For Job Seeker
+	Account Details (UPDATE Query)											Saadat
+	Show all application for EMPTY search query 							Safa
+	Dashboard (SELECT Queries with COUNT and LIMIT)							Maliha
+	Add Company Name to Search query [js_search.php]						Safa
+	Add Apply Button to Bookmarked Jobs (Optional)							Safa
+	Fix Apply and Bookmark Button (resets Search table)						Fixed (redirected)
+	Bookmark remove (Confirmation alert)									Saadat
+
+2. For Employer
+	Check already existing user_id in register [Copy from Job Seeker]
+	Account Details (UPDATE Query)
+	Dashboard (SELECT Queries with COUNT and LIMIT)
+	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]
+	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]
+	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]
+	Search all job seekers by skill and experience (SELECT Query) [Similar to js_search.php] (Extremely Optional)
+
+3. Shortlisted Candidates
+	View Profile Button (SELECT Query)
+	Send Acceptance Letter Button (Dummy Button, popup shows email sent)
+	
+4. Admin Panel
