@@ -4,11 +4,12 @@ CSE370 Project To-Do
 2. For Job Seeker
 	Check already existing user_id in register [Similar to Email check]
 	Account Details (UPDATE Query)
-	Show all application for EMPTY search query
+	Show all application for EMPTY search query 
 	Dashboard (SELECT Queries with COUNT and LIMIT)
 	Add Company Name to Search query [js_search.php]
 	Add Apply Button to Bookmarked Jobs (Optional)
 	Fix Apply and Bookmark Button (resets Search table)
+	Bookmark remove button
 
 2. For Employer
 	Check already existing user_id in register
