@@ -1,0 +1,630 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+  
+body {
+  font-family: 'Poppins', sans-serif;
+  color: #100727;
+  /* background: url(../images/home-bg.jpg) no-repeat center center fixed;  */
+  background-size: cover;
+  z-index: -1;
+  backdrop-filter: blur(2px);
+}
+
+a {
+  color: black; 
+  text-decoration: none; 
+}
+
+a:hover {
+  color: #d4eefc;
+  text-decoration: underline; 
+}
+
+/* Navigation bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px;
+  background-color: rgb(57, 119, 205);
+  background: linear-gradient(270deg,rgba(57,119,205,1)8%,rgba(0,212,255,1) 89%);
+}
+
+.navbar .logo a{   
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.logo img{
+    width: 300px; 
+    height: auto; 
+    max-height: 50px; 
+    display: inline-block;
+  }
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar ul li {
+  display: inline;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: #270f75;
+  font-size: 20px;
+  transition: 0.3s ease;
+}
+
+.navbar ul li a:hover{
+  color: #fcfcfd;;
+  background-color:  #9fbcd2;
+}
+
+.navbar .nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #fbfbfc;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown .dropbtn {
+  background: none;
+  border: none;
+  color: #fbfbfc;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 10px 12px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Main Container */
+.container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 50px 30px;
+}
+
+/* Left Section - index.html */
+.body-section {
+  display: flex;
+  justify-content: flex-start;
+  block-size: auto;
+  flex-direction: column;
+  align-items: flex-start;
+  align-content: flex-start;
+  flex-wrap: nowrap;
+  margin: 100px 150px 150px 50px;
+}
+
+.body-section h1 {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.body-section h2{
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+ 
+.body-section p {
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+/*body section search options*/
+.account-selection {
+  margin-bottom: 20px;
+  display: flex;
+  font-size: 16px;
+}
+
+.btn-type {
+  padding: 5px 10px;
+  width: 160px;
+  margin: 0px 10px 20px 0px;
+  font-size: 15px;
+  background-color: #c2e8fc;
+  color: #333;
+}
+
+/* .search-bar {
+  background: white;
+  border-radius: 8px;
+  margin-top: -40px;
+  font-size: 16px;
+
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+} */
+
+/* .search-btn{
+  background-color: #6185d3;
+  color:#fcfcfd;
+  text-decoration: none;
+  border: none;
+  padding: 3px 5px 3px 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+} */
+
+.search-optn{
+  padding: 3px 5px 3px 10px;
+} */
+
+
+/* features */
+.features-section {
+  padding: 40px 0;
+  background-color: #d4eefc;
+  background-image: none;
+  
+}
+
+.feature-container{
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  justify-content: center;
+}
+
+.feature-optn{
+  padding: 10px;
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center
+}
+
+.feature-optn img{
+  width: 80px; 
+  height: auto; 
+  max-height: 100px; 
+  display: inline-block;
+  align-items: center;
+}
+
+/* footer */
+/* footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #000000;
+  color: white;
+  padding: 10px 0;
+} */
+
+/* Mlogin signup Popup Styling */
+.popup {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup:target {
+  display: flex;
+}
+
+.popup-content {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.popup-content h4 {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  padding: 6px;
+}
+
+/* Close Button */
+.popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  cursor: pointer;
+  font-size: 24px;
+  text-decoration: none;
+  color: #333;
+}
+
+.popup .close-btn:hover {
+  color: #ff0000;
+}
+
+/* Form Input Styling */
+.popup form {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup form input {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.popup form button {
+  margin-top: 10px;
+  padding: 10px;
+  background: #0078d7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popup form button:hover {
+  background: #005bb5;
+}
+
+/* Select Styling for Gender */
+select {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 14px;
+}
+
+input[type="date"] {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 14px;
+}
+
+/* Account Selection Buttons */
+.account-selection {
+  margin-top: 20px;
+}
+
+.account-selection .btn-type {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+  margin: 0px 10px 20px 0px;
+  padding: 10px 20px;
+  background: #0078d7;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.account-selection .btn-type:hover {
+  background: #005bb5;
+}
+
+.account-selection .btn-type a{
+  display: flex;
+  align-items: center;
+}
+
+/* Login and Sign up Page */
+.form-container {
+  /* Form background and position */
+  background-color: #def4f2;
+  display: flex;
+  width: 350px;
+  justify-content: center;
+  align-items: center;
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 50px 30px;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.form-input-wrapper {
+  margin-bottom: 15px; /* Adds space between form fields */
+}
+
+.value-input {
+  width: 100%; /* Makes inputs take the full width of their container */
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Dashboard */
+/* Sidebar Styling */
+.sidebar {
+  width: 160px;
+  height: 100%;
+  background-color: #142455;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  position: fixed;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+  background-color: #0077b6;
+  color: #000000;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* dashboard Main Content */
+.content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+/* Section Styling */
+.section {
+  margin-bottom: 30px;
+}
+
+/* Cards for Summary Section */
+#summary-section {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.card {
+  background: #ffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 50%;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+  margin: 0 0 10px;
+}
+
+/* Job Lists */
+#applied-jobs-section,
+#bookmarks-section {
+  background: #ffff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+#applied-jobs-section ul,
+#bookmarks-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+#applied-jobs-section li,
+#bookmarks-section li {
+  padding: 10px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+#applied-jobs-section li:last-child,
+#bookmarks-section li:last-child {
+  border-bottom: none;
+}
+
+
+/* bookmarks */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #03045e;
+  color: #fff;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:hover {
+  background-color: #ebfcff;
+}
+
+td {
+  color: #333;
+}
+
+/* Acount Details */
+
+.account-container {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 30px;
+}
+
+.profile-section {
+  text-align: center;
+}
+
+.profile-pic img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-section h4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.edit-button {
+  border-radius: 20px;
+  background-color: #6200ea;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.edit-button:hover {
+  background-color: #4500b0;
+}
+
+/* Edit Button */
+button {
+  display: inline-block;
+  background-color: #0d042c;
+  color: #fcfcfd;
+  text-decoration: none;
+  border: none;
+  padding: 12px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #465664;
+  color: #fcfcfd;
+}
