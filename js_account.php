@@ -20,8 +20,8 @@
         <div class="profile-section">
             <div class="profile-pic">
                 <img src="https://www.w3schools.com/w3images/avatar2.png">
-                <h3>Employee1</h3>
-                <p>employee1@gmail.com</p>
+                <h3>Job_Seeker1</h3>
+                <p>jobseeker1@gmail.com</p>
             </div>
         </div>
         <div class="form-section">
