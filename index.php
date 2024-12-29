@@ -110,7 +110,6 @@
                 const modal = document.getElementById(id);
                 if (event.target === modal) {
                     modal.style.display = "none";
-
                 }
             });
         };
