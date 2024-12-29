@@ -304,16 +304,17 @@ input[type="date"] {
 /* Dashboard */
 /* Sidebar Styling */
 .sidebar {
-  width: 160px;
-  height: 100%;
-  background-color: #142455;
+  width: 220px;
+  height: 100vh;
+  background-color: #142455; 
   color: white;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
-  position: fixed;
+  position: fixed; 
+  left: 0;
+  overflow-y: auto; 
 }
-
 .sidebar ul {
   list-style-type: none;
   padding: 0;
@@ -339,13 +340,13 @@ input[type="date"] {
 }
 
 /* dashboard Main Content */
-.content {
+.dashboard_content {
   margin-left: 250px;
   padding: 20px;
 }
 
 /* Section Styling */
-.section {
+.dashboard_section {
   margin-bottom: 30px;
 }
 
@@ -356,7 +357,7 @@ input[type="date"] {
   margin-bottom: 40px;
 }
 
-.card {
+.job_card {
   background: #ffff;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -366,7 +367,7 @@ input[type="date"] {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.card h3 {
+.job_card h3 {
   margin: 0 0 10px;
 }
 

@@ -47,21 +47,21 @@
     <?php include 'includes/js_navbar.php'; ?>
     <?php include 'includes/js_sidebar.php'; ?>
     <!-- main contents -->
-    <div class="content">
+    <div class="dashboard_content">
         <!-- Section 1: Summary Cards -->
-        <div class="section" id="summary-section">
-            <div class="card">
+        <div class="dashboard_section" id="summary-section">
+            <div class="job_card">
                 <h3>Applied Jobs</h3>
                 <p id="applied-jobs-count">"applied-jobs-count"</p>
             </div>
-            <div class="card">
+            <div class="job_card">
                 <h3>Bookmarks</h3>
                 <p id="bookmarked-jobs-count">"bookmarked-jobs-count"</p>
             </div>
         </div>
 
         <!-- Section 2: Applied Jobs List -->
-        <div class="section" id="applied-jobs-section">
+        <div class="dashboard_section" id="applied-jobs-section">
             <h2>Applied Jobs</h2>
             <ul id="applied-jobs-list">
                 <!-- Dynamic data will be loaded here -->
@@ -69,7 +69,7 @@
         </div>
 
         <!-- Section 3: Bookmarks List -->
-        <div class="section" id="bookmarks-section">
+        <div class="dashboard_section" id="bookmarks-section">
             <h2>Bookmarked Jobs</h2>
             <ul id="bookmarked-jobs-list">
                 <!-- Dynamic data will be loaded here -->
