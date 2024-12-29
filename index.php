@@ -31,7 +31,8 @@
     <main class="container">
         <div class="body-section" id="home">
             <h1>DON'T MISS THE JOB OF YOUR DREAMS!</h1>
-            <p>Your Next Step Starts Here—For Dream Jobs and Star Employees.<br><strong>Just one click away!</strong></p>
+            <p>Your Next Step Starts Here—For Dream Jobs and Star Employees.<br><strong>Just one click away!</strong>
+            </p>
             <div class="account-selection">
                 <a href="#registerJsPopup" class="btn-type">Find a Job</a>
                 <a href="#registerEmployerPopup" class="btn-type">Find a Candidate</a>
@@ -103,15 +104,39 @@
 
     <script>
         // Close popups when clicking outside
-        window.onclick = function (event) {
+        window.onclick = function(event) {
             const modals = ['loginModal', 'registerJsPopup', 'registerEmployerPopup'];
             modals.forEach((id) => {
                 const modal = document.getElementById(id);
                 if (event.target === modal) {
                     modal.style.display = "none";
+
                 }
             });
         };
+
+        // Function to open popups when links are clicked
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const modal = document.getElementById(targetId);
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close popup when close button is clicked
+        document.querySelectorAll('.close-btn').forEach((btn) => {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const popup = this.closest('.popup');
+                if (popup) {
+                    popup.style.display = 'none';
+                }
+            });
+        });
     </script>
 
     <!-- Features Section -->
