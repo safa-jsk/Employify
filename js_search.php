@@ -33,43 +33,52 @@ session_start();
                                 <input type="text" name="search"
                                     value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
                                     class="form-control" placeholder="Search for jobs">
-                                <button type="submit" class="btn btn-primary">Search</button>
+                                <button type="submit" class="search-button">Search</button>
                             </div>
                         </form>
+
+                        <!-- Advanced Search -->
+                        <button type="button" class="advanced_search_collapsible">Advanced Search</button>
+                        <div class="advanced_search_content">
+                            <form action="" method="get">
+
+                                <div class="input-group">
+                                    <input type="text" name="name"
+                                        value="<?php echo isset($_GET['name']) ? htmlspecialchars($_GET['name']) : ''; ?>"
+                                        class="form-control" placeholder="Search job by name">
+                                    <button type="submit" class="search-button">Search</button>
+                                </div>
+
+                                <div class="input-group">
+                                    <input type="text" name="company"
+                                        value="<?php echo isset($_GET['company']) ? htmlspecialchars($_GET['company']) : ''; ?>"
+                                        class="form-control" placeholder="Search job by company">
+                                    <button type="submit" class="search-button">Search</button>
+                                </div>
+
+                                <div class="input-group">
+                                    <input type="text" name="field"
+                                        value="<?php echo isset($_GET['field']) ? htmlspecialchars($_GET['field']) : ''; ?>"
+                                        class="form-control" placeholder="Search job by field">
+                                    <button type="submit" class="search-button">Search</button>
+                                </div>
+
+                                <div class="input-group">
+                                    <input type="int" name="salary"
+                                        value="<?php echo isset($_GET['salary']) ? htmlspecialchars($_GET['salary']) : ''; ?>"
+                                        class="form-control" placeholder="Search job by minimum salary">
+                                    <button type="submit" class="search-button">Search</button>
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <button type="button" class="collapsible">Advanced Search</button>
-            <div class="content">
-                <form action="" method="get">
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="name"
-                            value="<?php echo isset($_GET['name']) ? htmlspecialchars($_GET['name']) : ''; ?>"
-                            class="form-control" placeholder="Search job by name">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="text" name="field"
-                            value="<?php echo isset($_GET['field']) ? htmlspecialchars($_GET['field']) : ''; ?>"
-                            class="form-control" placeholder="Search job by field">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <input type="int" name="salary"
-                            value="<?php echo isset($_GET['salary']) ? htmlspecialchars($_GET['salary']) : ''; ?>"
-                            class="form-control" placeholder="Search job by salary">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-
-                </form>
-            </div>
-
+            <!-- Advanced Search Script -->
             <script>
-                var coll = document.getElementsByClassName("collapsible");
+                var coll = document.getElementsByClassName("advanced_search_collapsible");
                 var i;
 
                 for (i = 0; i < coll.length; i++) {
@@ -107,17 +116,45 @@ session_start();
                                 require_once 'DBconnect.php'; // use $con
 
                                 $search = isset($_GET['search']) && !empty(trim($_GET['search'])) ? trim($_GET['search']) : null;
+                                $name = isset($_GET['name']) && !empty(trim($_GET['name'])) ? trim($_GET['name']) : null;
+                                $company = isset($_GET['company']) && !empty(trim($_GET['company'])) ? trim($_GET['company']) : null;
+                                $field = isset($_GET['field']) && !empty(trim($_GET['field'])) ? trim($_GET['field']) : null;
+                                $salary = isset($_GET['salary']) && !empty(trim($_GET['salary'])) ? trim($_GET['salary']) : null;
 
                                 // Prepare query
-                                $query = "SELECT a.*, r.CName FROM applications a INNER JOIN recruiter r ON a.R_id = r.R_id";
+                                $query = "SELECT a.*, r.CName FROM applications a INNER JOIN recruiter r ON a.R_id = r.R_id WHERE 1=1";
+                                $params = [];
+                                $types = "";
+
                                 if ($search) {
-                                    $query .= " WHERE CONCAT(a.Name, a.Field, a.Salary, a.Description) LIKE ?";
+                                    $query .= " AND CONCAT(a.Name, a.Field, a.Salary, a.Description) LIKE ?";
+                                    $params[] = "%$search%";
+                                    $types .= "s";
+                                }
+                                if ($name) {
+                                    $query .= " AND a.Name LIKE ?";
+                                    $params[] = "%$name%";
+                                    $types .= "s";
+                                }
+                                if ($company) {
+                                    $query .= " AND r.CName LIKE ?";
+                                    $params[] = "%$company%";
+                                    $types .= "s";
+                                }
+                                if ($field) {
+                                    $query .= " AND a.Field LIKE ?";
+                                    $params[] = "%$field%";
+                                    $types .= "s";
+                                }
+                                if ($salary) {
+                                    $query .= " AND a.Salary >= ?";
+                                    $params[] = $salary;
+                                    $types .= "i";
                                 }
 
                                 $stmt = $con->prepare($query);
-                                if ($search) {
-                                    $search_param = "%$search%";
-                                    $stmt->bind_param("s", $search_param);
+                                if (!empty($params)) {
+                                    $stmt->bind_param($types, ...$params);
                                 }
 
                                 $stmt->execute();
