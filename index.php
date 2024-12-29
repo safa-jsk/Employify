@@ -101,6 +101,19 @@
         </div>
     </div>
 
+    <script>
+        // Close popups when clicking outside
+        window.onclick = function (event) {
+            const modals = ['loginModal', 'registerJsPopup', 'registerEmployerPopup'];
+            modals.forEach((id) => {
+                const modal = document.getElementById(id);
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+    </script>
+
     <!-- Features Section -->
     <section class="features-section" id="services">
         <div class="feature-container">
