@@ -303,8 +303,6 @@ input[type="date"] {
   transition: background-color 0.3s ease;
 }
 
-
-/* Dashboard */
 /* Sidebar Styling */
 .sidebar {
   width: 220px;
@@ -343,18 +341,33 @@ input[type="date"] {
   transition: background-color 0.3s ease;
 }
 
-/* dashboard Main Content */
+/* Dashboard */
 .dashboard_content {
   margin-left: 250px;
   padding: 20px;
 }
 
-/* Section Styling */
 .dashboard_section {
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 
-/* Cards for Summary Section */
+.dashboard_section p {
+  font-size: 17px;
+  color: #010101;
+  text-align: center;
+  font-weight: bold;
+}
+
+.dashboard_section h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: #222;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+}
+
+/* Summary Cards Section */
 #summary-section {
   display: flex;
   gap: 20px;
@@ -365,7 +378,7 @@ input[type="date"] {
   background: #ffff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px;
   width: 100%;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -375,43 +388,24 @@ input[type="date"] {
   margin: 0 0 10px;
 }
 
-/* Job Lists */
-#applied-jobs-section,
-#bookmarks-section {
-  background: #ffff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+/* Applied and Bookmarked Jobs List */
+#applied-jobs-list,
+#bookmarked-jobs-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
 }
-
-#applied-jobs-section ul,
-#bookmarks-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-#applied-jobs-section li,
-#bookmarks-section li {
-  padding: 10px;
-  border-bottom: 1px solid #f1f1f1;
-}
-
-#applied-jobs-section li:last-child,
-#bookmarks-section li:last-child {
-  border-bottom: none;
-}
-
 
 /* bookmarks */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
-}
-
-thead {
-  background-color: #03045e;
-  color: #fff;
+  margin: 20px 0;
+  font-size: 0.95em;
+  font-family: Arial, sans-serif;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 th, td {
@@ -421,11 +415,7 @@ th, td {
 }
 
 tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-tr:hover {
-  background-color: #ebfcff;
+  background-color: #f8f9ff;
 }
 
 td {
@@ -433,7 +423,6 @@ td {
 }
 
 /* Acount Details */
-
 .account-container {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
