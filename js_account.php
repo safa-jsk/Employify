@@ -12,73 +12,85 @@
 </head>
 
 <body>
-
+    <!-- <form method="POST" action="includes/update_profile.php"> -->
+    
     <?php include 'includes/js_navbar.php'; ?>
     <?php include 'includes/js_sidebar.php'; ?>
+    <?php include 'fetch_js.php'; ?>
 
     <div class="account-container">
         <div class="profile-section">
             <div class="profile-pic">
                 <img src="https://www.w3schools.com/w3images/avatar2.png">
-                <h3>Job_Seeker1</h3>
-                <p>jobseeker1@gmail.com</p>
+                <h3 ><?php echo htmlspecialchars($job_seeker['FName'] . ' ' . $job_seeker['LName'] ); ?></h3>
+                <p><?php echo htmlspecialchars($job_seeker['Email'] ?? ''); ?></p>
             </div>
         </div>
         <div class="form-section">
             <h4>Profile Information</h4>
-            <form>
+            <form method="POST" action="update_profile.php">
                 <div class="form-row">
                     <div class="form-group">
                         <label>First Name</label>
-                        <input type="text" placeholder="Sam">
+                        <input type="text" name="fname" 
+                            value="<?php echo htmlspecialchars($job_seeker['FName'] ?? ''); ?>" 
+                            placeholder="First Name">
                     </div>
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input type="text" placeholder="Maxwell">
+                        <input type="text" name="lname" 
+                            value="<?php echo htmlspecialchars($job_seeker['LName'] ?? ''); ?>" 
+                            placeholder="Last Name">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" placeholder="employee1@gmail.com">
+                        <input type="email" name="email" 
+                            value="<?php echo htmlspecialchars($job_seeker['Email'] ?? ''); ?>" 
+                            placeholder="Email">
                     </div>
 
                     <div class="form-group">
                         <label>Contact Number</label>
-                        <input type="tel" placeholder="+880..">
+                        <input type="tel" name="contact" 
+                            placeholder="+880.." 
+                            value="">
                     </div>
-
                 </div>
-
-
 
                 <div class="form-row">
                     <div class="form-group">
                         <label>Skills</label>
-                        <textarea placeholder="e.g., JavaScript, Python, SQL"></textarea>
+                        <textarea name="skills" 
+                                placeholder="e.g., JavaScript, Python, SQL"><?php echo htmlspecialchars($job_seeker['Skills'] ?? ''); ?></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Experience</label>
-                        <textarea placeholder="e.g., 3 years in Software Development"></textarea>
+                        <textarea name="experience" 
+                                placeholder="e.g., 3 years in Software Development"><?php echo htmlspecialchars($job_seeker['Experience'] ?? ''); ?></textarea>
                     </div>
                 </div>
 
-
                 <div class="form-group">
                     <label>Education</label>
-                    <textarea placeholder="e.g., B.Sc. in Computer Science"></textarea>
+                    <textarea name="education" 
+                            placeholder="e.g., B.Sc. in Computer Science"><?php echo htmlspecialchars($job_seeker['Education'] ?? ''); ?></textarea>
                 </div>
 
                 <div class="form-group">
                     <label>Date of Birth</label>
-                    <input type="date">
+                    <input type="date" name="dob" 
+                        value="<?php echo htmlspecialchars($job_seeker['DoB'] ?? ''); ?>">
                 </div>
 
-                <button type="edit">Edit</button>
+                <button type="submit" name="edit">Edit</button>
             </form>
         </div>
+
+
     </div>
 
 </body>
