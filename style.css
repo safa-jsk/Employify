@@ -58,14 +58,13 @@ a:hover {
 
 .navbar ul li a {
   text-decoration: none;
-  color: #270f75;
+  color: #e8e3f8;
   font-size: 20px;
   transition: 0.3s ease;
 }
 
 .navbar ul li a:hover{
-  color: #fcfcfd;;
-  background-color:  #9fbcd2;
+  color: #270f75;
 }
 
 .navbar .nav-links {
@@ -122,7 +121,7 @@ a:hover {
   display: block;
 }
 
-/* Main Container */
+/* Main Container index page */
 .container {
    display: flex;
    justify-content: space-between;
@@ -132,7 +131,7 @@ a:hover {
    padding: 50px 30px;
 }
 
-/* Left Section - index.html */
+/* body Section - index.html */
 .body-section {
   display: flex;
   justify-content: flex-start;
@@ -154,117 +153,57 @@ a:hover {
   font-weight: bold;
   margin-bottom: 20px;
 }
- 
+
+.body-section h6{
+  font-size: 15px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .body-section p {
   font-size: 20px;
   margin-bottom: 30px;
 }
 
-/*body section search options*/
-.account-selection {
-  margin-bottom: 20px;
-  display: flex;
-  font-size: 16px;
-}
-
-.btn-type {
-  padding: 5px 10px;
-  width: 160px;
-  margin: 0px 10px 20px 0px;
-  font-size: 15px;
-  background-color: #c2e8fc;
-  color: #333;
-}
-
-/* .search-bar {
-  background: white;
-  border-radius: 8px;
-  margin-top: -40px;
-  font-size: 16px;
-
-}
-
-.row{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-} */
-
-/* .search-btn{
-  background-color: #6185d3;
-  color:#fcfcfd;
-  text-decoration: none;
-  border: none;
-  padding: 3px 5px 3px 5px;
-  font-size: 14px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 5px;
-} */
-
-.search-optn{
-  padding: 3px 5px 3px 10px;
-} */
-
-
-/* features */
+/* Features Section */
 .features-section {
   padding: 40px 0;
   background-color: #d4eefc;
-  background-image: none;
-  
 }
 
-.feature-container{
+.feature-container {
   display: flex;
-  flex-direction: row;
-  font-size: 15px;
   justify-content: center;
 }
 
-.feature-optn{
+.feature-optn {
   padding: 10px;
   margin: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  align-content: center
 }
 
-.feature-optn img{
-  width: 80px; 
-  height: auto; 
-  max-height: 100px; 
+.feature-optn img {
+  width: 80px;
+  height: auto;
+  max-height: 100px;
   display: inline-block;
-  align-items: center;
 }
 
-/* footer */
-/* footer {
-  position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #000000;
-  color: white;
-  padding: 10px 0;
-} */
-
-/* Mlogin signup Popup Styling */
+/* Login and Sign up Page- Popup Styling */
 .popup {
-  display: none; /* Hidden by default */
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: #00000099;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  scrollbar-width: 5px;
 }
 
 .popup:target {
@@ -282,14 +221,6 @@ a:hover {
   text-align: center;
 }
 
-.popup-content h4 {
-  font-size: 16px;
-  display: flex;
-  justify-content: center;
-  padding: 6px;
-}
-
-/* Close Button */
 .popup .close-btn {
   position: absolute;
   top: 10px;
@@ -304,7 +235,6 @@ a:hover {
   color: #ff0000;
 }
 
-/* Form Input Styling */
 .popup form {
   display: flex;
   flex-direction: column;
@@ -320,7 +250,7 @@ a:hover {
 .popup form button {
   margin-top: 10px;
   padding: 10px;
-  background: #0078d7;
+  background: #3977cc;
   color: white;
   border: none;
   border-radius: 4px;
@@ -331,28 +261,29 @@ a:hover {
   background: #005bb5;
 }
 
-/* Select Styling for Gender */
 select {
-    margin-bottom: 2.5px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 14px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 14px;
 }
 
 input[type="date"] {
-    margin-bottom: 2.5px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 14px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 14px;
 }
 
 /* Account Selection Buttons */
 .account-selection {
-  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  font-size: 16px;
 }
 
 .account-selection .btn-type {
@@ -360,51 +291,15 @@ input[type="date"] {
   flex-direction: column;
   align-items: center;
   width: 160px;
-  margin: 0px 10px 20px 0px;
+  margin: 0 10px 20px 0;
   padding: 10px 20px;
-  background: #0078d7;
+  background: #0d2757;
   color: white;
   text-decoration: none;
   border-radius: 5px;
-  font-size: 14px;
-}
-
-.account-selection .btn-type:hover {
-  background: #005bb5;
-}
-
-.account-selection .btn-type a{
-  display: flex;
-  align-items: center;
-}
-
-/* Login and Sign up Page */
-.form-container {
-  /* Form background and position */
-  background-color: #def4f2;
-  display: flex;
-  width: 350px;
-  justify-content: center;
-  align-items: center;
-  max-width: 1200px;
-  margin: 50px auto;
-  padding: 50px 30px;
-  align-content: center;
-  flex-wrap: wrap;
-  flex-direction: column;
-}
-
-.form-input-wrapper {
-  margin-bottom: 15px; /* Adds space between form fields */
-}
-
-.value-input {
-  width: 100%; /* Makes inputs take the full width of their container */
-  padding: 10px;
   font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
 }
+
 
 /* Dashboard */
 /* Sidebar Styling */

@@ -31,12 +31,9 @@
     <main class="container">
         <div class="body-section" id="home">
             <h1>DON'T MISS THE JOB OF YOUR DREAMS!</h1>
-            <p>Your Next Step Starts Here—For Dream Jobs and Star Employees.<br><strong>Just one click away!</strong>
-            </p>
+            <p>Your Next Step Starts Here—For Dream Jobs and Star Employees.<br><strong>Just one click away!</strong></p>
             <div class="account-selection">
                 <a href="#registerJsPopup" class="btn-type">Find a Job</a>
-                <!-- </div >
-            <div class="account-selection"> -->
                 <a href="#registerEmployerPopup" class="btn-type">Find a Candidate</a>
             </div>
         </div>
@@ -75,7 +72,6 @@
                 <input type="text" name="skills" placeholder="Skills">
                 <input type="text" name="experience" placeholder="Experience">
                 <input type="text" name="education" placeholder="Education">
-                <input type="text" name="skills" placeholder="Skills">
                 <button type="submit" name="register_js">Register</button>
             </form>
         </div>
@@ -92,8 +88,8 @@
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <select name="gender" required>
                     <option value="" disabled selected>Select Gender</option>
-                    <option value=1>Male</option>
-                    <option value=0>Female</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
