@@ -14,7 +14,7 @@
     <?php include 'includes/js_navbar.php'; ?>
     <?php include 'includes/js_sidebar.php'; ?>
 
-    <div class="content">
+    <div class="jobs_content">
         <h1>Bookmarked Jobs</h1>
         <?php
         session_start();
