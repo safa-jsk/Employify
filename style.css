@@ -264,6 +264,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  scrollbar-width: 5px;
 }
 
 .popup:target {
@@ -332,19 +333,19 @@ a:hover {
 
 /* Select Styling for Gender */
 select {
-    margin-bottom: 10px;
+    margin-bottom: 2.5px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
     width: 100%;
     font-size: 14px;
 }
 
 input[type="date"] {
-    margin-bottom: 10px;
+    margin-bottom: 2.5px;
     padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 5px;
     width: 100%;
     font-size: 14px;
 }
@@ -465,7 +466,7 @@ input[type="date"] {
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
-  width: 50%;
+  width: 100%;
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -568,7 +569,7 @@ td {
 form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2.5px;
 }
 
 .form-row {
@@ -609,7 +610,7 @@ textarea {
   background-color: #4500b0;
 }
 
-/* Edit Button */
+/* Account Edit Button */
 button {
   display: inline-block;
   background-color: #0d042c;
@@ -627,4 +628,57 @@ button {
 button:hover {
   background-color: #465664;
   color: #fcfcfd;
+}
+
+
+/* Search Container */
+.search-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 50px 30px;
+}
+
+.search-card {
+  background: #ffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.search-card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+}
+
+/* Advanced Search */
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding: 0 2px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
 }
