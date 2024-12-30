@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <title>Employify</title>
 </head>
 
 <body>
+    <!-- <div class="background"></div> -->
+
     <!-- Header -->
     <header class="navbar">
         <div class="logo">
