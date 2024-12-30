@@ -51,6 +51,8 @@
                     <th>Field</th>
                     <th>Salary</th>
                     <th>Deadline</th>
+                    <th>Apply</th>
+                    <th>Remove</th>
                 </tr>';
 
             while ($row = $result->fetch_assoc()) {
@@ -62,6 +64,10 @@
                 echo '<td>' . htmlspecialchars($row['Field']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['Salary']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
+                echo '<td><a href="js_apply.php?A_id=' . htmlspecialchars($row['A_id']) .
+                    '" class="search-button" name="apply">Apply</a></td>';
+                echo '<td><a href="js_bookmark.php?A_id=' . htmlspecialchars($row['A_id']) .
+                    '" class="search-button" name="remove">Remove</a></td>';
                 echo '</tr>';
             }
 

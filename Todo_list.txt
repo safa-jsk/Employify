@@ -10,7 +10,7 @@ CSE370 Project To-Do
 	Fix Apply and Bookmark Button (resets Search table)						Fixed (redirected)
 	Bookmark remove [DELETE button]											Saadat
 	Scroll Jobs (Optional)
-	Dropdown Advanced Search 												Safa
+	Dropdown Advanced Search 												Safa DONE
 	Accepted Job Count 														Maliha
 	Login check after clicking logo											Maliha									
 
