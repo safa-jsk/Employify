@@ -2,11 +2,11 @@ CSE370 Project To-Do
 
 1. Fix CSS
 2. For Job Seeker
-	Account Details (UPDATE Query)											Saadat
-	Show all application for EMPTY search query 							Safa
-	Dashboard (SELECT Queries with COUNT and LIMIT)							Maliha
-	Add Company Name to Search query [js_search.php]						Safa
-	Add Apply Button to Bookmarked Jobs (Optional)							Safa
+	Account Details (UPDATE Query)											Saadat DONE
+	Show all application for EMPTY search query 							Safa DONE
+	Dashboard (SELECT Queries with COUNT and LIMIT)							Maliha DONE
+	Add Company Name to Search query [js_search.php]						Safa DONE
+	Add Apply Button to Bookmarked Jobs (Optional)							Safa 
 	Fix Apply and Bookmark Button (resets Search table)						Fixed (redirected)
 	Bookmark remove (Confirmation alert)									Saadat
 

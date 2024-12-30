@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
 if (!isset($_SESSION['username'])) {
@@ -36,11 +37,13 @@ $bookmarked_jobs_count = $result_bookmarked->fetch_assoc()['bookmarked_jobs_coun
 $stmt_bookmarked->close();
 
 //Applied Jobs List
-$query_applied_list = "SELECT a.Name, r.CName,a.Deadline, ss.Applied_Date 
+$query_applied_list = "SELECT a.Name, r.CName,a.Deadline, ss.Applied_Date, ss.Status
                        FROM seeker_seeks ss
                        INNER JOIN applications a ON ss.A_id = a.A_id
                        INNER JOIN recruiter r ON a.R_id = r.R_id
-                       WHERE ss.S_id = ?";
+                       WHERE ss.S_id = ?
+                       ORDER BY a.Deadline
+                       LIMIT 5";
 $stmt_applied_list = $con->prepare($query_applied_list);
 if (!$stmt_applied_list) {
     die("Error in query preparation: " . $con->error);
@@ -68,18 +71,19 @@ $con->close();
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <link rel="stylesheet" href="style.css" />
-      <title>Dashboard</title>
 
-    <body>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="style.css" />
+    <title>Dashboard</title>
+
+<body>
     <?php include 'includes/js_navbar.php'; ?>
     <?php include 'includes/js_sidebar.php'; ?>
-    
+
     <!-- main contents -->
     <div class="dashboard_content">
         <!-- Section 1: Summary Cards -->
@@ -102,30 +106,40 @@ $con->close();
         <div class="dashboard_section" id="applied-jobs-section">
             <h2>Applied Jobs</h2>
             <ul id="applied-jobs-list">
-                
-            <?php if ($result_applied_list->num_rows > 0){
-            echo '<table class="applied-jobs-list">';
-            echo '<tr>
+
+                <?php if ($result_applied_list->num_rows > 0) {
+                    echo '<table class="applied-jobs-list">';
+                    echo '<tr>
                     <th>Name</th>
                     <th>Company</th>
                     <th>Deadline</th>
                     <th>Applied Date</th>
+                    <th>Status</th>
                 </tr>';
 
-            while ($row = $result_applied_list->fetch_assoc()) {
+                    while ($row = $result_applied_list->fetch_assoc()) {
 
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['CName']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['Applied_Date']) . '</td>';
-                echo '</tr>';
-            }
+                        echo '<tr>';
+                        echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['CName']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['Applied_Date']) . '</td>';
 
-            echo '</table>';
-            } else {
-                echo "<p>You have not applied to any jobs yet.</p>";
-            }?>
+                        // Status logic
+                        if (is_null($row['Status'])) {
+                            echo '<td><span class="status on-hold">On Hold</span></td>';
+                        } elseif ($row['Status'] == 0) {
+                            echo '<td><span class="status rejected">Rejected</span></td>';
+                        } elseif ($row['Status'] == 1) {
+                            echo '<td><span class="status accepted">Accepted</span></td>';
+                        }
+                        echo '</tr>';
+                    }
+
+                    echo '</table>';
+                } else {
+                    echo "<p>You have not applied to any jobs yet.</p>";
+                } ?>
             </ul>
         </div>
 
@@ -133,27 +147,28 @@ $con->close();
         <div class="dashboard_section" id="bookmarks-section">
             <h2>Bookmarked Jobs</h2>
             <ul id="bookmarked-jobs-list">
-            <?php if ($result_bookmarked_list->num_rows > 0){
-            echo '<table class="bookmarked-jobs-list">';
-            echo '<tr>
+                <?php if ($result_bookmarked_list->num_rows > 0) {
+                    echo '<table class="bookmarked-jobs-list">';
+                    echo '<tr>
                     <th>Name</th>
                     <th>Deadline</th>
                 </tr>';
 
-            while ($row = $result_bookmarked_list->fetch_assoc()) {
+                    while ($row = $result_bookmarked_list->fetch_assoc()) {
 
-                echo '<tr>';
-                echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
-                echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
-                echo '</tr>';
-            }
+                        echo '<tr>';
+                        echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
+                        echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
+                        echo '</tr>';
+                    }
 
-            echo '</table>';
-            } else {
-                echo "<p>You have no bookmarked jobs yet.</p>";
-            }?>
+                    echo '</table>';
+                } else {
+                    echo "<p>You have no bookmarked jobs yet.</p>";
+                } ?>
             </ul>
         </div>
     </div>
 </body>
+
 </html>

@@ -17,7 +17,7 @@
     <div class="jobs_content">
         <h1>Applied Jobs</h1>
         <?php
-        session_start();
+        // session_start();
 
         require_once 'DBconnect.php'; // use $con
 
@@ -30,7 +30,7 @@
         $username = $_SESSION['username'];
 
         // Query to retrieve applied jobs
-        $query = "SELECT ss.A_id, a.Name, r.CName, a.Field, a.Salary, a.Deadline, a.Description, ss.Applied_Date
+        $query = "SELECT ss.A_id, a.Name, r.CName, a.Field, a.Salary, a.Deadline, a.Description, ss.Applied_Date, ss.Status
                     FROM seeker_seeks ss
                     INNER JOIN applications a ON ss.A_id = a.A_id
                     INNER JOIN recruiter r ON a.R_id = r.R_id
@@ -52,6 +52,7 @@
                     <th>Salary</th>
                     <th>Deadline</th>
                     <th>Applied Date</th>
+                    <th>Status</th>
                 </tr>';
 
             while ($row = $result->fetch_assoc()) {
@@ -64,6 +65,17 @@
                 echo '<td>' . htmlspecialchars($row['Salary']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['Applied_Date']) . '</td>';
+
+                // Status logic
+                if (is_null($row['Status'])) {
+                    echo '<td><span class="status on-hold">On Hold</span></td>';
+                } elseif ($row['Status'] == 0) {
+                    echo '<td><span class="status rejected">Rejected</span></td>';
+                } elseif ($row['Status'] == 1) {
+                    echo '<td><span class="status accepted">Accepted</span></td>';
+                } else {
+                    echo '<td><span class="status">Unknown</span></td>';
+                }
                 echo '</tr>';
             }
 

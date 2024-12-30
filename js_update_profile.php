@@ -1,5 +1,6 @@
 <?php
 session_start();
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
 // Ensure the user is logged in
@@ -17,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
     $fname = trim($_POST['fname']);
     $lname = trim($_POST['lname']);
     $email = trim($_POST['email']);
+    $contact = trim($_POST['contact']);
     $skills = trim($_POST['skills']);
     $experience = trim($_POST['experience']);
     $education = trim($_POST['education']);
@@ -30,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
 
     // Prepare the SQL update query
     $stmt = $con->prepare("UPDATE seeker 
-              SET FName = ?, LName = ?, Email = ?, Skills = ?, Experience = ?, Education = ?, DoB = ? 
+              SET FName = ?, LName = ?, Email = ?, Skills = ?, Experience = ?, Education = ?, DoB = ? , Contact = ?
               WHERE S_id = ?");
 
-    $stmt->bind_param("ssssssss", $fname, $lname, $email, $skills, $experience, $education, $dob, $user_id);
+    $stmt->bind_param("sssssssss", $fname, $lname, $email, $skills, $experience, $education, $dob, $contact, $user_id);
 
     // Execute the query
     if ($stmt->execute()) {
@@ -48,4 +50,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit'])) {
     header("Location: js_account.php");
     exit();
 }
-?>

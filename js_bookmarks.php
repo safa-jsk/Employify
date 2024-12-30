@@ -17,7 +17,7 @@
     <div class="jobs_content">
         <h1>Bookmarked Jobs</h1>
         <?php
-        session_start();
+        // session_start();
 
         require_once 'DBconnect.php'; // use $con
 
