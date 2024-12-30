@@ -149,12 +149,6 @@
         integrity="sha384-MrcW6ZMFyZ6tOrX2UGjUZJhzoeF1hZeGkEe2kC7HrrxQi1RAd+0cFihkc7x9o2p6" crossorigin="anonymous">
     </script>
 
-    <?php
-    if (isset($_GET['message']) && !empty($_GET['message'])) {
-        $message = htmlspecialchars($_GET['message']);
-        echo "<script> alert('$message'); </script>";
-    }
-    ?>
 </body>
 
 </html>

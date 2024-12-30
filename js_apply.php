@@ -40,5 +40,5 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
 }
 
 mysqli_close($con);
-header("Location: js_applied-jobs.php");
+header("Location: js_applied-jobs.php?message=" . urlencode($message));
 exit;

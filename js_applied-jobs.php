@@ -88,6 +88,12 @@
         mysqli_close($con);
         ?>
     </div>
+    <?php
+    if (isset($_GET['message']) && !empty($_GET['message'])) {
+        $message = htmlspecialchars($_GET['message']);
+        echo "<script> alert('$message'); </script>";
+    }
+    ?>
 </body>
 
 </html>

@@ -66,8 +66,8 @@
                 echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
                 echo '<td><a href="js_apply.php?A_id=' . htmlspecialchars($row['A_id']) .
                     '" class="search-button" name="apply">Apply</a></td>';
-                echo '<td><a href="js_bookmark.php?A_id=' . htmlspecialchars($row['A_id']) .
-                    '" class="search-button" name="remove">Remove</a></td>';
+                echo '<td><a href="js_remove_bookmark.php?A_id=' . htmlspecialchars($row['A_id']) .
+                    '" class="remove-button" name="remove">Remove</a></td>';
                 echo '</tr>';
             }
 
@@ -80,6 +80,12 @@
         mysqli_close($con);
         ?>
     </div>
+    <?php
+    if (isset($_GET['message']) && !empty($_GET['message'])) {
+        $message = htmlspecialchars($_GET['message']);
+        echo "<script> alert('$message'); </script>";
+    }
+    ?>
 </body>
 
 </html>
