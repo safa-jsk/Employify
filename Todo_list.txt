@@ -20,6 +20,7 @@ CSE370 Project To-Do
 	Dashboard (SELECT Queries with COUNT and LIMIT)												Maliha
 	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]					Safa
 	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]		Saadat
+	COUNT total applicants for each job															Saadat
 	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha
 	Shortlist candidates																		Safa
 	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)
