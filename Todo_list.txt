@@ -8,19 +8,24 @@ CSE370 Project To-Do
 	Add Company Name to Search query [js_search.php]						Safa DONE
 	Add Apply Button to Bookmarked Jobs (Optional)							Safa 
 	Fix Apply and Bookmark Button (resets Search table)						Fixed (redirected)
-	Bookmark remove (Confirmation alert)									Saadat
+	Bookmark remove [DELETE button]											Saadat
+	Scroll Jobs (Optional)
+	Dropdown Advanced Search 												Safa
+	Accepted Job Count 														Maliha
+	Login check after clicking logo											Maliha									
 
 2. For Employer
-	Check already existing user_id in register [Copy from Job Seeker]
-	Account Details (UPDATE Query)
-	Dashboard (SELECT Queries with COUNT and LIMIT)
-	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]
-	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]
-	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]
-	Search all job seekers by skill and experience (SELECT Query) [Similar to js_search.php] (Extremely Optional)
+	Check already existing user_id in register [Copy from Job Seeker]							Safa
+	Account Details (UPDATE Query)																Saadat
+	Dashboard (SELECT Queries with COUNT and LIMIT)												Maliha
+	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]					Safa
+	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]		Saadat
+	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha
+	Shortlist candidates																		Safa
+	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)
 
 3. Shortlisted Candidates
-	View Profile Button (SELECT Query)
-	Send Acceptance Letter Button (Dummy Button, popup shows email sent)
+	View Profile Button (SELECT Query)															Maliha
+	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa
 	
 4. Admin Panel
