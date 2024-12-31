@@ -1,3 +1,22 @@
+<?php
+session_start();
+
+// Allow access to index.php without redirecting based on the session
+if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
+    if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
+        // Redirect based on the role
+        if ($_SESSION['role'] === 'job_seeker') {
+            header("Location: js_dashboard.php"); // Job seeker dashboard
+            exit();
+        } elseif ($_SESSION['role'] === 'employer') {
+            header("Location: e_dashboard.php"); // Employer dashboard
+            exit();
+        } else {
+            echo "<script>alert('Unknown role. Please contact admin.');</script>";
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,10 +44,19 @@
                 <li><a href="#">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#" class="contact-btn">Contact</a></li>
-                <li><a href="#loginModal">Login</a></li>
+                <?php if (isset($_SESSION['username']) && isset($_SESSION['role'])): ?>
+                    <?php if ($_SESSION['role'] === 'job_seeker'): ?>
+                        <li><a href="js_dashboard.php">Login</a></li>
+                    <?php elseif ($_SESSION['role'] === 'employer'): ?>
+                        <li><a href="e_dashboard.php">Login</a></li>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <li><a href="#loginModal">Login</a></li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>
+
 
     <!-- Main Section -->
     <main class="container">

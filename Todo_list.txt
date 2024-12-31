@@ -12,7 +12,7 @@ CSE370 Project To-Do
 	Scroll Jobs (Optional)
 	Dropdown Advanced Search 												Safa DONE
 	Accepted Job Count 														Maliha
-	Login check after clicking logo											Maliha									
+	Login check after clicking logo											Maliha	DONE								
 
 2. For Employer
 	Check already existing user_id in register [Copy from Job Seeker]							Safa
