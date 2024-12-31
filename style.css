@@ -719,3 +719,12 @@ button:hover {
 .mt-5 {
     margin-top: 3rem; /* Adjust this value for your preferred spacing */
 }
+
+.candidates-container {
+    width: 100%;
+    max-width: 1140px; /* Adjust this value for your desired container width */
+    margin-left: 250px;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
