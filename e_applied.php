@@ -58,7 +58,6 @@ $candidates_result = $candidates_query->get_result();
 
     <div class="candidates-container mt-5">
         <h2>Applicants</h2>
-        <h2 class="mb-4">Applicants</h2>
 
         <!-- Filter Dropdown -->
         <form method="GET" action="e_applied.php" class="search-form">
