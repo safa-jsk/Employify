@@ -106,29 +106,8 @@ $con->close();
             <button type="submit" class="search-button">Filter</button>
         </div>
     </form>
-    <div class="dashboard_content">
-        <h2>Shortlisted Candidates</h2>
 
-        <!-- Filter Form -->
-        <form action="" method="get">
-            <div class="input-group mb-3">
-                <select name="job_id" class="advanced-search-form-select">
-                    <option value="" selected>All Jobs</option>
-                    <?php while ($job = $result_jobs->fetch_assoc()): ?>
-                        <option value="<?php echo htmlspecialchars($job['A_id']); ?>"
-                            <?php if (isset($_GET['job_id']) && $_GET['job_id'] == $job['A_id']) echo 'selected'; ?>>
-                            <?php echo htmlspecialchars($job['Name']); ?>
-                        </option>
-                    <?php endwhile; ?>
-                </select>
-                <input type="text" name="search"
-                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
-                    class="form-control" placeholder="Search for candidates">
-                <button type="submit" class="search-button">Filter</button>
-            </div>
-        </form>
-
-        <!-- Shortlisted Candidates Table -->
+    <!-- Shortlisted Candidates Table -->
         <?php if ($result_shortlisted_candidates->num_rows > 0): ?>
             <table class="shortlisted-candidates-list">
                 <thead>
