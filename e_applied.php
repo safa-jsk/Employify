@@ -57,13 +57,12 @@ $candidates_result = $candidates_query->get_result();
     <?php include 'includes/e_sidebar.php'; ?>
 
     <div class="candidates-container mt-5">
-        <h1 class="mb-4">Applicants</h1>
+        <h2>Applicants</h2>
 
         <!-- Filter Dropdown -->
-        <form method="GET" action="e_applied.php" class="mb-4">
-            <div class="mb-3">
-                <label for="jobFilter" class="form-label">Filter by Job</label>
-                <select id="jobFilter" name="job_id" class="form-control">
+        <form method="GET" action="e_applied.php" class="search-form">
+            <div class="filter-container">
+                <select id="jobFilter" name="job_id" class="search-select">
                     <option value="all" <?= $filter_job_id === 'all' ? 'selected' : '' ?>>All Jobs</option>
                     <?php while ($job = $jobs_result->fetch_assoc()) : ?>
                         <option value="<?= htmlspecialchars($job['A_id']) ?>"

@@ -774,11 +774,11 @@ main.search-container {
   background-color: #007bff;
   color: white;
   border: none;
-  font-size: 14px;
+  font-size: 15px;
   border-radius: 5px;
   cursor: pointer;
   white-space: nowrap;
-  padding: 10px 15px;
+  padding: 20px 15px;
   margin-top: 0;
 }
 

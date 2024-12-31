@@ -82,12 +82,12 @@ $con->close();
 <?php include 'includes/e_sidebar.php'; ?>
 
 <div class="dashboard_content">
-    <h1>Shortlisted Candidates</h1>
+    <h2>Shortlisted Candidates</h2>
 
     <!-- Filter Form -->
     <form action="" method="get">
-        <div class="input-group mb-3">
-            <select name="job_id" class="advanced-search-form-select">
+        <div class="search-form">
+            <select name="job_id" class="search-select">
                 <option value="" selected>All Jobs</option>
                 <?php while ($job = $result_jobs->fetch_assoc()): ?>
                     <option value="<?php echo htmlspecialchars($job['A_id']); ?>" 
