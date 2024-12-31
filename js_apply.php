@@ -21,7 +21,7 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
     $check_result = $stmt->get_result();
 
     // Check if rows are returned
-    if ($check_result && $check_result->num_rows > 0) {
+    if ($check_result->num_rows > 0) {
         $message = "You have already applied for this job.";
     } else {
         // Prepared statement to insert the application
