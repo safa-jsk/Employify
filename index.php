@@ -49,12 +49,30 @@
             <a href="#" class="close-btn">&times;</a>
             <h4>Login</h4>
             <form action="login.php" method="POST">
-                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="login">Login</button>
+                <div class="password-links">
+                    <a href="#forgotPasswordPopup">Forgot Password?</a>
+                </div>
             </form>
         </div>
     </div>
+
+    <!-- Forgot Password Popup -->
+    <div id="forgotPasswordPopup" class="popup">
+        <div class="popup-content">
+            <a href="#" class="close-btn">&times;</a>
+            <h4>Reset Password</h4>
+            <form action="forgot_password.php" method="POST">
+                <input type="email" name="email" placeholder="Enter your Email" required>
+                <input type="password" name="new_password" placeholder="New Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <button type="submit" name="reset_password">Reset Password</button>
+            </form>
+        </div>
+    </div>
+
 
     <!-- Job Seeker Registration Popup -->
     <div id="registerJsPopup" class="popup">

@@ -37,7 +37,7 @@ a {
 }
 
 a:hover {
-  color: #d4eefc;
+  color: #011947;
   text-decoration: underline; 
 }
 
@@ -276,6 +276,20 @@ a:hover {
 
 .popup form button:hover {
   background: #005bb5;
+}
+
+.password-links {
+  margin-top: 10px;
+}
+
+.password-links a {
+  color: #000;
+  text-decoration: none; 
+}
+
+.password-links a:hover {
+  color: #a8a7b2; 
+  text-decoration: underline;
 }
 
 select {

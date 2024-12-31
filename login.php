@@ -17,16 +17,27 @@ if (isset($_POST['login'])) {
     $stmt->bind_param("ss", $username, $username);
     $stmt->execute();
     $stmt->store_result();
-    $stmt->bind_result($role, $hashed_password);
-
+    
     if ($stmt->num_rows > 0) {
+        $stmt->bind_result($role, $hashed_password);
         $stmt->fetch();
+
         if (password_verify($password, $hashed_password)) {
             session_regenerate_id(true);
+            
+            if ($role === 'job_seeker'){
+                $user_query = "SELECT S_id FROM seeker WHERE Email = ?";
+            } elseif ($role === 'employer'){
+                $user_query = "SELECT R_id FROM recruiter WHERE Email = ?";
+            }
 
-            $user_query = "SELECT S_id FROM seeker WHERE Email = '$username'";
-            $user_id = mysqli_query($con, $user_query);
-            $user_id = mysqli_fetch_assoc($user_id)['S_id'];
+            $stmt_user = $con->prepare($user_query);
+            $stmt_user->bind_param("s", $username);
+            $stmt_user->execute();
+            $stmt_user->store_result();
+            $stmt_user->bind_result($user_id);
+            $stmt_user->fetch();
+            
             $_SESSION['username'] = $user_id;
             $_SESSION['role'] = $role;
 
