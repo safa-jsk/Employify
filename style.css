@@ -531,7 +531,7 @@ textarea {
 }
 
 /* Account Edit Button */
-button {
+.edit-button {
   display: inline-block;
   background-color: #0d042c;
   color: #fcfcfd;
@@ -545,7 +545,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.edit-button:hover {
   background-color: #465664;
   color: #fcfcfd;
 }
@@ -707,6 +707,8 @@ button:hover {
   transition: background-color 0.3s ease;
 }
 
+<<<<<<< HEAD
+=======
 .job-container {
     width: 100%;
     max-width: 1140px; /* Adjust this value for your desired container width */
