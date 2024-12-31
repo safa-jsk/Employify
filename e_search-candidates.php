@@ -51,18 +51,18 @@ $result = $stmt->get_result();
         </form>
 
         <div class="filtered-section">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Skills</th>
-                        <th>Experience</th>
-                        <th>Education</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if ($result->num_rows > 0): ?>
+            <?php if ($result->num_rows > 0): ?>
+                <table class="filtered-job-list">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Skills</th>
+                            <th>Experience</th>
+                            <th>Education</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php while ($row = $result->fetch_assoc()): ?>
                             <tr>
                                 <td><?php echo htmlspecialchars($row['FName'] . ' ' . $row['LName']); ?></td>
@@ -72,13 +72,11 @@ $result = $stmt->get_result();
                                 <td><?php echo htmlspecialchars($row['Education']); ?></td>
                             </tr>
                         <?php endwhile; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="5">No candidates found.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>No Candidates Found.</p>
+            <?php endif; ?>
         </div>
     </main>
 
