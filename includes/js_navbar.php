@@ -17,7 +17,7 @@ $username = $_SESSION['username'];
             <button class="dropbtn"><?php echo htmlspecialchars($username); ?> ▾</button>
             <div class="dropdown-content">
                 <a href="js_account.php">Account Details</a>
-                <a href="index.php">Logout</a>
+                <a href="logout.php">Logout</a>
             </div>
         </div>
     </div>
