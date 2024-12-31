@@ -729,57 +729,90 @@ textarea {
     padding-right: 15px;
 }
 
-/* Search Form Styling */
-.search-container{
-  flex-direction: column;
-}
-.search-form {
+/* Main Content Styling */
+main.search-container {
+  margin-left: 250px;
+  padding: 20px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+
+/* Search Form Styling */
+.search-form {
+  display: flex; /* Align items in one row */
+  flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  margin: 20px 0;
-  gap: 10px;
-  flex-direction: row;
+  width: 100%;
+  /* gap: 10px; Space between elements */
+  margin-bottom: 15px;
 }
 
 /* Dropdown (Select) Styling */
 .search-form .search-select {
-  border: 1px solid #ccc;
-  padding: 10px 15px;
   font-size: 14px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  outline: none;
   background-color: #f9fafc;
   cursor: pointer;
+  padding: 10px;
+  width: fit-content; 
+  margin-bottom: 0;
 }
 
 /* Search Input Styling */
 .search-form .search-input {
-  width: 70%;
-  padding: 10px 15px;
-  font-size: 14px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  outline: none;
+  margin: 0; /* Remove extra margin */
 }
 
 /* Search Button Styling */
 .search-form .search-button {
-  background-color: #007bff; /* Button background */
+  background-color: #007bff;
   color: white;
   border: none;
-  padding: 10px 20px;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap;
+  padding: 10px 15px;
+  margin-top: 0;
 }
 
 .search-form .search-button:hover {
-  background-color: #0056b3; /* Hover state */
+  background-color: #0056b3;
 }
 
+
+/* Filtered Section Styling */
 .filtered-section {
-  padding: 20px;
+  width: 100%;
+  overflow-x: auto; /* Handles table overflow */
+  background: #fff;
+  border-radius: 5px;
 }
+
+.filtered-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.filtered-section th,
+.filtered-section td {
+  text-align: left;
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.filtered-section th {
+  background-color: #f4f6f9;
+  font-weight: bold;
+}
+
+.filtered-section tr:hover {
+  background-color: #f9fafc;
+}
+
