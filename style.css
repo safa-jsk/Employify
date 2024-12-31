@@ -707,8 +707,6 @@ textarea {
   transition: background-color 0.3s ease;
 }
 
-<<<<<<< HEAD
-=======
 .job-container {
     width: 100%;
     max-width: 1140px; /* Adjust this value for your desired container width */
@@ -721,4 +719,59 @@ textarea {
 .mt-5 {
     margin-top: 3rem; /* Adjust this value for your preferred spacing */
 }
->>>>>>> 1a4233e676540712e47527653d17fbbfc3bbfc3c
+
+
+/* Search Form Styling */
+.search-container{
+  flex-direction: column;
+}
+.search-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px 0;
+  gap: 10px;
+  flex-direction: row;
+}
+
+/* Dropdown (Select) Styling */
+.search-form .search-select {
+  border: 1px solid #ccc;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  outline: none;
+  background-color: #f9fafc;
+  cursor: pointer;
+}
+
+/* Search Input Styling */
+.search-form .search-input {
+  width: 70%;
+  padding: 10px 15px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+/* Search Button Styling */
+.search-form .search-button {
+  background-color: #007bff; /* Button background */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.search-form .search-button:hover {
+  background-color: #0056b3; /* Hover state */
+}
+
+.filtered-section {
+  padding: 20px;
+}
