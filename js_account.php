@@ -82,7 +82,7 @@
                     <input type="date" name="dob" value="<?php echo htmlspecialchars($job_seeker['DoB'] ?? ''); ?>">
                 </div>
 
-                <button type="submit" name="edit">Save Changes</button>
+                <button class="edit-btn" type="submit" name="edit">Save Changes</button>
             </form>
         </div>
 

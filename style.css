@@ -531,7 +531,7 @@ textarea {
 }
 
 /* Account Edit Button */
-button {
+.edit-button {
   display: inline-block;
   background-color: #0d042c;
   color: #fcfcfd;
@@ -545,7 +545,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.edit-button:hover {
   background-color: #465664;
   color: #fcfcfd;
 }
@@ -706,3 +706,4 @@ button:hover {
   margin-top: 10px;
   transition: background-color 0.3s ease;
 }
+
