@@ -28,12 +28,14 @@ $result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Posted Jobs</title>
 </head>
+
 <body>
     <?php include 'includes/e_navbar.php'; ?>
     <?php include 'includes/e_sidebar.php'; ?>
@@ -48,39 +50,40 @@ $result = $stmt->get_result();
             <button type="submit" class="search-button">Search</button>
         </form>
 
-    <div class="filtered-section">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Skills</th>
-                    <th>Experience</th>
-                    <th>Education</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if ($result->num_rows > 0): ?>
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($row['FName'] . ' ' . $row['LName']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Email']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Skills']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Experience']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Education']); ?></td>
-                        </tr>
-                    <?php endwhile; ?>
-                <?php else: ?>
+        <div class="filtered-section">
+            <table>
+                <thead>
                     <tr>
-                        <td colspan="5">No candidates found.</td>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Skills</th>
+                        <th>Experience</th>
+                        <th>Education</th>
                     </tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
-</main>
+                </thead>
+                <tbody>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['FName'] . ' ' . $row['LName']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Email']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Skills']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Experience']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Education']); ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="5">No candidates found.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </main>
 
 </body>
+
 </html>
 
 <?php

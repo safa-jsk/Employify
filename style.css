@@ -660,6 +660,7 @@ textarea {
 .advanced-search-form-select {
     display: block;
     margin-top: 10px;
+    margin-right: auto;
     height: 37.5px;
     width: fit-content;
     padding: 0.375rem 2.25rem 0.375rem 0.75rem;
@@ -722,7 +723,7 @@ textarea {
 
 .candidates-container {
     width: 100%;
-    max-width: 1140px; /* Adjust this value for your desired container width */
+    max-width: 1200px; /* Adjust this value for your desired container width */
     margin-left: 250px;
     margin-right: auto;
     padding-left: 15px;
