@@ -21,7 +21,7 @@ $filter_job_id = $_GET['job_id'] ?? 'all'; // Default filter to 'all'
 // Fetch candidates based on the selected job
 if ($filter_job_id === 'all') {
     $candidates_query = $con->prepare("
-        SELECT ss.S_id, ss.A_id, s.S_id as SeekerName, a.Name as JobName 
+        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) as SeekerName, a.Name as JobName, ss.Applied_Date
         FROM seeker_seeks ss
         JOIN seeker s ON ss.S_id = s.S_id
         JOIN applications a ON ss.A_id = a.A_id
@@ -29,7 +29,7 @@ if ($filter_job_id === 'all') {
     $candidates_query->bind_param("s", $recruiter_id);
 } else {
     $candidates_query = $con->prepare("
-        SELECT ss.S_id, ss.A_id, s.S_id as SeekerName, a.Name as JobName 
+        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) as SeekerName, a.Name as JobName, ss.Applied_Date
         FROM seeker_seeks ss
         JOIN seeker s ON ss.S_id = s.S_id
         JOIN applications a ON ss.A_id = a.A_id
@@ -49,7 +49,7 @@ $candidates_result = $candidates_query->get_result();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
-    <title>Post a Job - Employify</title>
+    <title>Employify</title>
 </head>
 
 <body>
@@ -58,6 +58,7 @@ $candidates_result = $candidates_query->get_result();
 
     <div class="candidates-container mt-5">
         <h2>Applicants</h2>
+        <h2 class="mb-4">Applicants</h2>
 
         <!-- Filter Dropdown -->
         <form method="GET" action="e_applied.php" class="search-form">
@@ -76,23 +77,31 @@ $candidates_result = $candidates_query->get_result();
         </form>
 
         <!-- Applicants Table -->
-        <table class="table table-bordered">
+        <table class="shortlisted-candidates-list">
             <thead>
                 <tr>
-                    <th>Candidate ID</th>
-                    <th>Candidate Name</th>
                     <th>Job ID</th>
                     <th>Job Name</th>
+                    <th>Candidate ID</th>
+                    <th>Candidate Name</th>
+                    <th>Applied Date</th>
+                    <th>Shortlist</th>
+                    <th>Reject</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if ($candidates_result->num_rows > 0) : ?>
                     <?php while ($candidate = $candidates_result->fetch_assoc()) : ?>
                         <tr>
-                            <td><?= htmlspecialchars($candidate['S_id']) ?></td>
-                            <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
                             <td><?= htmlspecialchars($candidate['A_id']) ?></td>
                             <td><?= htmlspecialchars($candidate['JobName']) ?></td>
+                            <td><?= htmlspecialchars($candidate['S_id']) ?></td>
+                            <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
+                            <td><?= htmlspecialchars($candidate['Applied_Date']) ?></td>
+                            <td><a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                                    class="btn btn-success">Shortlist</a></td>
+                            <td><a href="e_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                                    class="btn btn-danger">Reject</a></td>
                         </tr>
                     <?php endwhile; ?>
                 <?php else : ?>

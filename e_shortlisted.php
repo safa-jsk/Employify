@@ -24,7 +24,7 @@ $stmt_jobs->close();
 
 // Initialize shortlisted candidates query
 $query_shortlisted_candidates = "
-    SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.Field, a.Deadline, s.FName AS Seeker_Name, s.Email
+    SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.Field, a.Deadline, CONCAT(s.FName, ' ', s.LName) AS Seeker_Name, s.Email
     FROM recruiter_shortlist sc
     INNER JOIN applications a ON sc.A_id = a.A_id
     INNER JOIN seeker s ON sc.S_id = s.S_id
@@ -44,7 +44,7 @@ if (isset($_GET['job_id']) && !empty($_GET['job_id'])) {
 
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search_term = "%" . $_GET['search'] . "%";
-    $query_shortlisted_candidates .= " AND (s.FName LIKE ? OR a.Name LIKE ?)";
+    $query_shortlisted_candidates .= " AND (CONCAT(s.FName, ' ', s.LName) LIKE ? OR a.Name LIKE ?)";
     $filters[] = $search_term;
     $filters[] = $search_term;
     $types .= "ss";
@@ -71,15 +71,19 @@ $con->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Shortlisted Candidates</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
+    <title>Employify</title>
 </head>
+
 <body>
-<?php include 'includes/e_navbar.php'; ?>
-<?php include 'includes/e_sidebar.php'; ?>
+    <?php include 'includes/e_navbar.php'; ?>
+    <?php include 'includes/e_sidebar.php'; ?>
 
 <div class="dashboard_content">
     <h2>Shortlisted Candidates</h2>
@@ -102,35 +106,63 @@ $con->close();
             <button type="submit" class="search-button">Filter</button>
         </div>
     </form>
+    <div class="dashboard_content">
+        <h2>Shortlisted Candidates</h2>
 
-    <!-- Shortlisted Candidates Table -->
-    <?php if ($result_shortlisted_candidates->num_rows > 0): ?>
-        <table class="shortlisted-candidates-list">
-            <thead>
-                <tr>
-                    <th>Candidate Name</th>
-                    <th>Email</th>
-                    <th>Job Name</th>
-                    <th>Field</th>
-                    <th>Deadline</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $result_shortlisted_candidates->fetch_assoc()): ?>
+        <!-- Filter Form -->
+        <form action="" method="get">
+            <div class="input-group mb-3">
+                <select name="job_id" class="advanced-search-form-select">
+                    <option value="" selected>All Jobs</option>
+                    <?php while ($job = $result_jobs->fetch_assoc()): ?>
+                        <option value="<?php echo htmlspecialchars($job['A_id']); ?>"
+                            <?php if (isset($_GET['job_id']) && $_GET['job_id'] == $job['A_id']) echo 'selected'; ?>>
+                            <?php echo htmlspecialchars($job['Name']); ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+                <input type="text" name="search"
+                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
+                    class="form-control" placeholder="Search for candidates">
+                <button type="submit" class="search-button">Filter</button>
+            </div>
+        </form>
+
+        <!-- Shortlisted Candidates Table -->
+        <?php if ($result_shortlisted_candidates->num_rows > 0): ?>
+            <table class="shortlisted-candidates-list">
+                <thead>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['Seeker_Name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Job_Name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Field']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
+                        <th>Job Name</th>
+                        <th>Field</th>
+                        <th>Candidate Name</th>
+                        <th>Email</th>
+                        <th>Deadline</th>
+                        <th>Accept</th>
+                        <th>Reject</th>
                     </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>No shortlisted candidates found.</p>
-    <?php endif; ?>
-</div>
+                </thead>
+                <tbody>
+                    <?php while ($row = $result_shortlisted_candidates->fetch_assoc()): ?>
+                        <tr>
+                            <td><?php echo htmlspecialchars($row['Job_Name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['Field']); ?></td>
+                            <td><?php echo htmlspecialchars($row['Seeker_Name']); ?></td>
+                            <td><?php echo htmlspecialchars($row['Email']); ?></td>
+                            <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
+                            <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
+                                    class="btn btn-success">Accept</a></td>
+                            <td><a href="e_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
+                                    class="btn btn-danger">Reject</a></td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>No shortlisted candidates found.</p>
+        <?php endif; ?>
+    </div>
 
 </body>
+
 </html>

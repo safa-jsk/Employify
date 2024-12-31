@@ -28,12 +28,14 @@ $result = $stmt->get_result();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Search Candidates</title>
 </head>
+
 <body>
     <?php include 'includes/e_navbar.php'; ?>
     <?php include 'includes/e_sidebar.php'; ?>
@@ -49,7 +51,7 @@ $result = $stmt->get_result();
         </form>
 
         <div class="filtered-section">
-            <?php if ($result->num_rows>0):?>
+            <?php if ($result->num_rows > 0): ?>
                 <table class="filtered-job-list">
                     <thead>
                         <tr>
@@ -68,7 +70,7 @@ $result = $stmt->get_result();
                                 <td><?php echo htmlspecialchars($row['Skills']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Experience']); ?></td>
                                 <td><?php echo htmlspecialchars($row['Education']); ?></td>
-                                </tr>
+                            </tr>
                         <?php endwhile; ?>
                     </tbody>
                 </table>
@@ -79,6 +81,7 @@ $result = $stmt->get_result();
     </main>
 
 </body>
+
 </html>
 
 <?php
