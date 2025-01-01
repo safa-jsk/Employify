@@ -13,8 +13,7 @@ $username = $_SESSION['username'];
 // Fetch all posted jobs by the recruiter
 $query_posted_jobs = "SELECT A_id, Name, Field, Posted_Date, Deadline, Status, Salary, Description 
                       FROM applications 
-                      WHERE R_id = ? 
-                      ORDER BY Posted_Date DESC";
+                      WHERE R_id = ?";
 
 $stmt_posted_jobs = $con->prepare($query_posted_jobs);
 if (!$stmt_posted_jobs) {
