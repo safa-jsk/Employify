@@ -27,7 +27,7 @@
         </div>
         <div class="form-section">
             <h4>Profile Information</h4>
-            <form>
+            <form method="POST" action="e_update_profile.php">
                 <div class="form-row">
                     <div class="form-group">
                         <label>First Name</label>
@@ -63,12 +63,12 @@
 
                 <div class="form-group">
                     <label>Company Description</label>
-                    <textarea name="education"
-                        placeholder="Company info..."><?php echo htmlspecialchars($job_seeker['CDescription'] ?? ''); ?></textarea>
+                    <textarea name="company_description"
+                        placeholder="Company info..."><?php echo htmlspecialchars($job_recruiter['CDescription'] ?? ''); ?></textarea>
                 </div>
 
 
-                <button class="edit-btn" type="submit" name="edit">Edit</button>
+                <button class="edit-btn" type="submit" name="e_edit">Save Changes</button>
             </form>
         </div>
 

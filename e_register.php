@@ -52,7 +52,7 @@ if (isset($_POST['e_register'])) {
             $stmt = $con->prepare("INSERT INTO `recruiter` (`R_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `DoB`, `CName`, `CDescription`, `Contact`) 
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            $stmt->bind_param("sssisssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $dob, $company_name, $company_description, $contact_number);
+            $stmt->bind_param("sssissssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $dob, $company_name, $company_description, $contact_number);
 
             if ($stmt->execute()) {
                 echo "<script>alert('Registration successful! Please login.'); window.location.href='index.php';</script>";
