@@ -46,7 +46,7 @@ $result = $stmt->get_result();
                 <option value="all">All</option>
                 <option value="<?php echo htmlspecialchars($search_query); ?>">Skills</option>
             </select>
-            <input type="text" name="query" placeholder="Search for jobs" class="search-input">
+            <input type="text" name="query" placeholder="Search for candidates" class="search-input">
             <button type="submit" class="search-button">Search</button>
         </form>
 

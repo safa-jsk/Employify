@@ -2,31 +2,37 @@ CSE370 Project To-Do
 
 1. Fix CSS
 2. For Job Seeker
-	Account Details (UPDATE Query)											Saadat DONE
-	Show all application for EMPTY search query 							Safa DONE
-	Dashboard (SELECT Queries with COUNT and LIMIT)							Maliha DONE
-	Add Company Name to Search query [js_search.php]						Safa DONE
-	Add Apply Button to Bookmarked Jobs (Optional)							Safa 
+	Account Details (UPDATE Query)											Saadat 		DONE
+	Show all application for EMPTY search query 							Safa 		DONE
+	Dashboard (SELECT Queries with COUNT and LIMIT)							Maliha 		DONE
+	Add Company Name to Search query [js_search.php]						Safa	 	DONE
+	Add Apply Button to Bookmarked Jobs (Optional)							Safa 		DONE
 	Fix Apply and Bookmark Button (resets Search table)						Fixed (redirected)
 	Bookmark remove [DELETE button]											Saadat
 	Scroll Jobs (Optional)
-	Dropdown Advanced Search 												Safa DONE
+	Dropdown Advanced Search 												Safa 		DONE
 	Accepted Job Count 														Maliha
-	Login check after clicking logo											Maliha	DONE								
+	Login check after clicking logo											Maliha		DONE								
 
 2. For Employer
-	Check already existing user_id in register [Copy from Job Seeker]							Safa
+	Check already existing user_id in register [Copy from Job Seeker]							Safa	DONE
 	Account Details (UPDATE Query)																Saadat
-	Dashboard (SELECT Queries with COUNT and LIMIT)												Maliha
-	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]					Safa
-	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]		Saadat
-	COUNT total applicants for each job															Saadat
-	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha
-	Shortlist candidates																		Safa
-	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)
+	Dashboard (SELECT Queries with COUNT and LIMIT)												Maliha	DONE
+	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]					Safa	DONE
+	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]		Saadat	
+	DELETE Job (in e_posted-jobs.php)															Safa
+	COUNT total applicants for each job															Saadat	
+	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha	DONE
+	Shortlist candidates																		Safa	DONE
+	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)			Maliha	DONE
 
 3. Shortlisted Candidates
 	View Profile Button (SELECT Query)															Maliha
-	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa
+	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa	
+	Shortlist Button																			Safa
+	Reject Button (for both Applied and Shortlisted Page)										Safa
 	
 4. Admin Panel
+
+5. Forgot Password
+	Add Security Question (Also add during Registration)

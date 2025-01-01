@@ -3,7 +3,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
-if (!isset($_SESSION['username'])|| $_SESSION['role'] !== 'job_seeker') {
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'job_seeker') {
     header("Location: login.php");
     exit;
 }
@@ -104,7 +104,7 @@ $con->close();
 
         <!-- Section 2: Applied Jobs List -->
         <div class="dashboard_section" id="applied-jobs-section">
-            <h2>Applied Jobs</h2>
+            <h2>Upcoming Applied Jobs</h2>
             <ul id="applied-jobs-list">
 
                 <?php if ($result_applied_list->num_rows > 0) {
@@ -145,7 +145,7 @@ $con->close();
 
         <!-- Section 3: Bookmarks List -->
         <div class="dashboard_section" id="bookmarks-section">
-            <h2>Bookmarked Jobs</h2>
+            <h2>Upcoming Bookmarked Jobs</h2>
             <ul id="bookmarked-jobs-list">
                 <?php if ($result_bookmarked_list->num_rows > 0) {
                     echo '<table class="bookmarked-jobs-list">';
