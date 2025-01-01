@@ -25,6 +25,7 @@ CSE370 Project To-Do
 	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha	DONE
 	Shortlist candidates																		Safa	DONE
 	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)			Maliha	DONE
+	Update "username" in navbar in Employer 																Safa
 
 3. Shortlisted Candidates
 	View Profile Button (SELECT Query)															Maliha

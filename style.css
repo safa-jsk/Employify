@@ -633,6 +633,8 @@ textarea {
   transition: background-color 0.3s ease;
 }
 
+
+
 /* Job Status */
 .status {
     padding: 5px 10px;
@@ -817,3 +819,19 @@ main.search-container {
   background-color: #f9fafc;
 }
 
+/* disabling button after applyin for a job */
+.applied-button:disabled{
+  height: 32px;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  font-size: 12px;
+  border-radius: 5px;
+  background-color: #eaf3f6;
+  color: #5e5e5e;
+  cursor: not-allowed;
+  opacity: 0.6;
+  margin-top: 8px;
+}

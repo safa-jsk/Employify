@@ -29,15 +29,15 @@
 
         $username = $_SESSION['username'];
 
-        // Query to retrieve bookmarked jobs
-        $query = "SELECT sb.A_id, a.Name, r.CName, a.Field, a.Salary, a.Deadline, a.Description
-                    FROM seeker_bookmarks sb
-                    INNER JOIN applications a ON sb.A_id = a.A_id
-                    INNER JOIN recruiter r ON a.R_id = r.R_id
-                    WHERE sb.S_id = ?";
+        $query = "SELECT sb.A_id, a.Name, r.CName, a.Field, a.Salary, a.Deadline, a.Description,
+                 (SELECT COUNT(*) FROM seeker_seeks ss WHERE ss.S_id = ? AND ss.A_id = sb.A_id) AS has_applied
+                  FROM seeker_bookmarks sb
+                  INNER JOIN applications a ON sb.A_id = a.A_id
+                  INNER JOIN recruiter r ON a.R_id = r.R_id
+                  WHERE sb.S_id = ?";
 
         $stmt = $con->prepare($query);
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("ss", $username, $username);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -64,11 +64,18 @@
                 echo '<td>' . htmlspecialchars($row['Field']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['Salary']) . '</td>';
                 echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
-                echo '<td><a href="js_apply.php?A_id=' . htmlspecialchars($row['A_id']) .
-                    '" class="search-button" name="apply">Apply</a></td>';
+
+                if ($row['has_applied'] > 0) {
+                    echo '<td><button class="applied-button" disabled>Applied</button></td>';
+                } else {
+                    echo '<td><a href="js_apply.php?A_id=' . htmlspecialchars($row['A_id']) .
+                        '" class="search-button" name="apply">Apply</a></td>';
+                }
+        
                 echo '<td><a href="js_remove_bookmark.php?A_id=' . htmlspecialchars($row['A_id']) .
                     '" class="remove-button" name="remove">Remove</a></td>';
                 echo '</tr>';
+            
             }
 
             echo '</table>';

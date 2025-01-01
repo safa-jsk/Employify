@@ -24,7 +24,10 @@ $applied_jobs_count = $result_applied->fetch_assoc()['applied_jobs_count'] ?? 0;
 $stmt_applied->close();
 
 //Bookmarked Jobs Count
-$query_bookmarked = "SELECT COUNT(*) AS bookmarked_jobs_count FROM seeker_bookmarks WHERE S_id = ?";
+$query_bookmarked = "SELECT COUNT(*) AS bookmarked_jobs_count 
+                     FROM seeker_bookmarks 
+                     WHERE S_id = ?";
+
 $stmt_bookmarked = $con->prepare($query_bookmarked);
 if (!$stmt_bookmarked) {
     die("Error in query preparation: " . $con->error);
@@ -48,7 +51,7 @@ if (!$stmt_accepted) {
     die("Error in query preparation: " . $con->error);
 }
 
-$stmt_accepted->bind_param("i", $seeker_id);
+$stmt_accepted->bind_param("s", $username);
 $stmt_accepted->execute();
 
 $result_accepted = $stmt_accepted->get_result();
