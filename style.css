@@ -398,6 +398,15 @@ input[type="date"] {
   padding-bottom: 5px;
 }
 
+.scrollable {
+  max-height: 300px; /* Set your desired height */
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
 /* Summary Cards Section */
 #summary-section {
   display: flex;
