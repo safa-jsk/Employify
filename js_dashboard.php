@@ -44,7 +44,7 @@ $query_accepted = "SELECT COUNT(*) AS total_accepted
 FROM seeker_seeks s
 INNER JOIN applications a 
 ON s.A_id = a.A_id
-WHERE s.S_id = ? AND s.Status = 'accepted'";
+WHERE s.S_id = ? AND s.Status = 1";
 
 $stmt_accepted = $con->prepare($query_accepted);
 if (!$stmt_accepted) {
@@ -127,9 +127,9 @@ $con->close();
             <div class="job_card">
                 <h3>Accepted applications</h3>
                 <p id="accepted-applications-count">
-                <?php 
-                echo htmlspecialchars($total_accepted); 
-                ?>
+                    <?php
+                    echo htmlspecialchars($total_accepted);
+                    ?>
                 </p>
             </div>
         </div>
