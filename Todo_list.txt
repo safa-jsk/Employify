@@ -8,7 +8,7 @@ CSE370 Project To-Do
 	Add Company Name to Search query [js_search.php]						Safa	 	DONE
 	Add Apply Button to Bookmarked Jobs (Optional)							Safa 		DONE
 	Fix Apply and Bookmark Button (resets Search table)						Fixed (redirected)
-	Bookmark remove [DELETE button]											Saadat
+	Bookmark remove [DELETE button]											Saadat		DONE
 	Scroll Jobs (Optional)
 	Dropdown Advanced Search 												Safa 		DONE
 	Accepted Job Count 														Maliha		DONE
@@ -20,7 +20,7 @@ CSE370 Project To-Do
 	Dashboard (SELECT Queries with COUNT and LIMIT)												Maliha	DONE
 	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]					Safa	DONE
 	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]		Saadat	
-	DELETE Job (in e_posted-jobs.php)															Safa
+	DELETE Job (in e_posted-jobs.php)															Safa	DONE
 	COUNT total applicants for each job															Saadat	
 	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha	DONE
 	Shortlist candidates																		Safa	DONE

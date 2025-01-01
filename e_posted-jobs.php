@@ -29,12 +29,16 @@ $stmt_posted_jobs->close();
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" />
     <title>Posted Jobs</title>
 </head>
+
 <body>
     <?php include 'includes/e_navbar.php'; ?>
     <?php include 'includes/e_sidebar.php'; ?>
@@ -45,6 +49,7 @@ $stmt_posted_jobs->close();
             <table class="posted-jobs-list">
                 <thead>
                     <tr>
+                        <th>Job ID</th>
                         <th>Job Name</th>
                         <th>Field</th>
                         <th>Posted Date</th>
@@ -52,11 +57,13 @@ $stmt_posted_jobs->close();
                         <th>Status</th>
                         <th>Salary</th>
                         <th>Description</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
                         <tr>
+                            <td><?php echo htmlspecialchars($row['A_id']); ?></td>
                             <td><?php echo htmlspecialchars($row['Name']); ?></td>
                             <td><?php echo htmlspecialchars($row['Field']); ?></td>
                             <td><?php echo htmlspecialchars($row['Posted_Date']); ?></td>
@@ -75,6 +82,7 @@ $stmt_posted_jobs->close();
                             </td>
                             <td><?php echo htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
                             <td><?php echo htmlspecialchars($row['Description']); ?></td>
+                            <td><a href="e_remove_job.php?A_id=<?= $row['A_id'] ?>" class="btn btn-danger">Delete</a></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
@@ -84,4 +92,5 @@ $stmt_posted_jobs->close();
         <?php endif; ?>
     </div>
 </body>
+
 </html>
