@@ -59,14 +59,14 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
 
 
     <!-- Main Section -->
-    <main class="container">
+    <main class="index-container">
         <div class="body-section" id="home">
             <h1>DON'T MISS THE JOB OF YOUR DREAMS!</h1>
             <p>Your Next Step Starts Here—For Dream Jobs and Star Employees.<br><strong>Just one click away!</strong>
             </p>
             <div class="account-selection">
-                <a href="#registerJsPopup" class="btn-type">Find a Job</a>
-                <a href="#registerEmployerPopup" class="btn-type">Find a Candidate</a>
+                <a href="#registerJsPopup" class="option-button">Find a Job</a>
+                <a href="#registerEmployerPopup" class="option-button">Find a Candidate</a>
             </div>
         </div>
     </main>

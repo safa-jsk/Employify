@@ -139,7 +139,7 @@ a:hover {
 }
 
 /* Main Container index page */
-.container {
+.index-container {
    display: flex;
    justify-content: space-between;
    align-items: center;
@@ -148,7 +148,7 @@ a:hover {
    padding: 50px 30px;
 }
 
-/* body Section - index.html */
+/* body Section - index page */
 .body-section {
   display: flex;
   justify-content: flex-start;
@@ -183,7 +183,7 @@ a:hover {
   margin-bottom: 30px;
 }
 
-/* Features Section */
+/* Features Section - index page */
 .features-section {
   padding: 40px 0;
   background-color: #d4eefc;
@@ -310,14 +310,14 @@ input[type="date"] {
   font-size: 14px;
 }
 
-/* Account Selection Buttons */
+/* Account Selection Buttons index page*/
 .account-selection {
   margin-bottom: 20px;
   display: flex;
   font-size: 16px;
 }
 
-.account-selection .btn-type {
+.account-selection .option-button {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -398,16 +398,7 @@ input[type="date"] {
   padding-bottom: 5px;
 }
 
-.scrollable {
-  max-height: 300px; /* Set your desired height */
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  background: #f9f9f9;
-  border-radius: 5px;
-}
-
-/* Summary Cards Section */
+/* Summary Cards Section - dashboard*/
 #summary-section {
   display: flex;
   gap: 20px;
@@ -428,6 +419,16 @@ input[type="date"] {
   margin: 0 0 10px;
 }
 
+/* scrollable dashboard */
+.scrollable {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
 /* Applied and Bookmarked Jobs List */
 #applied-jobs-list,
 #bookmarked-jobs-list {
@@ -436,7 +437,7 @@ input[type="date"] {
     margin-top: 15px;
 }
 
-/* bookmarks */
+/* bookmarks page*/
 table {
   width: 100%;
   border-collapse: collapse;
@@ -461,6 +462,59 @@ tr:nth-child(even) {
 td {
   color: #333;
 }
+
+/* Applied and Bookmarked Jobs */
+.jobs_content {
+  margin-top: 20px;
+  margin-left: 300px;
+  margin-right: 50px;
+  padding: 0 2px;
+  background-color: white;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+
+/* Job Status - applied and bookmark*/
+.status {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+}
+
+.status.on-hold {
+    background-color: #ffc107; /* Yellow */
+    color: #000;
+}
+
+.status.rejected {
+    background-color: #dc3545; /* Red */
+}
+
+.status.accepted {
+    background-color: #28a745; /* Green */
+}
+
+.remove-button {
+  height: 37.5px;
+  background-color: #dc3545;
+  color: #fcfcfd;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
 
 /* Acount Details */
 .account-container {
@@ -527,178 +581,44 @@ textarea {
   border-radius: 5px;
 }
 
+/* Account Edit Button */
 .edit-button {
-  border-radius: 20px;
-  background-color: #6200ea;
+  border-radius: 15px;
+  background-color: #261e48;
   color: white;
   cursor: pointer;
   font-size: 16px;
+  padding: 6px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .edit-button:hover {
   background-color: #4500b0;
 }
 
-/* Account Edit Button */
-.edit-button {
-  display: inline-block;
-  background-color: #0d042c;
-  color: #fcfcfd;
-  text-decoration: none;
-  border: none;
-  padding: 12px;
-  font-size: 18px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 0 10px;
-  transition: background-color 0.3s ease;
-}
-
-.edit-button:hover {
-  background-color: #465664;
-  color: #fcfcfd;
-}
-
-
-/* Advanced Search */
-/* .advanced_search_collapsible {
-  margin-left: auto;
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 15px;
-  width: fit-content;
-  border: none;
-  
-  text-align: left;
-  outline: none;
-  font-size: 16px;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-/* .active, .collapsible:hover {
-  background-color: #ccc;
-} */
-
-/* Style the collapsible content. Note: hidden by default */
-/* .advanced_search_content {
-  padding: 0 2px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-}  */
-
-/* Applied and Bookmarked Jobs */
-.jobs_content {
-  margin-top: 20px;
-  margin-left: 300px;
-  margin-right: 50px;
-  padding: 0 2px;
-  background-color: white;
-  max-height: 0;
-  transition: max-height 0.2s ease-out;
-}
-
-
-/* Job Status */
-.status {
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: bold;
-    display: inline-block;
-    text-align: center;
-}
-
-.status.on-hold {
-    background-color: #ffc107; /* Yellow */
-    color: #000;
-}
-
-.status.rejected {
-    background-color: #dc3545; /* Red */
-}
-
-.status.accepted {
-    background-color: #28a745; /* Green */
-}
-
-/* Advanced Search Filters
-.advanced-search-form-select {
-    display: block;
-    margin-top: 10px;
-    margin-right: auto;
-    height: 37.5px;
-    width: fit-content;
-    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.375rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.advanced-search-form-select:focus {
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-.advanced-search-form-select[multiple], .form-select[size]:not([size="1"]) {
-    padding-right: 0.75rem;
-    background-image: none;
-}
-
-.advanced-search-form-select:disabled {
-    background-color: #e9ecef;
-    color: #6c757d;
-} */
-
-.remove-button {
-  height: 37.5px;
-  background-color: #dc3545;
-  color: #fcfcfd;
-  text-decoration: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
+/* applied applicants page- e_applied  */
 .job-container {
     width: 100%;
-    max-width: 1140px; /* Adjust this value for your desired container width */
+    max-width: 1140px; 
     margin-left: 250px;
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
-}
-
-.mt-5 {
-    margin-top: 3rem; /* Adjust this value for your preferred spacing */
-}
-
-.candidates-container {
+  }
+  
+  
+  .candidates-container {
     width: 100%;
     max-width: 1200px; /* Adjust this value for your desired container width */
     margin-left: 250px;
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
+    margin-top: 40px; /* Adjust this value for your preferred spacing */
 }
 
-/* Main Content Styling */
+/* Search bar Styling-general */
 .search-container {
   margin-left: 250px;
   box-sizing: border-box;
@@ -719,6 +639,7 @@ textarea {
  text-align: center;
  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 /* Search Button */
 .search-button {
   height: 37.5px;
@@ -743,11 +664,12 @@ textarea {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 
 /* Dropdown (Select) Styling */
-.search-form .search-select {
+.search-select {
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -759,14 +681,14 @@ textarea {
 }
 
 /* Search Input Styling */
-.search-form .search-input {
+.search-input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 0; /* Remove extra margin */
 }
 
-/* Search Button Styling */
+/* Filter Button Styling */
 .search-form .search-button {
   background-color: #007bff;
   color: white;
