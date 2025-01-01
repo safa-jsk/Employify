@@ -11,7 +11,7 @@ if (!isset($_SESSION['username'])) {
 
 // Fetch job seeker data
 $username = $_SESSION['username'];
-$stmt = $con->prepare("SELECT FName, LName, Email, Gender, CName, CDescription, Contact FROM seeker WHERE R_id = ?");
+$stmt = $con->prepare("SELECT FName, LName, Email, Gender, CName, CDescription, Contact FROM recruiter WHERE R_id = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
