@@ -25,6 +25,7 @@ $stmt_posted_jobs->bind_param("s", $username);
 $stmt_posted_jobs->execute();
 $result_posted_jobs = $stmt_posted_jobs->get_result();
 $stmt_posted_jobs->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -57,11 +58,25 @@ $stmt_posted_jobs->close();
                         <th>Status</th>
                         <th>Salary</th>
                         <th>Description</th>
+                        <th>Total Applicants</th>
+                        <th>Edit</th>
                         <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
+                        <?php
+                        // Fetch total applicants for the job
+                        $query_total_applicants = "SELECT COUNT(*) AS total_applicants 
+                                                  FROM seeker_seeks 
+                                                  WHERE A_id = ?";
+                        $stmt_total_applicants = $con->prepare($query_total_applicants);
+                        $stmt_total_applicants->bind_param("s", $row['A_id']);
+                        $stmt_total_applicants->execute();
+                        $result_total_applicants = $stmt_total_applicants->get_result();
+                        $total_applicants = $result_total_applicants->fetch_assoc()['total_applicants'];
+                        $stmt_total_applicants->close();
+                        ?>
                         <tr>
                             <td><?php echo htmlspecialchars($row['A_id']); ?></td>
                             <td><?php echo htmlspecialchars($row['Name']); ?></td>
@@ -82,6 +97,8 @@ $stmt_posted_jobs->close();
                             </td>
                             <td><?php echo htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
                             <td><?php echo htmlspecialchars($row['Description']); ?></td>
+                            <td><?php echo htmlspecialchars($total_applicants); ?></td>
+                            <td><a href="e_edit_job.php?A_id=<?= $row['A_id'] ?>" class="btn btn-primary">Edit</a></td>
                             <td><a href="e_remove_job.php?A_id=<?= $row['A_id'] ?>" class="btn btn-danger">Delete</a></td>
                         </tr>
                     <?php endwhile; ?>
