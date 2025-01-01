@@ -53,12 +53,9 @@ if (!$stmt_accepted) {
 
 $stmt_accepted->bind_param("s", $username);
 $stmt_accepted->execute();
-
 $result_accepted = $stmt_accepted->get_result();
 $total_accepted = $result_accepted->fetch_assoc()["total_accepted"] ?? 0;
-
 $stmt_accepted->close();
-
 
 //Applied Jobs List
 $query_applied_list = "SELECT a.Name, r.CName,a.Deadline, ss.Applied_Date, ss.Status
@@ -66,8 +63,8 @@ $query_applied_list = "SELECT a.Name, r.CName,a.Deadline, ss.Applied_Date, ss.St
                        INNER JOIN applications a ON ss.A_id = a.A_id
                        INNER JOIN recruiter r ON a.R_id = r.R_id
                        WHERE ss.S_id = ?
-                       ORDER BY a.Deadline
-                       LIMIT 5";
+                       ORDER BY a.Deadline";
+
 $stmt_applied_list = $con->prepare($query_applied_list);
 if (!$stmt_applied_list) {
     die("Error in query preparation: " . $con->error);
@@ -76,16 +73,17 @@ $stmt_applied_list->bind_param("s", $username);
 $stmt_applied_list->execute();
 $result_applied_list = $stmt_applied_list->get_result();
 
-
-// Bookmarked Jobs List
+//Bookmarked Jobs List
 $query_bookmarked_list = "SELECT a.Name, a.Deadline
                           FROM seeker_bookmarks sb
                           INNER JOIN applications a ON sb.A_id = a.A_id
                           WHERE sb.S_id = ?";
+
 $stmt_bookmarked_list = $con->prepare($query_bookmarked_list);
 if (!$stmt_bookmarked_list) {
     die("Error in query preparation: " . $con->error);
 }
+
 $stmt_bookmarked_list->bind_param("s", $username);
 $stmt_bookmarked_list->execute();
 $result_bookmarked_list = $stmt_bookmarked_list->get_result();
@@ -103,12 +101,12 @@ $con->close();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="style.css" />
     <title>Dashboard</title>
+</head>
 
 <body>
     <?php include 'includes/js_navbar.php'; ?>
     <?php include 'includes/js_sidebar.php'; ?>
 
-    <!-- main contents -->
     <div class="dashboard_content">
         <!-- Section 1: Summary Cards -->
         <div class="dashboard_section" id="summary-section">
@@ -125,81 +123,76 @@ $con->close();
                 </p>
             </div>
             <div class="job_card">
-                <h3>Accepted applications</h3>
+                <h3>Accepted Applications</h3>
                 <p id="accepted-applications-count">
-                    <?php
-                    echo htmlspecialchars($total_accepted);
-                    ?>
+                    <?php echo htmlspecialchars($total_accepted); ?>
                 </p>
             </div>
         </div>
 
         <!-- Section 2: Applied Jobs List -->
-        <div class="dashboard_section" id="applied-jobs-section">
+        <div class="dashboard_section scrollable" id="applied-jobs-section">
             <h2>Upcoming Applied Jobs</h2>
-            <ul id="applied-jobs-list">
-
-                <?php if ($result_applied_list->num_rows > 0) {
-                    echo '<table class="applied-jobs-list">';
-                    echo '<tr>
-                    <th>Name</th>
-                    <th>Company</th>
-                    <th>Deadline</th>
-                    <th>Applied Date</th>
-                    <th>Status</th>
-                </tr>';
-
-                    while ($row = $result_applied_list->fetch_assoc()) {
-
-                        echo '<tr>';
-                        echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['CName']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['Applied_Date']) . '</td>';
-
-                        // Status logic
-                        if (is_null($row['Status'])) {
-                            echo '<td><span class="status on-hold">On Hold</span></td>';
-                        } elseif ($row['Status'] == 0) {
-                            echo '<td><span class="status rejected">Rejected</span></td>';
-                        } elseif ($row['Status'] == 1) {
-                            echo '<td><span class="status accepted">Accepted</span></td>';
+            <table class="applied-jobs-list">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Company</th>
+                        <th>Deadline</th>
+                        <th>Applied Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($result_applied_list->num_rows > 0) {
+                        while ($row = $result_applied_list->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['CName']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['Applied_Date']) . '</td>';
+                        
+                            if (is_null($row['Status'])) {
+                                echo '<td><span class="status on-hold">On Hold</span></td>';
+                            } elseif ($row['Status'] == 0) {
+                                echo '<td><span class="status rejected">Rejected</span></td>';
+                            } elseif ($row['Status'] == 1) {
+                                echo '<td><span class="status accepted">Accepted</span></td>';
+                            }
+                            echo '</tr>';
                         }
-                        echo '</tr>';
-                    }
-
-                    echo '</table>';
-                } else {
-                    echo "<p>You have not applied to any jobs yet.</p>";
-                } ?>
-            </ul>
+                    } else {
+                        echo '<tr><td colspan="5">You have not applied to any jobs yet.</td></tr>';
+                    } ?>
+                </tbody>
+            </table>
         </div>
-
+                
         <!-- Section 3: Bookmarks List -->
-        <div class="dashboard_section" id="bookmarks-section">
+        <div class="dashboard_section scrollable" id="bookmarks-section">
             <h2>Upcoming Bookmarked Jobs</h2>
-            <ul id="bookmarked-jobs-list">
-                <?php if ($result_bookmarked_list->num_rows > 0) {
-                    echo '<table class="bookmarked-jobs-list">';
-                    echo '<tr>
-                    <th>Name</th>
-                    <th>Deadline</th>
-                </tr>';
-
-                    while ($row = $result_bookmarked_list->fetch_assoc()) {
-
-                        echo '<tr>';
-                        echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
-                        echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
-                        echo '</tr>';
-                    }
-
-                    echo '</table>';
-                } else {
-                    echo "<p>You have no bookmarked jobs yet.</p>";
-                } ?>
-            </ul>
+            <table class="bookmarked-jobs-list">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Deadline</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($result_bookmarked_list->num_rows > 0) {
+                        while ($row = $result_bookmarked_list->fetch_assoc()) {
+                            echo '<tr>';
+                            echo '<td>' . htmlspecialchars($row['Name']) . '</td>';
+                            echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
+                            echo '</tr>';
+                        }
+                    } else {
+                        echo '<tr><td colspan="2">You have no bookmarked jobs yet.</td></tr>';
+                    } ?>
+                </tbody>
+            </table>
         </div>
+
     </div>
 </body>
 
