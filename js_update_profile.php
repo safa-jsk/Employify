@@ -36,11 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
               WHERE S_id = ?");
 
     $stmt->bind_param("sssssssss", $fname, $lname, $email, $skills, $experience, $education, $dob, $contact, $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
 
     // Execute the query
-    if ($result -> affected_rows > 0) {
+    if ($stmt->execute()) {
         echo "<script>alert('Profile updated successfully.'); window.location.href = 'js_account.php';</script>";
     } else {
         echo "<script>alert('Failed to update profile.'); window.history.back();</script>";

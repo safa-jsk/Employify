@@ -33,11 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['e_edit'])) {
               SET FName = ?, LName = ?, Email = ?, CName = ?, CDescription = ?, Contact = ?
               WHERE R_id = ?");
 
-    $stmt->bind_param("sssssss", $fname, $lname, $email, $company_name, $company_description,$contact, $user_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $stmt->bind_param("sssssss", $fname, $lname, $email, $company_name, $company_description, $contact, $user_id);
+
     // Execute the query
-    if ($result -> affected_rows > 0) {
+    if ($stmt->execute()) {
         echo "<script>alert('Profile updated successfully.'); window.location.href = 'e_account.php';</script>";
     } else {
         echo "<script>alert('Failed to update profile.'); window.history.back();</script>";
