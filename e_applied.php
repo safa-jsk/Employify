@@ -99,7 +99,7 @@ $candidates_result = $candidates_query->get_result();
                             <td><?= htmlspecialchars($candidate['Applied_Date']) ?></td>
                             <td><a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
                                     class="btn btn-success">Shortlist</a></td>
-                            <td><a href="e_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                            <td><a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
                                     class="btn btn-danger">Reject</a></td>
                         </tr>
                     <?php endwhile; ?>

@@ -26,18 +26,35 @@ $result_posted = $stmt_posted->get_result();
 $posted_jobs_count = $result_posted->fetch_assoc()['posted_jobs_count'] ?? 0;
 $stmt_posted->close();
 
-// //Shortlisted candidates Count
-// $query_bookmarked = "SELECT COUNT(*) AS shortlisted_candidates_count FROM recruiter_shortlist WHERE R_id = ?";
-// $stmt_bookmarked = $con->prepare($query_bookmarked);
-// if (!$stmt_bookmarked) {
-//     die("Error in query preparation: " . $con->error);
-// }
+// Shortlisted candidates Count
+$query_shortlisted = "SELECT A_id, COUNT(*) AS shortlisted_candidates_count 
+                     FROM recruiter_shortlist 
+                     WHERE S_id = ? 
+                     GROUP BY A_id";
 
-// $stmt_bookmarked->bind_param("s", $username);
-// $stmt_bookmarked->execute();
-// $result_bookmarked = $stmt_bookmarked->get_result();
-// $shortlisted_candidates_count = $result_bookmarked->fetch_assoc()['shortlisted_candidates_count'] ?? 0;
-// $stmt_bookmarked->close();
+$stmt_shortlisted = $con->prepare($query_shortlisted);
+if (!$stmt_shortlisted) {
+    die("Error in query preparation: " . $con->error);
+}
+
+$stmt_shortlisted->bind_param("s", $username);
+$stmt_shortlisted->execute();
+$result_shortlisted = $stmt_shortlisted->get_result();
+$shortlisted_candidates_per_application = [];
+$total_shortlisted = 0;  // Initialize the total shortlisted counter
+
+while ($row = $result_shortlisted->fetch_assoc()) {
+    $shortlisted_candidates_per_application[] = $row;
+    $total_shortlisted += $row['shortlisted_candidates_count'];  // Sum the shortlisted count
+}
+
+$stmt_shortlisted->close();
+
+// Print or process the results
+foreach ($shortlisted_candidates_per_application as $row) {
+    echo "Application ID: " . $row['A_id'] . " - Shortlisted Candidates Count: " . $row['shortlisted_candidates_count'] . "<br>";
+}
+
 
 //posted Jobs List
 $query_posted_jobs = "SELECT Name, Field, Posted_Date, Deadline, Status, Salary, Description
@@ -54,22 +71,6 @@ $stmt_posted_jobs->bind_param("s", $username);
 $stmt_posted_jobs->execute();
 $result_posted_jobs = $stmt_posted_jobs->get_result();
 $stmt_posted_jobs->close();
-
-//shortlisted candidates Count
-$query_shortlisted = "SELECT COUNT(*) AS total_shortlisted 
-                      FROM recruiter_shortlist
-                      WHERE R_id = ?";
-
-$stmt_shortlisted = $con->prepare($query_shortlisted);
-if (!$stmt_shortlisted) {
-    die("Error in query preparation: " . $con->error);
-}
-
-$stmt_shortlisted->bind_param("s", $username);
-$stmt_shortlisted->execute();
-$result_shortlisted = $stmt_shortlisted->get_result();
-$total_shortlisted = $result_shortlisted->fetch_assoc()['total_shortlisted'] ?? 0;
-$stmt_shortlisted->close();
 
 $con->close();
 ?>
@@ -92,7 +93,7 @@ $con->close();
         <!-- Section 1: Summary Cards -->
         <div class="dashboard_section" id="summary-section">
             <div class="job_card">
-                <h3>Total Applications</h3>
+                <h3>Total Posted Jobs</h3>
                 <p id="applied-jobs-count">
                     <?php echo htmlspecialchars($posted_jobs_count); ?>
                 </p>

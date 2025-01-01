@@ -24,7 +24,10 @@ $applied_jobs_count = $result_applied->fetch_assoc()['applied_jobs_count'] ?? 0;
 $stmt_applied->close();
 
 //Bookmarked Jobs Count
-$query_bookmarked = "SELECT COUNT(*) AS bookmarked_jobs_count FROM seeker_bookmarks WHERE S_id = ?";
+$query_bookmarked = "SELECT COUNT(*) AS bookmarked_jobs_count 
+                     FROM seeker_bookmarks 
+                     WHERE S_id = ?";
+
 $stmt_bookmarked = $con->prepare($query_bookmarked);
 if (!$stmt_bookmarked) {
     die("Error in query preparation: " . $con->error);
@@ -41,14 +44,14 @@ $query_accepted = "SELECT COUNT(*) AS total_accepted
 FROM seeker_seeks s
 INNER JOIN applications a 
 ON s.A_id = a.A_id
-WHERE s.S_id = ? AND s.Status = 'accepted'";
+WHERE s.S_id = ? AND s.Status = 1";
 
 $stmt_accepted = $con->prepare($query_accepted);
 if (!$stmt_accepted) {
     die("Error in query preparation: " . $con->error);
 }
 
-$stmt_accepted->bind_param("i", $seeker_id);
+$stmt_accepted->bind_param("s", $username);
 $stmt_accepted->execute();
 
 $result_accepted = $stmt_accepted->get_result();
@@ -124,9 +127,9 @@ $con->close();
             <div class="job_card">
                 <h3>Accepted applications</h3>
                 <p id="accepted-applications-count">
-                <?php 
-                echo htmlspecialchars($total_accepted); 
-                ?>
+                    <?php
+                    echo htmlspecialchars($total_accepted);
+                    ?>
                 </p>
             </div>
         </div>

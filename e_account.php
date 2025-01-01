@@ -17,7 +17,7 @@
     <?php include 'includes/e_sidebar.php'; ?>
     <?php include 'e_fetch.php'; ?>
 
-    <div class="container">
+    <div class="account-container">
         <div class="profile-section">
             <div class="profile-pic">
                 <img src="https://www.w3schools.com/w3images/avatar3.png">
@@ -68,7 +68,7 @@
                 </div>
 
 
-                <button type="edit">Edit</button>
+                <button class="edit-btn" type="submit" name="edit">Edit</button>
             </form>
         </div>
 

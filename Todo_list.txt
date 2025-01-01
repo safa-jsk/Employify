@@ -25,14 +25,15 @@ CSE370 Project To-Do
 	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha	DONE
 	Shortlist candidates																		Safa	DONE
 	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)			Maliha	DONE
+	Update "username" in navbar in Employer 																Safa
 
 3. Shortlisted Candidates
 	View Profile Button (SELECT Query)															Maliha
-	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa	
-	Shortlist Button																			Safa	
-	Reject Button (for both Applied and Shortlisted Page)										Safa	
+	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa	DONE
+	Shortlist Button																			Safa	DONE
+	Reject Button (for both Applied and Shortlisted Page)										Safa	DONE
 	
 4. Admin Panel
 
 5. Forgot Password
-	Add Security Question (Also add during Registration)
+	Add Security Question (Also add during Registration) [Used DoB]								Safa	DONE

@@ -96,6 +96,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                 <input type="email" name="email" placeholder="Enter your Email" required>
                 <input type="password" name="new_password" placeholder="New Password" required>
                 <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <input type="date" name="dob" placeholder="Date of Birth" required>
                 <button type="submit" name="reset_password">Reset Password</button>
             </form>
         </div>
@@ -141,6 +142,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
+                <input type="date" name="dob" placeholder="Date of Birth" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="text" name="company_name" placeholder="Company Name" required>

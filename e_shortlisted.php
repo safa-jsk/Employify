@@ -112,6 +112,7 @@ $con->close();
             <table class="shortlisted-candidates-list">
                 <thead>
                     <tr>
+                        <th>Job ID</th>
                         <th>Job Name</th>
                         <th>Field</th>
                         <th>Candidate Name</th>
@@ -124,6 +125,7 @@ $con->close();
                 <tbody>
                     <?php while ($row = $result_shortlisted_candidates->fetch_assoc()): ?>
                         <tr>
+                            <td><?php echo htmlspecialchars($row['A_id']); ?></td>
                             <td><?php echo htmlspecialchars($row['Job_Name']); ?></td>
                             <td><?php echo htmlspecialchars($row['Field']); ?></td>
                             <td><?php echo htmlspecialchars($row['Seeker_Name']); ?></td>
