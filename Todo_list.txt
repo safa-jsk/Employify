@@ -29,8 +29,8 @@ CSE370 Project To-Do
 3. Shortlisted Candidates
 	View Profile Button (SELECT Query)															Maliha
 	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa	
-	Shortlist Button																			Safa
-	Reject Button (for both Applied and Shortlisted Page)										Safa
+	Shortlist Button																			Safa	
+	Reject Button (for both Applied and Shortlisted Page)										Safa	
 	
 4. Admin Panel
 
