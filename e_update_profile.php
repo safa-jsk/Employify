@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['e_edit'])) {
               SET FName = ?, LName = ?, Email = ?, CName = ?, CDescription = ?, Contact = ?
               WHERE R_id = ?");
 
-    $stmt->bind_param("sssssss", $fname, $lname, $email, $contact, $company_name, $company_description, $user_id);
+    $stmt->bind_param("sssssss", $fname, $lname, $email, $company_name, $company_description,$contact, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
     // Execute the query
