@@ -16,19 +16,19 @@ CSE370 Project To-Do
 
 2. For Employer
 	Check already existing user_id in register [Copy from Job Seeker]							Safa	DONE
-	Account Details (UPDATE Query)																Saadat
+	Account Details (UPDATE Query)																Saadat	DONE
 	Dashboard (SELECT Queries with COUNT and LIMIT)												Maliha	DONE
 	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]					Safa	DONE
 	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_update-job.php w/o html]		Saadat	
 	DELETE Job (in e_posted-jobs.php)															Safa	DONE
-	COUNT total applicants for each job															Saadat	
+	COUNT total applicants for each job															Safa	DONE
 	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha	DONE
 	Shortlist candidates																		Safa	DONE
 	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)			Maliha	DONE
-	Update "username" in navbar in Employer 																Safa
+	Update "username" in navbar in Employer 													Safa	DONE
 
 3. Shortlisted Candidates
-	View Profile Button (SELECT Query)															Maliha
+	View Profile Button (SELECT Query)															Maliha	
 	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa	DONE
 	Shortlist Button																			Safa	DONE
 	Reject Button (for both Applied and Shortlisted Page)										Safa	DONE
