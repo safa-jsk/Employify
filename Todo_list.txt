@@ -11,7 +11,7 @@ CSE370 Project To-Do
 	Bookmark remove [DELETE button]											Saadat
 	Scroll Jobs (Optional)
 	Dropdown Advanced Search 												Safa 		DONE
-	Accepted Job Count 														Maliha
+	Accepted Job Count 														Maliha		DONE
 	Login check after clicking logo											Maliha		DONE								
 
 2. For Employer
