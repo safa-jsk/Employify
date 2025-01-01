@@ -5,9 +5,10 @@ if (isset($_POST['reset_password'])) {
     $email = trim($_POST['email']);
     $new_password = trim($_POST['new_password']);
     $confirm_password = trim($_POST['confirm_password']);
+    $dob = trim($_POST['dob']);
 
     // Validate fields
-    if (empty($email) || empty($new_password) || empty($confirm_password)) {
+    if (empty($email) || empty($new_password) || empty($confirm_password) || empty($dob)) {
         echo "<script>alert('All fields are required'); window.location.href='index.php';</script>";
         exit();
     }
@@ -21,6 +22,28 @@ if (isset($_POST['reset_password'])) {
         echo "<script>alert('Password must be at least 8 characters long'); window.location.href='index.php';</script>";
         exit();
     }
+
+    // Confirm DoB
+    $stmt = $con->prepare("SELECT DoB FROM seeker WHERE Email = ?
+                            UNION
+                            SELECT DoB FROM recruiter WHERE Email = ?");
+    $stmt->bind_param("ss", $email, $email);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows == 0) {
+        echo "<script>alert('Email not found'); window.location.href='index.php';</script>";
+        exit();
+    }
+
+    $stmt->bind_result($dob_db);
+    $stmt->fetch();
+
+    if ($dob !== $dob_db) {
+        echo "<script>alert('Date of Birth does not match'); window.location.href='index.php';</script>";
+        exit();
+    }
+
 
     // Check if email exists
     $stmt = $con->prepare("SELECT S_id FROM seeker WHERE Email = ?");
@@ -47,4 +70,3 @@ if (isset($_POST['reset_password'])) {
     header("Location: index.php");
     exit();
 }
-?>

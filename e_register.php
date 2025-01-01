@@ -9,6 +9,7 @@ if (isset($_POST['e_register'])) {
     $first_name = trim($_POST['first_name']);
     $last_name = trim($_POST['last_name']);
     $gender = isset($_POST['gender']) ? intval($_POST['gender']) : null;
+    $dob = trim($_POST['dob']);
     $email = trim($_POST['email']);
     $password = trim($_POST['password']);
     $company_name = trim($_POST['company_name']);
@@ -48,10 +49,10 @@ if (isset($_POST['e_register'])) {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert data
-            $stmt = $con->prepare("INSERT INTO `recruiter` (`R_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `CName`, `CDescription`, `Contact`) 
+            $stmt = $con->prepare("INSERT INTO `recruiter` (`R_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `DoB`, `CName`, `CDescription`, `Contact`) 
                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            $stmt->bind_param("sssisssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $company_name, $company_description, $contact_number);
+            $stmt->bind_param("sssisssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $dob, $company_name, $company_description, $contact_number);
 
             if ($stmt->execute()) {
                 echo "<script>alert('Registration successful! Please login.'); window.location.href='index.php';</script>";
