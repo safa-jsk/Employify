@@ -1,6 +1,7 @@
 <?php
 session_start();
-require_once 'DBconnect.php';
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+require_once 'DBconnect.php'; // Include the database conection file
 
 // Ensure the recruiter is logged in
 if (!isset($_SESSION['username'])) {

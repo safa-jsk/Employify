@@ -13,16 +13,14 @@ if (!isset($_SESSION['username'])) {
 $user_id = $_SESSION['username'];
 
 // Check if the form was submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['e_edit'])) {
     // Fetch form data
     $fname = trim($_POST['fname']);
     $lname = trim($_POST['lname']);
     $email = trim($_POST['email']);
     $contact = trim($_POST['contact']);
-    $skills = trim($_POST['skills']);
-    $experience = trim($_POST['experience']);
-    $education = trim($_POST['education']);
-    $dob = trim($_POST['dob']);
+    $company_name = $_POST['cname'];
+    $company_description = $_POST['company_description'];
 
     // Validate input (optional, add more validation as needed)
     if (empty($fname) || empty($lname) || empty($email)) {
@@ -31,17 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
     }
 
     // Prepare the SQL update query
-    $stmt = $con->prepare("UPDATE seeker 
-              SET FName = ?, LName = ?, Email = ?, Skills = ?, Experience = ?, Education = ?, DoB = ? , Contact = ?
-              WHERE S_id = ?");
+    $stmt = $con->prepare("UPDATE recruiter 
+              SET FName = ?, LName = ?, Email = ?, CName = ?, CDescription = ?, Contact = ?
+              WHERE R_id = ?");
 
-    $stmt->bind_param("sssssssss", $fname, $lname, $email, $skills, $experience, $education, $dob, $contact, $user_id);
+    $stmt->bind_param("sssssss", $first_name, $last_name, $email, $contact_number, $company_name, $company_description, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
-
     // Execute the query
     if ($result -> affected_rows > 0) {
-        echo "<script>alert('Profile updated successfully.'); window.location.href = 'js_account.php';</script>";
+        echo "<script>alert('Profile updated successfully.'); window.location.href = 'e_account.php';</script>";
     } else {
         echo "<script>alert('Failed to update profile.'); window.history.back();</script>";
     }
@@ -49,6 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
     $stmt->close();
     $con->close();
 } else {
-    header("Location: js_account.php");
+    header("Location: e_account.php");
     exit();
 }
