@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['e_edit'])) {
     $lname = trim($_POST['lname']);
     $email = trim($_POST['email']);
     $contact = trim($_POST['contact']);
-    $company_name = $_POST['cname'];
-    $company_description = $_POST['company_description'];
+    $company_name = trim($_POST['cname']);
+    $company_description = trim($_POST['company_description']);
 
     // Validate input (optional, add more validation as needed)
     if (empty($fname) || empty($lname) || empty($email)) {
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['e_edit'])) {
               SET FName = ?, LName = ?, Email = ?, CName = ?, CDescription = ?, Contact = ?
               WHERE R_id = ?");
 
-    $stmt->bind_param("sssssss", $first_name, $last_name, $email, $contact_number, $company_name, $company_description, $user_id);
+    $stmt->bind_param("sssssss", $fname, $lname, $email, $contact, $company_name, $company_description, $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
     // Execute the query
