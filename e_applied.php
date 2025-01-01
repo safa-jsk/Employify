@@ -3,9 +3,9 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php'; // Include the database conection file
 
-// Ensure the user is logged in
+// Ensure the recruiter is logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: index.php?message=" . urlencode("You need to log in to view applicants."));
+    header("Location: login.php");
     exit;
 }
 
