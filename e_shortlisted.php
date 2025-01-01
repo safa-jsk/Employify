@@ -85,29 +85,29 @@ $con->close();
     <?php include 'includes/e_navbar.php'; ?>
     <?php include 'includes/e_sidebar.php'; ?>
 
-<div class="dashboard_content">
-    <h2>Shortlisted Candidates</h2>
+    <div class="dashboard_content">
+        <h2>Shortlisted Candidates</h2>
 
-    <!-- Filter Form -->
-    <form action="" method="get">
-        <div class="search-form">
-            <select name="job_id" class="search-select">
-                <option value="" selected>All Jobs</option>
-                <?php while ($job = $result_jobs->fetch_assoc()): ?>
-                    <option value="<?php echo htmlspecialchars($job['A_id']); ?>" 
-                        <?php if (isset($_GET['job_id']) && $_GET['job_id'] == $job['A_id']) echo 'selected'; ?>>
-                        <?php echo htmlspecialchars($job['Name']); ?>
-                    </option>
-                <?php endwhile; ?>
-            </select>
-            <input type="text" name="search"
-                value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
-                class="form-control" placeholder="Search for candidates">
-            <button type="submit" class="search-button">Filter</button>
-        </div>
-    </form>
+        <!-- Filter Form -->
+        <form action="" method="get">
+            <div class="search-form">
+                <select name="job_id" class="search-select">
+                    <option value="" selected>All Jobs</option>
+                    <?php while ($job = $result_jobs->fetch_assoc()): ?>
+                        <option value="<?php echo htmlspecialchars($job['A_id']); ?>"
+                            <?php if (isset($_GET['job_id']) && $_GET['job_id'] == $job['A_id']) echo 'selected'; ?>>
+                            <?php echo htmlspecialchars($job['Name']); ?>
+                        </option>
+                    <?php endwhile; ?>
+                </select>
+                <input type="text" name="search"
+                    value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
+                    class="form-control" placeholder="Search for candidates">
+                <button type="submit" class="search-button">Filter</button>
+            </div>
+        </form>
 
-    <!-- Shortlisted Candidates Table -->
+        <!-- Shortlisted Candidates Table -->
         <?php if ($result_shortlisted_candidates->num_rows > 0): ?>
             <table class="shortlisted-candidates-list">
                 <thead>
@@ -131,7 +131,7 @@ $con->close();
                             <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
                             <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
                                     class="btn btn-success">Accept</a></td>
-                            <td><a href="e_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
+                            <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
                                     class="btn btn-danger">Reject</a></td>
                         </tr>
                     <?php endwhile; ?>
