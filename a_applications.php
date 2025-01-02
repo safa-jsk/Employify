@@ -92,7 +92,7 @@ if (isset($_GET['delete']) && $_GET['delete']) {
                         <td>
                             <span
                                 class="btn <?php echo $row['Status'] == 1 ? 'status accepted' : 'status rejected'; ?>">
-                                <?php echo $row['Status'] == 1 ? 'ACTIVE' : 'INACTIVE'; ?>
+                                <?php echo $row['Status'] == 1 ? 'Active' : 'Inactive'; ?>
                             </span>
                         </td>
                         <td><?php echo htmlspecialchars($row['Deadline']); ?></td>

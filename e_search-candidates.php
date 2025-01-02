@@ -13,13 +13,13 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'employer') {
 $search_query = '';
 if (isset($_GET['search'])) {
     $search_query = trim($_GET['search']);
-    $stmt = $con->prepare("SELECT S_id, FName, LName, Skills, Email, Experience, Education, Contact
+    $stmt = $con->prepare("SELECT *
                            FROM seeker 
                            WHERE skills LIKE ?");
     $like_query = "%{$search_query}%";
     $stmt->bind_param("s", $like_query);
 } else {
-    $stmt = $con->prepare("SELECT S_id, FName, LName, Skills, Email, Experience, Education, Contact
+    $stmt = $con->prepare("SELECT *
                            FROM seeker");
 }
 
@@ -62,6 +62,7 @@ $result = $stmt->get_result();
                     <th>Skills</th>
                     <th>Experience</th>
                     <th>Education</th>
+                    <th>Contact</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,6 +73,7 @@ $result = $stmt->get_result();
                     <td><?php echo htmlspecialchars($row['Skills']); ?></td>
                     <td><?php echo htmlspecialchars($row['Experience']); ?></td>
                     <td><?php echo htmlspecialchars($row['Education']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Contact']); ?></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
