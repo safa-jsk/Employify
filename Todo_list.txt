@@ -34,6 +34,10 @@ CSE370 Project To-Do
 	Reject Button (for both Applied and Shortlisted Page)										Safa	DONE
 	
 4. Admin Panel
+	Dashboard																					Safa	DONE
+	Seeker Page																					Safa
+	Recruiter Page																				Safa
+	Applications Page																			Safa
 
 5. Forgot Password
 	Add Security Question (Also add during Registration) [Used DoB]								Safa	DONE

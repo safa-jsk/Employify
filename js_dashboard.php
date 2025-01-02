@@ -41,10 +41,10 @@ $stmt_bookmarked->close();
 
 // Total accepted count
 $query_accepted = "SELECT COUNT(*) AS total_accepted
-FROM seeker_seeks s
-INNER JOIN applications a 
-ON s.A_id = a.A_id
-WHERE s.S_id = ? AND s.Status = 1";
+                    FROM seeker_seeks s
+                    INNER JOIN applications a 
+                    ON s.A_id = a.A_id
+                    WHERE s.S_id = ? AND s.Status = 1";
 
 $stmt_accepted = $con->prepare($query_accepted);
 if (!$stmt_accepted) {
@@ -151,7 +151,7 @@ $con->close();
                             echo '<td>' . htmlspecialchars($row['CName']) . '</td>';
                             echo '<td>' . htmlspecialchars($row['Deadline']) . '</td>';
                             echo '<td>' . htmlspecialchars($row['Applied_Date']) . '</td>';
-                        
+
                             if (is_null($row['Status'])) {
                                 echo '<td><span class="status on-hold">On Hold</span></td>';
                             } elseif ($row['Status'] == 0) {
@@ -167,7 +167,7 @@ $con->close();
                 </tbody>
             </table>
         </div>
-                
+
         <!-- Section 3: Bookmarks List -->
         <div class="dashboard_section scrollable" id="bookmarks-section">
             <h2>Upcoming Bookmarked Jobs</h2>

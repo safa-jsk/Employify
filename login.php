@@ -8,6 +8,13 @@ if (isset($_POST['login'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
+    if ($username == "admin@admin.admin" && $password == "ADMIN") {
+        $_SESSION['username'] = "admin";
+        $_SESSION['role'] = "admin";
+        echo "<script>alert('Welcome to the Admin Panel'); window.location.href='admin_panel.php';</script>";
+        exit();
+    }
+
     // Prepare and check user
     $stmt = $con->prepare("SELECT 'job_seeker' AS role, password FROM seeker
                             WHERE Email = ?
@@ -17,17 +24,17 @@ if (isset($_POST['login'])) {
     $stmt->bind_param("ss", $username, $username);
     $stmt->execute();
     $stmt->store_result();
-    
+
     if ($stmt->num_rows > 0) {
         $stmt->bind_result($role, $hashed_password);
         $stmt->fetch();
 
         if (password_verify($password, $hashed_password)) {
             session_regenerate_id(true);
-            
-            if ($role === 'job_seeker'){
+
+            if ($role === 'job_seeker') {
                 $user_query = "SELECT S_id FROM seeker WHERE Email = ?";
-            } elseif ($role === 'employer'){
+            } elseif ($role === 'employer') {
                 $user_query = "SELECT R_id FROM recruiter WHERE Email = ?";
             }
 
@@ -37,7 +44,7 @@ if (isset($_POST['login'])) {
             $stmt_user->store_result();
             $stmt_user->bind_result($user_id);
             $stmt_user->fetch();
-            
+
             $_SESSION['username'] = $user_id;
             $_SESSION['role'] = $role;
 
