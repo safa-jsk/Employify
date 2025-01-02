@@ -128,9 +128,9 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                     <td><a href="?S_id=<?php echo $row['S_id']; ?>#profile-popup" class="view-button">View Profile</a>
                     </td>
                     <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                            class="accept-button">Accept</a></td>
+                            class="status accepted">Accept</a></td>
                     <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                            class="remove-button">Reject</a></td>
+                            class="status rejected">Reject</a></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>

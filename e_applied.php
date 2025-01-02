@@ -57,7 +57,7 @@ $candidates_result = $candidates_query->get_result();
     <?php include 'includes/e_navbar.php'; ?>
     <?php include 'includes/e_sidebar.php'; ?>
 
-    <div class="candidates-container">
+    <div class="dashboard_content">
         <h2>Applicants</h2>
 
         <!-- Filter Dropdown -->

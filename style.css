@@ -697,7 +697,7 @@ textarea {
 }
 
 .accept-button {
-  height: 37.5px;
+  /* height: 37.5px; */
   background-color: #28a745;
   color: #fcfcfd;
   text-decoration: none;
@@ -714,7 +714,7 @@ textarea {
 }
 
 .view-button{
-  height: 37.5px;
+  height: auto;
   color: #fcfcfd;
   text-decoration: underline;
   display: flex;
@@ -722,7 +722,7 @@ textarea {
   justify-content: center;
   align-items: center;
   border: none;
-  padding: 12px;
+  padding: auto;
   font-size: 14px;
   border-radius: 5px;
   cursor: pointer;

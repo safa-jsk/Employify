@@ -78,7 +78,7 @@ if (isset($_GET['edit'])) {
         <?php endif; ?>
 
         <!-- Display Jobs List -->
-        <table class="posted-jobs-list">
+        <table class="shortlisted-candidates-list">
             <thead>
                 <tr>
                     <th>Job ID</th>
