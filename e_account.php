@@ -20,6 +20,15 @@
     <div class="account-container">
         <div class="profile-section">
             <div class="profile-pic">
+                <!-- Display Role based on the session role -->
+                <?php 
+                if (isset($_SESSION['role']) && $_SESSION['role'] == 'employer') {
+                    echo '<h4>Job Recruiter</h4>';
+                } else {
+                    echo '<h4>No Role Assigned</h4>';
+                }
+                ?>
+
                 <img src="https://www.w3schools.com/w3images/avatar3.png">
                 <h3><?php echo htmlspecialchars($job_recruiter['FName'] . ' ' . $job_recruiter['LName']); ?></h3>
                 <p><?php echo htmlspecialchars($job_recruiter['Email'] ?? ''); ?></p>

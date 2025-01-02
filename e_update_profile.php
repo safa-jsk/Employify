@@ -9,6 +9,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+
+
 // Fetch the Job Seeker ID from the session
 $user_id = $_SESSION['username'];
 

@@ -9,6 +9,10 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+
+
+
+
 // Fetch job seeker data
 $username = $_SESSION['username'];
 $stmt = $con->prepare("SELECT FName, LName, Email, Gender, DoB, CName, CDescription, Contact FROM recruiter WHERE R_id = ?");

@@ -1,5 +1,5 @@
 <?php
-session_start();
+session_start(); // Start the session
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
@@ -9,8 +9,9 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Fetch the Job Seeker ID from the session
+// Fetch the Job Seeker ID and role from the session
 $user_id = $_SESSION['username'];
+
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
@@ -32,9 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
 
     // Prepare the SQL update query
     $stmt = $con->prepare("UPDATE seeker 
-              SET FName = ?, LName = ?, Email = ?, Skills = ?, Experience = ?, Education = ?, DoB = ? , Contact = ?
+              SET FName = ?, LName = ?, Email = ?, Skills = ?, Experience = ?, Education = ?, DoB = ? , Contact = ? 
               WHERE S_id = ?");
-
     $stmt->bind_param("sssssssss", $fname, $lname, $email, $skills, $experience, $education, $dob, $contact, $user_id);
 
     // Execute the query
@@ -50,3 +50,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
     header("Location: js_account.php");
     exit();
 }
+?>

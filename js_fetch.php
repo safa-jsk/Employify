@@ -1,5 +1,5 @@
 <?php
-// session_start();
+// session_start(); // Start the session
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require 'DBconnect.php'; // Ensure the connection is available
 
@@ -17,6 +17,10 @@ $stmt->execute();
 $result = $stmt->get_result();
 $job_seeker = $result->fetch_assoc();
 
+
+
 // Close the statement and connection
 $stmt->close();
 $con->close();
+?>
+
