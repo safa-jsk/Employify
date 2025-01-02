@@ -35,9 +35,9 @@ CSE370 Project To-Do
 	
 4. Admin Panel
 	Dashboard																					Safa	DONE
-	Seeker Page																					Safa
-	Recruiter Page																				Safa
-	Applications Page																			Safa
+	Seeker Page																					Safa	DONE
+	Recruiter Page																				Safa	DONE
+	Applications Page																			Safa	DONE
 
 5. Forgot Password
 	Add Security Question (Also add during Registration) [Used DoB]								Safa	DONE
