@@ -66,7 +66,7 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -87,10 +87,10 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                 <select name="job_id" class="search-select">
                     <option value="" selected>All Jobs</option>
                     <?php while ($job = $result_jobs->fetch_assoc()): ?>
-                        <option value="<?php echo htmlspecialchars($job['A_id']); ?>"
-                            <?php if (isset($_GET['job_id']) && $_GET['job_id'] == $job['A_id']) echo 'selected'; ?>>
-                            <?php echo htmlspecialchars($job['Name']); ?>
-                        </option>
+                    <option value="<?php echo htmlspecialchars($job['A_id']); ?>"
+                        <?php if (isset($_GET['job_id']) && $_GET['job_id'] == $job['A_id']) echo 'selected'; ?>>
+                        <?php echo htmlspecialchars($job['Name']); ?>
+                    </option>
                     <?php endwhile; ?>
                 </select>
                 <input type="text" name="search"
@@ -102,38 +102,41 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
 
         <!-- Shortlisted Candidates Table -->
         <?php if ($result_shortlisted_candidates->num_rows > 0): ?>
-            <table class="shortlisted-candidates-list">
-                <thead>
-                    <tr>
-                        <th>Job ID</th>
-                        <th>Job Name</th>
-                        <th>Field</th>
-                        <th>Candidate Name</th>
-                        <th>Email</th>
-                        <th>Deadline</th>
-                        <th>Profile</th>
-                        <th>Accept</th>
-                        <th>Reject</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result_shortlisted_candidates->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($row['A_id']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Job_Name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Field']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Seeker_Name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Email']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
-                            <td><a href="?S_id=<?php echo $row['S_id']; ?>#profile-popup" class="view-button">View Profile</a></td>
-                            <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" class="accept-button">Accept</a></td>
-                            <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" class="remove-button">Reject</a></td>
-                        </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+        <table class="shortlisted-candidates-list">
+            <thead>
+                <tr>
+                    <th>Job ID</th>
+                    <th>Job Name</th>
+                    <th>Field</th>
+                    <th>Candidate Name</th>
+                    <th>Email</th>
+                    <th>Deadline</th>
+                    <th>Profile</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $result_shortlisted_candidates->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($row['A_id']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Job_Name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Field']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Seeker_Name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Email']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
+                    <td><a href="?S_id=<?php echo $row['S_id']; ?>#profile-popup" class="view-button">View Profile</a>
+                    </td>
+                    <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
+                            class="accept-button">Accept</a></td>
+                    <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
+                            class="remove-button">Reject</a></td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
         <?php else: ?>
-            <p>No shortlisted candidates found.</p>
+        <p>No shortlisted candidates found.</p>
         <?php endif; ?>
     </div>
 
@@ -143,69 +146,72 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
             <?php
-            $seeker_id = $_GET['S_id'];
-            $stmt = $con->prepare("SELECT FName, LName, Gender, Email, Experience, Education, Skills, Contact 
+                $seeker_id = $_GET['S_id'];
+                $stmt = $con->prepare("SELECT FName, LName, Gender, Email, Experience, Education, Skills, Contact 
                                    FROM seeker 
                                    WHERE S_id = ?");
-            $stmt->bind_param("s", $seeker_id);
-            $stmt->execute();
-            $result = $stmt->get_result();
+                $stmt->bind_param("s", $seeker_id);
+                $stmt->execute();
+                $result = $stmt->get_result();
 
-            if ($result->num_rows > 0) {
-                $seeker = $result->fetch_assoc();
-                echo "<p><strong>Name:</strong> " . htmlspecialchars($seeker['FName'] . ' ' . $seeker['LName']) . "</p>";
-                echo "<p><strong>Gender:</strong> " . ($seeker['Gender'] == 1 ? 'Male' : 'Female') . "</p>";
-                echo "<p><strong>Email:</strong> " . htmlspecialchars($seeker['Email']) . "</p>";
-                echo "<p><strong>Experience:</strong> " . htmlspecialchars($seeker['Experience']) . " years</p>";
-                echo "<p><strong>Education:</strong> " . htmlspecialchars($seeker['Education']) . "</p>";
-                echo "<p><strong>Skills:</strong> " . htmlspecialchars($seeker['Skills']) . "</p>";
-                echo "<p><strong>Contact:</strong> " . htmlspecialchars($seeker['Contact']) . "</p>";
-            } else {
-                echo "<p>Profile not found.</p>";
-            }
+                if ($result->num_rows > 0) {
+                    $seeker = $result->fetch_assoc();
+                    echo "<p><strong>Name:</strong> " . htmlspecialchars($seeker['FName'] . ' ' . $seeker['LName']) . "</p>";
+                    echo "<p><strong>Gender:</strong> " . ($seeker['Gender'] == 1 ? 'Male' : 'Female') . "</p>";
+                    echo "<p><strong>Email:</strong> " . htmlspecialchars($seeker['Email']) . "</p>";
+                    echo "<p><strong>Experience:</strong> " . htmlspecialchars($seeker['Experience']) . " years</p>";
+                    echo "<p><strong>Education:</strong> " . htmlspecialchars($seeker['Education']) . "</p>";
+                    echo "<p><strong>Skills:</strong> " . htmlspecialchars($seeker['Skills']) . "</p>";
+                    echo "<p><strong>Contact:</strong> " . htmlspecialchars($seeker['Contact']) . "</p>";
+                } else {
+                    echo "<p>Profile not found.</p>";
+                }
 
-            $stmt->close();
-            ?>
+                $stmt->close();
+                ?>
         </div>
     </div>
     <?php endif; ?>
 
     <script>
-        // Close popups when clicking outside
-        window.onclick = function(event) {
-            const modals = ['profile-popup'];
-            modals.forEach((id) => {
-                const modal = document.getElementById(id);
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                }
-            });
-        };
-
-        // Function to open popups when links are clicked
-        document.querySelectorAll('a[href^="#"]').forEach((link) => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const modal = document.getElementById(targetId);
-                if (modal) {
-                    modal.style.display = 'flex';
-                }
-            });
+    // Close popups when clicking outside
+    window.onclick = function(event) {
+        const modals = ['profile-popup'];
+        modals.forEach((id) => {
+            const modal = document.getElementById(id);
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
         });
+    };
 
-        // Close popup when close button is clicked
-        document.querySelectorAll('.close-btn').forEach((btn) => {
-            btn.addEventListener('click', function(event) {
-                event.preventDefault();
-                const popup = this.closest('.popup');
-                if (popup) {
-                    popup.style.display = 'none';
-                }
-            });
+    // Function to open popups when links are clicked
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const modal = document.getElementById(targetId);
+            if (modal) {
+                modal.style.display = 'flex';
+            }
         });
+    });
+
+    // Close popup when close button is clicked
+    document.querySelectorAll('.close-btn').forEach((btn) => {
+        btn.addEventListener('click', function(event) {
+            event.preventDefault();
+            const popup = this.closest('.popup');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+            // Remove the hash from the URL
+            history.pushState("", document.title, window.location.pathname);
+        });
+    });
     </script>
 
 
 </body>
+
 </html>
