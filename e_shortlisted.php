@@ -144,7 +144,6 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                         <th>Candidate Name</th>
                         <th>Email</th>
                         <th>Deadline</th>
-                        <th>Profile</th>
                         <th>Accept</th>
                         <th>Reject</th>
                     </tr>
