@@ -34,7 +34,8 @@
                     FROM seeker_seeks ss
                     INNER JOIN applications a ON ss.A_id = a.A_id
                     INNER JOIN recruiter r ON a.R_id = r.R_id
-                    WHERE ss.S_id = ?";
+                    WHERE ss.S_id = ?
+                    ORDER BY ss.Status DESC, a.Deadline ASC";
 
         $stmt = $con->prepare($query);
         $stmt->bind_param("s", $username);

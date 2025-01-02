@@ -11,6 +11,9 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
         } elseif ($_SESSION['role'] === 'employer') {
             header("Location: e_dashboard.php"); // Employer dashboard
             exit();
+        } elseif ($_SESSION['role'] === 'admin') {
+            header("Location: admin_panel.php"); // Admin dashboard
+            exit();
         } else {
             echo "<script>alert('Unknown role. Please contact admin.');</script>";
         }

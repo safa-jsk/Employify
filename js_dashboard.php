@@ -63,7 +63,7 @@ $query_applied_list = "SELECT a.Name, r.CName,a.Deadline, ss.Applied_Date, ss.St
                        INNER JOIN applications a ON ss.A_id = a.A_id
                        INNER JOIN recruiter r ON a.R_id = r.R_id
                        WHERE ss.S_id = ?
-                       ORDER BY a.Deadline";
+                       ORDER BY ss.Status DESC, a.Deadline ASC";
 
 $stmt_applied_list = $con->prepare($query_applied_list);
 if (!$stmt_applied_list) {
