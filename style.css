@@ -1,16 +1,16 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
-  
+
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #100727;
   /* background: url(../images/index_bg.jpg) no-repeat center center fixed;  */
   z-index: -1;
@@ -28,17 +28,17 @@ body {
   background-size: cover;
   background-position: center;
   filter: blur(8px); /* Adjust the blur intensity */
-  /* z-index: -1; /* Ensures it stays in the background */
+/* z-index: -1; /* Ensures it stays in the background */
 /* } */
 
 a {
-  color: black; 
-  text-decoration: none; 
+  color: black;
+  text-decoration: none;
 }
 
 a:hover {
   color: #011947;
-  text-decoration: underline; 
+  text-decoration: underline;
 }
 
 /* Navigation bar */
@@ -48,20 +48,24 @@ a:hover {
   align-items: center;
   padding: 10px 50px;
   background-color: rgb(57, 119, 205);
-  background: linear-gradient(270deg,rgba(57,119,205,1)8%,rgba(0,212,255,1) 89%);
+  background: linear-gradient(
+    270deg,
+    rgba(57, 119, 205, 1) 8%,
+    rgba(0, 212, 255, 1) 89%
+  );
 }
 
-.navbar .logo a{   
-    font-size: 32px;
-    font-weight: bold;
+.navbar .logo a {
+  font-size: 32px;
+  font-weight: bold;
 }
 
-.logo img{
-    width: 300px; 
-    height: auto; 
-    max-height: 50px; 
-    display: inline-block;
-  }
+.logo img {
+  width: 300px;
+  height: auto;
+  max-height: 50px;
+  display: inline-block;
+}
 
 .navbar ul {
   list-style: none;
@@ -80,7 +84,7 @@ a:hover {
   transition: 0.3s ease;
 }
 
-.navbar ul li a:hover{
+.navbar ul li a:hover {
   color: #270f75;
 }
 
@@ -140,12 +144,12 @@ a:hover {
 
 /* Main Container index page */
 .container {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   max-width: 1200px;
-   margin: 0 auto;
-   padding: 50px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 30px;
 }
 
 /* body Section - index.html */
@@ -165,13 +169,13 @@ a:hover {
   font-weight: bold;
   margin-bottom: 20px;
 }
-.body-section h2{
+.body-section h2 {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-.body-section h6{
+.body-section h6 {
   font-size: 15px;
   margin-bottom: 20px;
   display: flex;
@@ -284,11 +288,11 @@ a:hover {
 
 .password-links a {
   color: #000;
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .password-links a:hover {
-  color: #000; 
+  color: #000;
   text-decoration: underline;
 }
 
@@ -339,14 +343,14 @@ input[type="date"] {
   width: 220px;
   height: 100vh;
   min-height: 100%;
-  background-color: #142455; 
+  background-color: #142455;
   color: white;
   display: flex;
   flex-direction: column;
   padding: 20px 0;
-  position: fixed; 
+  position: fixed;
   left: 0;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 .sidebar ul {
   list-style-type: none;
@@ -431,9 +435,9 @@ input[type="date"] {
 /* Applied and Bookmarked Jobs List */
 #applied-jobs-list,
 #bookmarked-jobs-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 15px;
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
 }
 
 /* bookmarks */
@@ -448,7 +452,8 @@ table {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+th,
+td {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #ddd;
@@ -559,7 +564,6 @@ textarea {
   color: #fcfcfd;
 }
 
-
 /* Advanced Search */
 /* .advanced_search_collapsible {
   margin-left: auto;
@@ -600,28 +604,27 @@ textarea {
   transition: max-height 0.2s ease-out;
 }
 
-
 /* Job Status */
 .status {
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #fff;
-    font-weight: bold;
-    display: inline-block;
-    text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
 }
 
 .status.on-hold {
-    background-color: #ffc107; /* Yellow */
-    color: #000;
+  background-color: #ffc107; /* Yellow */
+  color: #000;
 }
 
 .status.rejected {
-    background-color: #dc3545; /* Red */
+  background-color: #dc3545; /* Red */
 }
 
 .status.accepted {
-    background-color: #28a745; /* Green */
+  background-color: #28a745; /* Green */
 }
 
 /* Advanced Search Filters
@@ -677,25 +680,25 @@ textarea {
 }
 
 .job-container {
-    width: 100%;
-    max-width: 1140px; /* Adjust this value for your desired container width */
-    margin-left: 250px;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+  width: 100%;
+  max-width: 1140px; /* Adjust this value for your desired container width */
+  margin-left: 250px;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .mt-5 {
-    margin-top: 3rem; /* Adjust this value for your preferred spacing */
+  margin-top: 3rem; /* Adjust this value for your preferred spacing */
 }
 
 .candidates-container {
-    width: 100%;
-    max-width: 1200px; /* Adjust this value for your desired container width */
-    margin-left: 250px;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+  width: 100%;
+  max-width: 1200px; /* Adjust this value for your desired container width */
+  margin-left: 250px;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 /* Main Content Styling */
@@ -711,13 +714,13 @@ textarea {
 
 /* Search Form Styling */
 .search-card {
- background: #ffff;
- border: 1px solid #ddd;
- border-radius: 8px;
- padding: 20px;
- width: 100%;
- text-align: center;
- box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background: #ffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 /* Search Button */
 .search-button {
@@ -754,7 +757,7 @@ textarea {
   background-color: #f9fafc;
   cursor: pointer;
   padding: 10px;
-  width: fit-content; 
+  width: fit-content;
   margin-bottom: 0;
 }
 
@@ -782,7 +785,6 @@ textarea {
 .search-form .search-button:hover {
   background-color: #0056b3;
 }
-
 
 /* Filtered Section Styling */
 .filtered-section {
@@ -814,7 +816,7 @@ textarea {
 }
 
 /* disabling button after applyin for a job */
-.applied-button:disabled{
+.applied-button:disabled {
   height: 36px;
   text-decoration: none;
   display: flex;
@@ -828,4 +830,50 @@ textarea {
   cursor: default;
   opacity: 0.65;
   margin-top: 8px;
+}
+
+/* Style the slider container */
+.form-check-input {
+  width: 60px; /* Slider width */
+  height: 30px; /* Slider height */
+  background-color: #ccc; /* Default background color (inactive state) */
+  border-radius: 50px; /* Rounded edges for capsule shape */
+  position: relative;
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+/* The slider circle (button) */
+.form-check-input:before {
+  content: "";
+  position: absolute;
+  top: 2px; /* Align vertically at the center */
+  left: 2px; /* Align horizontally at the left */
+  width: 26px; /* Circle diameter */
+  height: 26px; /* Circle height */
+  background-color: white; /* Slider button color */
+  border-radius: 50%; /* Round the button */
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+/* Active state: when the slider is checked */
+.form-check-input:checked {
+  background-color: #28a745; /* Green color for active state */
+}
+
+/* When the slider is active, the button moves to the right */
+.form-check-input:checked:before {
+  transform: translateX(30px); /* Move the button to the right */
+}
+
+/* Label for the switch */
+.form-check-label {
+  font-size: 16px;
+  margin-left: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Optional: Change label color based on the slider state */
+.form-check-input:checked + .form-check-label {
+  color: #28a745; /* Green when active */
 }
