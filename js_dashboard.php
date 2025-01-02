@@ -133,7 +133,6 @@ $con->close();
         <!-- Section 2: Applied Jobs List -->
         <h2>Upcoming Applied Jobs</h2>
         <div class="dashboard_section scrollable" id="applied-jobs-section">
-            <h2>Upcoming Applied Jobs</h2>
             <table class="applied-jobs-list">
                 <thead>
                     <tr>
