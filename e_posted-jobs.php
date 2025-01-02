@@ -171,15 +171,15 @@ if (isset($_GET['edit'])) {
                 <textarea id="description" name="description" class="form-control"
                     rows="5"><?= htmlspecialchars($job['Description']); ?></textarea>
             </div>
-            <div class="form-check form-switch mb-3">
+            <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" id="status" name="status"
                     <?= $job['Status'] ? 'checked' : ''; ?>>
-                <label class="form-check-label" for="status">
-                    <span id="status-label"><?= $job['Status'] ? 'Active' : 'Inactive' ?></span>
+                <label for="status" class="form-check-label" id="status-label">
+                    <?= $job['Status'] ? 'Active' : 'Inactive'; ?>
                 </label>
             </div>
-            <button type="submit" name="update_job" class="btn btn-primary">Update Job</button>
-            <a href="e_posted-jobs.php" class="btn btn-secondary">Cancel</a>
+            <button type="submit" name="update_job" class="search-button">Update Job</button>
+            <a href="e_posted-jobs.php" class="status rejected">Cancel</a>
         </form>
         <?php endif; ?>
     </div>
