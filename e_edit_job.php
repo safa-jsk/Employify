@@ -71,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
     <title>Edit Job</title>
 </head>
 
@@ -79,55 +78,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'includes/e_navbar.php'; ?>
     <?php include 'includes/e_sidebar.php'; ?>
 
-    <div class="container">
+    <div class="container mt-4">
         <h2>Edit Job</h2>
-
+        
         <?php if (isset($_SESSION['msg'])): ?>
-        <div class="alert alert-info">
-            <?= $_SESSION['msg']; ?>
-        </div>
-        <?php unset($_SESSION['msg']); ?>
+            <div class="alert alert-info">
+                <?= $_SESSION['msg']; ?>
+            </div>
+            <?php unset($_SESSION['msg']); ?>
         <?php endif; ?>
 
         <form method="POST">
             <div class="mb-3">
                 <label for="name" class="form-label">Job Name</label>
-                <input type="text" id="name" name="name" class="form-control"
-                    value="<?= htmlspecialchars($job['Name']); ?>" required>
+                <input type="text" id="name" name="name" class="form-control" value="<?= htmlspecialchars($job['Name']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="field" class="form-label">Field</label>
-                <input type="text" id="field" name="field" class="form-control"
-                    value="<?= htmlspecialchars($job['Field']); ?>" required>
+                <input type="text" id="field" name="field" class="form-control" value="<?= htmlspecialchars($job['Field']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="posted_date" class="form-label">Posted Date</label>
-                <input type="date" id="posted_date" name="posted_date" class="form-control"
-                    value="<?= htmlspecialchars($job['Posted_Date']); ?>" required>
+                <input type="date" id="posted_date" name="posted_date" class="form-control" value="<?= htmlspecialchars($job['Posted_Date']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="deadline" class="form-label">Deadline</label>
-                <input type="date" id="deadline" name="deadline" class="form-control"
-                    value="<?= htmlspecialchars($job['Deadline']); ?>" required>
+                <input type="date" id="deadline" name="deadline" class="form-control" value="<?= htmlspecialchars($job['Deadline']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="salary" class="form-label">Salary</label>
-                <input type="number" id="salary" name="salary" class="form-control"
-                    value="<?= htmlspecialchars($job['Salary']); ?>" required>
+                <input type="number" id="salary" name="salary" class="form-control" value="<?= htmlspecialchars($job['Salary']); ?>" required>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea id="description" name="description" class="form-control"
-                    rows="5"><?= htmlspecialchars($job['Description']); ?></textarea>
+                <textarea id="description" name="description" class="form-control" rows="5"><?= htmlspecialchars($job['Description']); ?></textarea>
             </div>
             <div class="form-check form-switch mb-3">
-                <input class="form-check-input" type="checkbox" id="status" name="status"
-                    <?= $job['Status'] ? 'checked' : ''; ?>>
+                <input class="form-check-input" type="checkbox" id="status" name="status" <?= $job['Status'] ? 'checked' : ''; ?>>
                 <label class="form-check-label" for="status">Active</label>
             </div>
-            <button type="submit" class="edit-button"
+            <button type="submit" class="btn btn-primary"
                 onclick="return confirm('Are you sure you want to update this job?');">Update Job</button>
-            <a href="e_posted-jobs.php" class="edit-button">Cancel</a>
+            <a href="e_posted-jobs.php" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </body>
