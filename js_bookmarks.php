@@ -71,11 +71,10 @@
                     echo '<td><a href="js_apply.php?A_id=' . htmlspecialchars($row['A_id']) .
                         '" class="search-button" name="apply">Apply</a></td>';
                 }
-        
+
                 echo '<td><a href="js_remove_bookmark.php?A_id=' . htmlspecialchars($row['A_id']) .
-                    '" class="remove-button" name="remove">Remove</a></td>';
+                    '" class="status rejected" name="remove">Remove</a></td>';
                 echo '</tr>';
-            
             }
 
             echo '</table>';
