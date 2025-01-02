@@ -19,7 +19,7 @@ CSE370 Project To-Do
 	Account Details (UPDATE Query)																Saadat	DONE
 	Dashboard (SELECT Queries with COUNT and LIMIT)												Maliha	DONE
 	Post a Job (INSERT Query to applications table) [Similar to js_apply.php]					Safa	DONE
-	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_edit_job.php w/o html] (Active/Inactive slider or dropdown)		Saadat	
+	See and Edit Posted Jobs (SELECT and UPDATE Query) [Need new e_edit_job.php w/o html]		Saadat	DONE
 	DELETE Job (in e_posted-jobs.php)															Safa	DONE
 	COUNT total applicants for each job															Safa	DONE
 	See applied candidates (SELECT Query) [Need new e_applied-candidates.php w/ html]			Maliha	DONE
