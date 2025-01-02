@@ -125,9 +125,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <?= $job['Status'] ? 'checked' : ''; ?>>
                 <label class="form-check-label" for="status">Active</label>
             </div>
-            <button type="submit" class="edit-button"
+            <button type="submit" class="btn btn-primary"
                 onclick="return confirm('Are you sure you want to update this job?');">Update Job</button>
-            <a href="e_posted-jobs.php" class="edit-button">Cancel</a>
+            <a href="e_posted-jobs.php" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </body>
