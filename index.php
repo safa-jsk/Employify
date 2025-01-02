@@ -159,7 +159,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
     <script>
         // Close popups when clicking outside
         window.onclick = function(event) {
-            const modals = ['loginModal', 'registerJsPopup', 'registerEmployerPopup'];
+            const modals = ['loginModal', 'registerJsPopup', 'registerEmployerPopup', 'forgotPasswordPopup'];
             modals.forEach((id) => {
                 const modal = document.getElementById(id);
                 if (event.target === modal) {
