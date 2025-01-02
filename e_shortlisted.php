@@ -135,42 +135,6 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                 <?php endwhile; ?>
             </tbody>
         </table>
-        <table class="shortlisted-candidates-list">
-            <thead>
-                <tr>
-                    <th>Job ID</th>
-                    <th>Job Name</th>
-                    <th>Field</th>
-                    <th>Candidate Name</th>
-                    <th>Email</th>
-                    <th>Deadline</th>
-                    <th>Accept</th>
-                    <th>Reject</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = $result_shortlisted_candidates->fetch_assoc()): ?>
-                <tr>
-                    <td><?php echo htmlspecialchars($row['A_id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Job_Name']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Field']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Seeker_Name']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Email']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
-                    <td><a href="?S_id=<?php echo $row['S_id']; ?>#profile-popup" class="view-button">View Profile</a>
-                    </td>
-                    <?php if ($row['Status'] === 'accepted'): ?>
-                    <td><button class="applied-button" disabled>Accepted</button></td>
-                    <?php else: ?>
-                    <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                            class="accept-button">Accept</a></td>
-                    <?php endif; ?>
-                    <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                            class="remove-button">Reject</a></td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
         <?php else: ?>
         <p>No shortlisted candidates found.</p>
         <?php endif; ?>
