@@ -17,6 +17,7 @@
     <?php include 'includes/js_navbar.php'; ?>
     <?php include 'includes/js_sidebar.php'; ?>
     <?php include 'js_fetch.php'; ?>
+    <?php include 'js_change_password.php'; ?>
 
     <div class="account-container">
         <div class="profile-section">
@@ -102,13 +103,54 @@
                     <input type="date" name="dob" value="<?php echo htmlspecialchars($job_seeker['DoB'] ?? ''); ?>">
                 </div>
 
+
+
                 <button class="edit-button" type="submit" name="js_edit">Save Changes</button>
+                <br>
+
+            <!-- Change Password Button -->
+            <button  class="edit-button-changepass" type="button" id="changePasswordBtn">Change Password</button>
             </form>
         </div>
 
-
+    <!-- Change Password Popup -->
+    <div id="changePasswordPopup" class="popup">
+        <div class="popup-content">
+            <a href="#" class="close-btn">&times;</a>
+            <h4>Change Password</h4>
+            <form method="POST" action="js_change_password.php">
+                <input type="password" name="old_password" placeholder="Current Password" required>
+                <input type="password" name="new_password" placeholder="New Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
+                <button type="submit" name="change_password">Update Password</button>
+            </form>
+        </div>
     </div>
 
-</body>
+    <script>
+        // Open Change Password Popup
+        document.getElementById('changePasswordBtn').addEventListener('click', function() {
+            document.getElementById('changePasswordPopup').style.display = 'flex';
+        });
 
+        // Close popups when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('changePasswordPopup');
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Close popup when close button is clicked
+        document.querySelectorAll('.close-btn').forEach((btn) => {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const popup = this.closest('.popup');
+                if (popup) {
+                    popup.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
 </html>
