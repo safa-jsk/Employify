@@ -8,11 +8,11 @@
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
+  width: -webkit-fill-available;
+  height: fit-content;
   font-family: "Poppins", sans-serif;
   color: #100727;
-  /* background: url(../images/index_bg.jpg) no-repeat center center fixed;  */
+  /* background: url(../images/index_bg.jpg) no-repeat center center fixed; */
   z-index: -1;
   backdrop-filter: blur(2px);
   position: relative;
@@ -45,6 +45,7 @@ a:hover {
 .navbar {
   display: flex;
   justify-content: space-between;
+  width: -webkit-fill-available;
   align-items: center;
   padding: 10px 50px;
   background-color: rgb(57, 119, 205);
@@ -97,7 +98,7 @@ a:hover {
 .nav-links a {
   color: #fbfbfc;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 .nav-links a:hover {
@@ -143,7 +144,7 @@ a:hover {
 }
 
 /* Main Container index page */
-.container {
+.index-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -168,6 +169,7 @@ a:hover {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 20px;
+
 }
 .body-section h2 {
   font-size: 20px;
@@ -221,15 +223,15 @@ a:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  background: rgba(0, 0, 0, 0.6); 
   justify-content: center;
   align-items: center;
-  z-index: 1000; /* Ensure it's above all other content */
+  z-index: 1000;
 }
 
 /* Display when targeted */
 .popup:target {
-  display: flex; /* Ensure it appears and flex alignment works */
+  display: flex;
 }
 
 /* Popup Content Styling */
@@ -242,7 +244,7 @@ a:hover {
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  z-index: 1001; /* Ensure it's above the overlay */
+  z-index: 1001;
 }
 
 
@@ -731,11 +733,12 @@ textarea {
   height: 30px;
   text-decoration: underline;
   display: flex;
+  color: #011947;
   justify-content: center;
   align-items: center;
   border: none;
   padding: 10px;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
   margin: 10px;
 }
@@ -749,15 +752,11 @@ textarea {
   padding-right: 15px;
 }
 
-.mt-5 {
-  margin-top: 3rem; /* Adjust this value for your preferred spacing */
-}
-
 .candidates-container {
   width: 100%;
-  max-width: 1200px; /* Adjust this value for your desired container width */
-  margin-left: 250px;
-  margin-right: auto;
+  max-width: 80%;
+  margin-left: 280px;
+  margin-top: 50px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -878,7 +877,7 @@ textarea {
   background-color: #f9fafc;
 }
 
-/* disabling button after applyin for a job */
+/* disabling button after applying for a job */
 .applied-button:disabled {
   height: 36px;
   text-decoration: none;

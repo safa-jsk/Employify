@@ -50,11 +50,6 @@ while ($row = $result_shortlisted->fetch_assoc()) {
 
 $stmt_shortlisted->close();
 
-// Print or process the results
-foreach ($shortlisted_candidates_per_application as $row) {
-    echo "Application ID: " . $row['A_id'] . " - Shortlisted Candidates Count: " . $row['shortlisted_candidates_count'] . "<br>";
-}
-
 
 //posted Jobs List
 $query_posted_jobs = "SELECT Name, Field, Posted_Date, Deadline, Status, Salary, Description

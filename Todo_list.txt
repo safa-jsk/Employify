@@ -9,7 +9,7 @@ CSE370 Project To-Do
 	Add Apply Button to Bookmarked Jobs (Optional)							Safa 		DONE
 	Fix Apply and Bookmark Button (resets Search table)						Fixed (redirected)
 	Bookmark remove [DELETE button]											Saadat		DONE
-	Scroll Jobs (Optional)
+	Scroll Jobs (Optional)													Maliha		DONE
 	Dropdown Advanced Search 												Safa 		DONE
 	Accepted Job Count 														Maliha		DONE
 	Login check after clicking logo											Maliha		DONE								
