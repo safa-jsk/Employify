@@ -45,11 +45,11 @@ $candidates_result = $candidates_query->get_result();
 <html lang="en">
 
 <head>
-<meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="style.css" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Applied Jobs</title>
 </head>
 
@@ -66,10 +66,10 @@ $candidates_result = $candidates_query->get_result();
                 <select id="jobFilter" name="job_id" class="search-select">
                     <option value="all" <?= $filter_job_id === 'all' ? 'selected' : '' ?>>All Jobs</option>
                     <?php while ($job = $jobs_result->fetch_assoc()) : ?>
-                        <option value="<?= htmlspecialchars($job['A_id']) ?>"
-                            <?= $filter_job_id == $job['A_id'] ? 'selected' : '' ?>>
-                            <?= htmlspecialchars($job['Name']) ?>
-                        </option>
+                    <option value="<?= htmlspecialchars($job['A_id']) ?>"
+                        <?= $filter_job_id == $job['A_id'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($job['Name']) ?>
+                    </option>
                     <?php endwhile; ?>
                 </select>
             </div>
@@ -91,23 +91,23 @@ $candidates_result = $candidates_query->get_result();
             </thead>
             <tbody>
                 <?php if ($candidates_result->num_rows > 0) : ?>
-                    <?php while ($candidate = $candidates_result->fetch_assoc()) : ?>
-                        <tr>
-                            <td><?= htmlspecialchars($candidate['A_id']) ?></td>
-                            <td><?= htmlspecialchars($candidate['JobName']) ?></td>
-                            <td><?= htmlspecialchars($candidate['S_id']) ?></td>
-                            <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
-                            <td><?= htmlspecialchars($candidate['Applied_Date']) ?></td>
-                            <td><a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                                    class="btn btn-success">Shortlist</a></td>
-                            <td><a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                                    class="btn btn-danger">Reject</a></td>
-                        </tr>
-                    <?php endwhile; ?>
+                <?php while ($candidate = $candidates_result->fetch_assoc()) : ?>
+                <tr>
+                    <td><?= htmlspecialchars($candidate['A_id']) ?></td>
+                    <td><?= htmlspecialchars($candidate['JobName']) ?></td>
+                    <td><?= htmlspecialchars($candidate['S_id']) ?></td>
+                    <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
+                    <td><?= htmlspecialchars($candidate['Applied_Date']) ?></td>
+                    <td><a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                            class="status accepted">Shortlist</a></td>
+                    <td><a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                            class="status rejected">Reject</a></td>
+                </tr>
+                <?php endwhile; ?>
                 <?php else : ?>
-                    <tr>
-                        <td colspan="4" class="text-center">No applicants found for the selected job.</td>
-                    </tr>
+                <tr>
+                    <td colspan="4" class="text-center">No applicants found for the selected job.</td>
+                </tr>
                 <?php endif; ?>
             </tbody>
         </table>
