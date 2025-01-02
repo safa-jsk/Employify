@@ -538,7 +538,6 @@ td {
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
   transition: background-color 0.3s ease;
 }
 
@@ -776,7 +775,6 @@ textarea {
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
   transition: background-color 0.3s ease;
 }
 
