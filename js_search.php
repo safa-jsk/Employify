@@ -15,7 +15,7 @@
     <?php include 'includes/js_sidebar.php'; ?>
 
     <main class="search-container">
-        <h4>Search Your Desired Job</h4>
+        <h2>Search Your Desired Job</h2>
         <form action="" method="get" class="search-form">
             <select name="criteria" class="search-select">
                 <option value="all" selected>All</option>
