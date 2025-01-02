@@ -30,7 +30,7 @@ CSE370 Project To-Do
 	Role display on account information 								                        Saadat  DONE
 
 3. Shortlisted Candidates
-	View Profile Button (SELECT Query)															Maliha	
+	View Profile Button (SELECT Query)															Maliha	DONE
 	Send Acceptance Letter Button (Dummy Button, popup shows email sent)						Safa	DONE
 	Shortlist Button																			Safa	DONE
 	Reject Button (for both Applied and Shortlisted Page)										Safa	DONE
@@ -44,4 +44,4 @@ CSE370 Project To-Do
 5. Forgot Password
 	Add Security Question (Also add during Registration) [Used DoB]								Safa	DONE
 
-6. Index Page Fix																				Maliha
+6. Index Page Fix																				Maliha	DONE

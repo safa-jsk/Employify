@@ -63,8 +63,8 @@ $application_count = $con->query($application_count)->fetch_row()[0];
             </div>
 
             <!-- Section 2: Seekers List -->
+            <h2>Job Seekers</h2>
             <div class="dashboard_section scrollable" id="seekers-section">
-                <h2>Job Seekers</h2>
                 <table class="applied-jobs-list">
                     <thead>
                         <tr>
@@ -99,8 +99,8 @@ $application_count = $con->query($application_count)->fetch_row()[0];
             </div>
 
             <!-- Section 3: Recruiters List -->
+            <h2>Recruiters</h2>
             <div class="dashboard_section scrollable" id="recruiters-section">
-                <h2>Recruiters</h2>
                 <table class="applied-jobs-list">
                     <thead>
                         <tr>
@@ -135,8 +135,8 @@ $application_count = $con->query($application_count)->fetch_row()[0];
             </div>
 
             <!-- Section 4: Applications List -->
+            <h2>Applications</h2>
             <div class="dashboard_section scrollable" id="applications-section">
-                <h2>Applications</h2>
                 <table class="applied-jobs-list">
                     <thead>
                         <tr>
