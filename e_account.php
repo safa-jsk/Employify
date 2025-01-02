@@ -38,7 +38,8 @@
                     <div class="form-group">
                         <label>Last Name</label>
                         <input type="text" name="lname"
-                            value="<?php echo htmlspecialchars($job_recruiter['LName'] ?? ''); ?>" placeholder="Last Name">
+                            value="<?php echo htmlspecialchars($job_recruiter['LName'] ?? ''); ?>"
+                            placeholder="Last Name">
                     </div>
                 </div>
 
@@ -51,14 +52,16 @@
                     <div class="form-group">
                         <label>Contact Number</label>
                         <input type="tel" name="contact"
-                            value="<?php echo htmlspecialchars($job_recruiter['Contact'] ?? ''); ?>" placeholder="+880..">
+                            value="<?php echo htmlspecialchars($job_recruiter['Contact'] ?? ''); ?>"
+                            placeholder="+880..">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Company Name</label>
                     <input type="text" name="cname"
-                            value="<?php echo htmlspecialchars($job_recruiter['CName'] ?? ''); ?>" placeholder="Company Name">
+                        value="<?php echo htmlspecialchars($job_recruiter['CName'] ?? ''); ?>"
+                        placeholder="Company Name">
                 </div>
 
                 <div class="form-group">
@@ -68,7 +71,7 @@
                 </div>
 
 
-                <button class="option-button" type="submit" name="e_edit">Save Changes</button>
+                <button class="edit-button" type="submit" name="e_edit">Save Changes</button>
             </form>
         </div>
 
