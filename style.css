@@ -520,12 +520,19 @@ td {
 
 /* Job Status - applied and bookmark*/
 .status {
-  padding: 5px 10px;
+  height: 37.5px;
+  color: #fcfcfd;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
   border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-  display: inline-block;
-  text-align: center;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .status.on-hold {
@@ -654,29 +661,6 @@ textarea {
   transition: max-height 0.2s ease-out;
 }
 
-/* Job Status */
-.status {
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-  display: inline-block;
-  text-align: center;
-}
-
-.status.on-hold {
-  background-color: #ffc107; /* Yellow */
-  color: #000;
-}
-
-.status.rejected {
-  background-color: #dc3545; /* Red */
-}
-
-.status.accepted {
-  background-color: #28a745; /* Green */
-}
-
 .remove-button {
   height: 37.5px;
   background-color: #dc3545;
@@ -695,7 +679,7 @@ textarea {
 }
 
 .accept-button {
-  /* height: 37.5px; */
+  height: 37.5px;
   background-color: #28a745;
   color: #fcfcfd;
   text-decoration: none;
