@@ -72,17 +72,19 @@ $con->close();
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="style.css" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-      <title>Dashboard</title>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Dashboard</title>
+
 <body>
     <?php include 'includes/e_navbar.php'; ?>
     <?php include 'includes/e_sidebar.php'; ?>
-    
+
     <!-- main contents -->
     <div class="dashboard_content">
         <!-- Section 1: Summary Cards -->
@@ -96,17 +98,17 @@ $con->close();
             <div class="job_card">
                 <h3>Shortlisted Candidates</h3>
                 <p id="shortlisted-candidates-count">
-                <?php 
-                echo htmlspecialchars($total_shortlisted); 
-                ?>
+                    <?php
+                    echo htmlspecialchars($total_shortlisted);
+                    ?>
                 </p>
             </div>
         </div>
 
         <!-- Section 2: Applied Jobs List -->
         <div class="dashboard_section" id="posted-jobs-section">
-        <h2>Posted Jobs</h2>
-        <?php if ($result_posted_jobs->num_rows > 0): ?>
+            <h2>Posted Jobs</h2>
+            <?php if ($result_posted_jobs->num_rows > 0): ?>
             <table class="posted-jobs-list">
                 <thead>
                     <tr>
@@ -121,33 +123,34 @@ $con->close();
                 </thead>
                 <tbody>
                     <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
-                        <tr>
-                            <td><?php echo htmlspecialchars($row['Name']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Field']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Posted_Date']); ?></td>
-                            <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
-                            <td>
-                                <?php
-                                // Status logic
-                                if (is_null($row['Status'])) {
-                                    echo '<span class="status on-hold">On Hold</span>';
-                                } elseif ($row['Status'] == 0) {
-                                    echo '<span class="status rejected">Inactive</span>';
-                                } elseif ($row['Status'] == 1) {
-                                    echo '<span class="status accepted">Active</span>';
-                                }
-                                ?>
-                            </td>
-                            <td><?php echo htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
-                            <td><?php echo htmlspecialchars($row['Description']); ?></td>
-                        </tr>
+                    <tr>
+                        <td><?php echo htmlspecialchars($row['Name']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Field']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Posted_Date']); ?></td>
+                        <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
+                        <td>
+                            <?php
+                                    // Status logic
+                                    if (is_null($row['Status'])) {
+                                        echo '<span class="status on-hold">On Hold</span>';
+                                    } elseif ($row['Status'] == 0) {
+                                        echo '<span class="status rejected">Inactive</span>';
+                                    } elseif ($row['Status'] == 1) {
+                                        echo '<span class="status accepted">Active</span>';
+                                    }
+                                    ?>
+                        </td>
+                        <td><?php echo htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
+                        <td><?php echo htmlspecialchars($row['Description']); ?></td>
+                    </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
-        <?php else: ?>
+            <?php else: ?>
             <p>No jobs have been posted yet.</p>
-        <?php endif; ?>
-    </div>
-    
+            <?php endif; ?>
+        </div>
+
 </body>
+
 </html>

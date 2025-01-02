@@ -730,17 +730,21 @@ textarea {
 }
 
 .view-button{
-  height: 30px;
+  height: 37.5px;
+  background-color: #6c757d;
+  color: #fcfcfd;
   text-decoration: underline;
   display: flex;
   color: #011947;
   justify-content: center;
   align-items: center;
   border: none;
-  padding: 10px;
-  font-size: 13px;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 5px;
   cursor: pointer;
   margin: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .job-container {
