@@ -9,22 +9,40 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'employer') {
     exit();
 }
 
-// Handle search query
+// Handle search query and filter
 $search_query = '';
-if (isset($_GET['search'])) {
-    $search_query = trim($_GET['search']);
-    $stmt = $con->prepare("SELECT S_id, FName, LName, Skills, Email, Experience, Education, Contact
-                           FROM seeker 
-                           WHERE skills LIKE ?");
-    $like_query = "%{$search_query}%";
-    $stmt->bind_param("s", $like_query);
+$filter = 'all';
+if (isset($_GET['query']) && isset($_GET['filter'])) {
+    $search_query = trim($_GET['query']);
+    $filter = $_GET['filter'];
+
+    if ($filter === 'all') {
+        $stmt = $con->prepare("SELECT * FROM seeker 
+                               WHERE skills LIKE ? 
+                                  OR experience >= ? 
+                                  OR education LIKE ?");
+        $like_query = "%{$search_query}%";
+        $stmt->bind_param("sis", $like_query, $like_query, $like_query);
+    } elseif ($filter === 'skills') {
+        $stmt = $con->prepare("SELECT * FROM seeker WHERE skills LIKE ?");
+        $like_query = "%{$search_query}%";
+        $stmt->bind_param("s", $like_query);
+    } elseif ($filter === 'experience') {
+        $stmt = $con->prepare("SELECT * FROM seeker WHERE experience >= ?");
+        $like_query = "%{$search_query}%";
+        $stmt->bind_param("i", $like_query);
+    } elseif ($filter === 'education') {
+        $stmt = $con->prepare("SELECT * FROM seeker WHERE education LIKE ?");
+        $like_query = "%{$search_query}%";
+        $stmt->bind_param("s", $like_query);
+    }
 } else {
-    $stmt = $con->prepare("SELECT S_id, FName, LName, Skills, Email, Experience, Education, Contact
-                           FROM seeker");
+    $stmt = $con->prepare("SELECT * FROM seeker");
 }
 
 $stmt->execute();
 $result = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>
@@ -43,14 +61,17 @@ $result = $stmt->get_result();
 
     <div class="dashboard_content">
         <h2>Search Candidates</h2>
-        <div action="e_search-candidates.php" method="GET" class="search-form">
+        <form action="e_search-candidates.php" method="GET" class="search-form">
             <select name="filter" class="search-select">
-                <option value="all">All</option>
-                <option value="<?php echo htmlspecialchars($search_query); ?>">Skills</option>
+                <option value="all" <?= $filter === 'all' ? 'selected' : '' ?>>All</option>
+                <option value="skills" <?= $filter === 'skills' ? 'selected' : '' ?>>Skills</option>
+                <option value="experience" <?= $filter === 'experience' ? 'selected' : '' ?>>Experience</option>
+                <option value="education" <?= $filter === 'education' ? 'selected' : '' ?>>Education</option>
             </select>
-            <input type="text" name="query" placeholder="Search for candidates" class="search-input">
+            <input type="text" name="query" placeholder="Search for candidates" class="search-input"
+                value="<?= htmlspecialchars($search_query); ?>">
             <button type="submit" class="search-button">Search</button>
-        </div>
+        </form>
 
 
         <?php if ($result->num_rows > 0): ?>
@@ -62,6 +83,7 @@ $result = $stmt->get_result();
                     <th>Skills</th>
                     <th>Experience</th>
                     <th>Education</th>
+                    <th>Contact</th>
                 </tr>
             </thead>
             <tbody>
@@ -72,6 +94,7 @@ $result = $stmt->get_result();
                     <td><?php echo htmlspecialchars($row['Skills']); ?></td>
                     <td><?php echo htmlspecialchars($row['Experience']); ?></td>
                     <td><?php echo htmlspecialchars($row['Education']); ?></td>
+                    <td><?php echo htmlspecialchars($row['Contact']); ?></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>

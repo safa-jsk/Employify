@@ -29,8 +29,19 @@
                     echo '<h4>No Role Assigned</h4>';
                 }
                 ?>
+                <!-- Display Gender-Specific Avatar -->
+                <?php
+                $avatar_url = "https://www.w3schools.com/w3images/avatar3.png"; // Default avatar
+                if (isset($job_recruiter['Gender'])) {
+                    if (strtolower($job_recruiter['Gender']) == 1) {
+                        $avatar_url = "https://www.w3schools.com/w3images/avatar2.png"; // Male avatar
+                    } elseif (strtolower($job_recruiter['Gender']) == 0) {
+                        $avatar_url = "https://www.w3schools.com/w3images/avatar6.png"; // Female avatar
+                    }
+                }
+                ?>
 
-                <img src="https://www.w3schools.com/w3images/avatar2.png">
+                <img src="<?php echo $avatar_url; ?>" alt="Profile Picture">
                 <h3><?php echo htmlspecialchars($job_seeker['FName'] . ' ' . $job_seeker['LName']); ?></h3>
                 <p><?php echo htmlspecialchars($job_seeker['Email'] ?? ''); ?></p>
             </div>
