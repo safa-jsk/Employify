@@ -58,7 +58,7 @@
 
                     // Prepare query with additional checks for applied and bookmarked jobs
                     $query = "SELECT a.*, r.CName, 
-                                  (SELECT COUNT(*) FROM seeker_seeks ss WHERE ss.S_id = ? AND ss.A_id = a.A_id) AS has_applied,
+                                  (SELECT Status FROM seeker_seeks ss WHERE ss.S_id = ? AND ss.A_id = a.A_id) AS Status,
                                   (SELECT COUNT(*) FROM seeker_bookmarks sb WHERE sb.S_id = ? AND sb.A_id = a.A_id) AS is_bookmarked
                                   FROM applications a 
                                   INNER JOIN recruiter r ON a.R_id = r.R_id 
@@ -115,7 +115,7 @@
                         <td><?= htmlspecialchars($items['Description']); ?></td>
                         <!-- Apply Button -->
                         <td>
-                            <?php if ($items['has_applied'] > 0): ?>
+                            <?php if ($items['Status'] == 1 || is_null($items['Status'])): ?>
                             <button class="applied-button" disabled>Applied</button>
                             <?php else: ?>
                             <a href="js_apply.php?A_id=<?= htmlspecialchars($items['A_id']); ?>" class="search-button"
