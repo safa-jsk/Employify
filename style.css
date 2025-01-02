@@ -169,7 +169,6 @@ a:hover {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 20px;
-
 }
 .body-section h2 {
   font-size: 20px;
@@ -218,12 +217,12 @@ a:hover {
 /* Login and Sign up Page- Popup Styling */
 .popup {
   display: none;
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6); 
+  background: rgba(0, 0, 0, 0.6);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -246,7 +245,6 @@ a:hover {
   text-align: center;
   z-index: 1001;
 }
-
 
 .popup-header {
   display: flex;
@@ -729,7 +727,7 @@ textarea {
   transition: background-color 0.3s ease;
 }
 
-.view-button{
+.view-button {
   height: 37.5px;
   color: #fcfcfd;
   text-decoration: underline;
@@ -899,57 +897,57 @@ textarea {
 
 /* Hide the default checkbox */
 .form-check-input {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    position: relative;
-    width: 50px;
-    height: 25px;
-    background-color: #ccc;
-    border-radius: 50px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  width: 50px;
+  height: 25px;
+  background-color: #ccc;
+  border-radius: 50px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  outline: none;
 }
 
 /* Add the circular knob inside the slider */
 .form-check-input::before {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 21px;
-    height: 21px;
-    background-color: #fff;
-    border-radius: 50%;
-    transition: transform 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 21px;
+  height: 21px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Change background and position of the knob when checked */
 .form-check-input:checked {
-    background-color: #007bff;
+  background-color: #007bff;
 }
 
 .form-check-input:checked::before {
-    transform: translateX(25px);
+  transform: translateX(25px);
 }
 
 /* Disabled state */
 .form-check-input:disabled {
-    background-color: #e9ecef;
-    cursor: not-allowed;
-    opacity: 0.7;
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .form-check-input:disabled::before {
-    background-color: #ced4da;
+  background-color: #ced4da;
 }
 
 /* Label styling */
 .form-check-label {
-    margin-left: 10px;
-    font-size: 16px;
-    color: #212529;
-    cursor: pointer;
+  margin-left: 10px;
+  font-size: 16px;
+  color: #212529;
+  cursor: pointer;
 }
