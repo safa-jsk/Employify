@@ -96,7 +96,7 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                 <input type="text" name="search"
                     value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>"
                     class="form-control" placeholder="Search for candidates">
-                <button type="submit" class="search-button">Filter</button>
+                <button type="submit" class="filter-button">Filter</button>
             </div>
         </form>
 

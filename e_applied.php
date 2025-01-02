@@ -73,7 +73,7 @@ $candidates_result = $candidates_query->get_result();
                     <?php endwhile; ?>
                 </select>
             </div>
-            <button type="submit" class="search-button">Filter</button>
+            <button type="submit" class="filter-button">Filter</button>
         </form>
 
         <!-- Applicants Table -->

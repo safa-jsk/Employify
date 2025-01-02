@@ -521,8 +521,10 @@ td {
 /* Job Status - applied and bookmark*/
 .status {
   height: 37.5px;
+  max-width: fit-content;
   color: #fcfcfd;
   text-decoration: none;
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -755,9 +757,30 @@ textarea {
 /* Search Button */
 .search-button {
   height: 37.5px;
+  max-width: fit-content;
   background-color: #0d6efd;
   color: #fcfcfd;
   text-decoration: none;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.filter-button {
+  height: 37.5px;
+  max-width: fit-content;
+  background-color: #0d6efd;
+  color: #fcfcfd;
+  text-decoration: none;
+  margin-bottom: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -988,4 +1011,10 @@ textarea {
 .btn-block {
     display: block;
     width: 100%;
+}
+
+
+/* Edit Job Form */
+.mb-3 {
+    margin-bottom: 1rem; /* 16px */
 }
