@@ -12,7 +12,8 @@ CSE370 Project To-Do
 	Scroll Jobs (Optional)													Maliha		DONE
 	Dropdown Advanced Search 												Safa 		DONE
 	Accepted Job Count 														Maliha		DONE
-	Login check after clicking logo											Maliha		DONE								
+	Login check after clicking logo											Maliha		DONE
+	Role display on account information 								    Saadat      DONE
 
 2. For Employer
 	Check already existing user_id in register [Copy from Job Seeker]							Safa	DONE
@@ -26,6 +27,7 @@ CSE370 Project To-Do
 	Shortlist candidates																		Safa	DONE
 	Search all job seekers by skill and experience (SELECT Query) (Extremely Optional)			Maliha	DONE
 	Update "username" in navbar in Employer 													Safa	DONE
+	Role display on account information 								                        Saadat  DONE
 
 3. Shortlisted Candidates
 	View Profile Button (SELECT Query)															Maliha	
