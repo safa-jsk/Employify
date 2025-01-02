@@ -82,7 +82,7 @@ if (isset($_GET['delete']) && $_GET['delete']) {
                         <td><?php echo htmlspecialchars($row['CName']); ?></td>
                         <td><?php echo htmlspecialchars($row['Contact']); ?></td>
                         <td>
-                            <a href="a_recruiters.php?delete=<?= $row['R_id'] ?>" class="btn btn-danger"
+                            <a href="a_recruiters.php?delete=<?= $row['R_id'] ?>" class="status rejected"
                                 onclick="return confirm('Are you sure you want to delete this recruiter?');">Delete</a>
                         </td>
                     </tr>
