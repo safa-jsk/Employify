@@ -68,7 +68,7 @@
                 </div>
 
 
-                <button class="edit-btn" type="submit" name="e_edit">Save Changes</button>
+                <button class="option-button" type="submit" name="e_edit">Save Changes</button>
             </form>
         </div>
 

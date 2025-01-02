@@ -152,7 +152,7 @@ a:hover {
   padding: 50px 30px;
 }
 
-/* body Section - index.html */
+/* body Section - index page */
 .body-section {
   display: flex;
   justify-content: flex-start;
@@ -187,7 +187,7 @@ a:hover {
   margin-bottom: 30px;
 }
 
-/* Features Section */
+/* Features Section - index page */
 .features-section {
   padding: 40px 0;
   background-color: #d4eefc;
@@ -314,14 +314,14 @@ input[type="date"] {
   font-size: 14px;
 }
 
-/* Account Selection Buttons */
+/* Account Selection Buttons index page*/
 .account-selection {
   margin-bottom: 20px;
   display: flex;
   font-size: 16px;
 }
 
-.account-selection .btn-type {
+.account-selection .option-button {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -402,16 +402,7 @@ input[type="date"] {
   padding-bottom: 5px;
 }
 
-.scrollable {
-  max-height: 300px; /* Set your desired height */
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  background: #f9f9f9;
-  border-radius: 5px;
-}
-
-/* Summary Cards Section */
+/* Summary Cards Section - dashboard*/
 #summary-section {
   display: flex;
   gap: 20px;
@@ -432,6 +423,16 @@ input[type="date"] {
   margin: 0 0 10px;
 }
 
+/* scrollable dashboard */
+.scrollable {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 5px;
+}
+
 /* Applied and Bookmarked Jobs List */
 #applied-jobs-list,
 #bookmarked-jobs-list {
@@ -440,7 +441,7 @@ input[type="date"] {
   margin-top: 15px;
 }
 
-/* bookmarks */
+/* bookmarks page*/
 table {
   width: 100%;
   border-collapse: collapse;
@@ -465,6 +466,57 @@ tr:nth-child(even) {
 
 td {
   color: #333;
+}
+
+/* Applied and Bookmarked Jobs */
+.jobs_content {
+  margin-top: 20px;
+  margin-left: 300px;
+  margin-right: 50px;
+  padding: 0 2px;
+  background-color: white;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+/* Job Status - applied and bookmark*/
+.status {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center;
+}
+
+.status.on-hold {
+  background-color: #ffc107; /* Yellow */
+  color: #000;
+}
+
+.status.rejected {
+  background-color: #dc3545; /* Red */
+}
+
+.status.accepted {
+  background-color: #28a745; /* Green */
+}
+
+.remove-button {
+  height: 37.5px;
+  background-color: #dc3545;
+  color: #fcfcfd;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 /* Acount Details */
@@ -532,12 +584,16 @@ textarea {
   border-radius: 5px;
 }
 
+/* Account Edit Button */
 .edit-button {
-  border-radius: 20px;
-  background-color: #6200ea;
+  border-radius: 15px;
+  background-color: #261e48;
   color: white;
   cursor: pointer;
   font-size: 16px;
+  padding: 6px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .edit-button:hover {
@@ -701,7 +757,7 @@ textarea {
   padding-right: 15px;
 }
 
-/* Main Content Styling */
+/* Search bar Styling-general */
 .search-container {
   margin-left: 250px;
   box-sizing: border-box;
@@ -722,6 +778,7 @@ textarea {
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
 /* Search Button */
 .search-button {
   height: 37.5px;
@@ -746,11 +803,12 @@ textarea {
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 
 /* Dropdown (Select) Styling */
-.search-form .search-select {
+.search-select {
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -762,14 +820,14 @@ textarea {
 }
 
 /* Search Input Styling */
-.search-form .search-input {
+.search-input {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   margin: 0; /* Remove extra margin */
 }
 
-/* Search Button Styling */
+/* Filter Button Styling */
 .search-form .search-button {
   background-color: #007bff;
   color: white;
