@@ -24,13 +24,23 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
     if ($check_result->num_rows > 0) {
         $message = "You have already applied for this job.";
     } else {
-        // Prepared statement to insert the application
-        $stmt = $con->prepare("INSERT INTO seeker_seeks (S_id, A_id, Applied_Date) VALUES (?, ?, NOW())");
-        $stmt->bind_param("si", $username, $application_id);
-        if ($stmt->execute()) {
-            $message = "Application submitted successfully.";
+        // Check if deadline has passed
+        $deadline_stmt = $con->prepare("SELECT Deadline FROM applications WHERE A_id = ?");
+        $deadline_stmt->bind_param("i", $application_id);
+        $deadline_stmt->execute();
+        $deadline_result = $deadline_stmt->get_result();
+        $deadline = $deadline_result->fetch_assoc()['Deadline'];
+        if (strtotime($deadline) < time()) {
+            $message = "The deadline for this job has passed.";
         } else {
-            $message = "Error applying for the job.";
+            // Prepared statement to insert the application
+            $stmt = $con->prepare("INSERT INTO seeker_seeks (S_id, A_id, Applied_Date) VALUES (?, ?, NOW())");
+            $stmt->bind_param("si", $username, $application_id);
+            if ($stmt->execute()) {
+                $message = "Application submitted successfully.";
+            } else {
+                $message = "Error applying for the job.";
+            }
         }
     }
 
