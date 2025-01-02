@@ -115,7 +115,7 @@ $candidates_result = $candidates_query->get_result();
                         <?php endif; ?>
                     </td>
                     <td><a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                    class="status rejected">Remove</a></td>
+                    class="status rejected">Reject</a></td>
                 </tr>
                 <?php endwhile; ?>
                 <?php else : ?>

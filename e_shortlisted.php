@@ -147,9 +147,9 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                             <?php echo $acceptDisabled; ?>>Accept</a>
                     </td>
                     <td>
-                        <a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" 
+                        <a href="e_shortlist_remove.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" 
                             class="status rejected <?php echo $rejectDisabled; ?>" 
-                            <?php echo $rejectDisabled; ?>>Reject</a>
+                            <?php echo $rejectDisabled; ?>>Remove</a>
                     </td>
                 </tr>
                 <?php endwhile; ?>
