@@ -22,7 +22,7 @@ $stmt_jobs->execute();
 $result_jobs = $stmt_jobs->get_result();
 $stmt_jobs->close();
 
-// Initialize shortlisted candidates query
+// Fetch shortlisted candidates
 $query_shortlisted_candidates = "
     SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.Field, a.Deadline, CONCAT(s.FName, ' ', s.LName) AS Seeker_Name, s.Email
     FROM recruiter_shortlist sc
@@ -38,15 +38,15 @@ $types = "s";
 if (isset($_GET['job_id']) && !empty($_GET['job_id'])) {
     $job_id = $_GET['job_id'];
     $query_shortlisted_candidates .= " AND sc.A_id = ?";
-    $filters[] = $job_id;
+    $parameters[] = $job_id;
     $types .= "s";
 }
 
 if (isset($_GET['search']) && !empty($_GET['search'])) {
     $search_term = "%" . $_GET['search'] . "%";
     $query_shortlisted_candidates .= " AND (CONCAT(s.FName, ' ', s.LName) LIKE ? OR a.Name LIKE ?)";
-    $filters[] = $search_term;
-    $filters[] = $search_term;
+    $parameters[] = $search_term;
+    $parameters[] = $search_term;
     $types .= "ss";
 }
 
@@ -57,28 +57,21 @@ if (!$stmt_shortlisted_candidates) {
     die("Error in query preparation: " . $con->error);
 }
 
-if (!empty($filters)) {
-    $stmt_shortlisted_candidates->bind_param($types, ...$parameters, ...$filters);
-} else {
-    $stmt_shortlisted_candidates->bind_param("s", $username);
-}
+$stmt_shortlisted_candidates->bind_param($types, ...$parameters);
 $stmt_shortlisted_candidates->execute();
 $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
-$stmt_shortlisted_candidates->close();
-
-$con->close();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
-    <title>Employify</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <title>Shortlisted Candidates</title>
 </head>
 
 <body>
@@ -118,6 +111,7 @@ $con->close();
                         <th>Candidate Name</th>
                         <th>Email</th>
                         <th>Deadline</th>
+                        <th>Profile</th>
                         <th>Accept</th>
                         <th>Reject</th>
                     </tr>
@@ -131,10 +125,9 @@ $con->close();
                             <td><?php echo htmlspecialchars($row['Seeker_Name']); ?></td>
                             <td><?php echo htmlspecialchars($row['Email']); ?></td>
                             <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
-                            <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                                    class="btn btn-success">Accept</a></td>
-                            <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                                    class="btn btn-danger">Reject</a></td>
+                            <td><a href="?S_id=<?php echo $row['S_id']; ?>#profile-popup" class="view-button">View Profile</a></td>
+                            <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" class="accept-button">Accept</a></td>
+                            <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" class="remove-button">Reject</a></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
@@ -144,6 +137,75 @@ $con->close();
         <?php endif; ?>
     </div>
 
-</body>
+    <!-- Popup Modal for view profile -->
+    <?php if (isset($_GET['S_id']) && !empty($_GET['S_id'])): ?>
+    <div id="profile-popup" class="popup">
+        <div class="popup-content">
+            <a href="#" class="close-btn">&times;</a>
+            <?php
+            $seeker_id = $_GET['S_id'];
+            $stmt = $con->prepare("SELECT FName, LName, Gender, Email, Experience, Education, Skills, Contact 
+                                   FROM seeker 
+                                   WHERE S_id = ?");
+            $stmt->bind_param("s", $seeker_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
+            if ($result->num_rows > 0) {
+                $seeker = $result->fetch_assoc();
+                echo "<p><strong>Name:</strong> " . htmlspecialchars($seeker['FName'] . ' ' . $seeker['LName']) . "</p>";
+                echo "<p><strong>Gender:</strong> " . ($seeker['Gender'] == 1 ? 'Male' : 'Female') . "</p>";
+                echo "<p><strong>Email:</strong> " . htmlspecialchars($seeker['Email']) . "</p>";
+                echo "<p><strong>Experience:</strong> " . htmlspecialchars($seeker['Experience']) . " years</p>";
+                echo "<p><strong>Education:</strong> " . htmlspecialchars($seeker['Education']) . "</p>";
+                echo "<p><strong>Skills:</strong> " . htmlspecialchars($seeker['Skills']) . "</p>";
+                echo "<p><strong>Contact:</strong> " . htmlspecialchars($seeker['Contact']) . "</p>";
+            } else {
+                echo "<p>Profile not found.</p>";
+            }
+
+            $stmt->close();
+            ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <script>
+        // Close popups when clicking outside
+        window.onclick = function(event) {
+            const modals = ['profile-popup'];
+            modals.forEach((id) => {
+                const modal = document.getElementById(id);
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+
+        // Function to open popups when links are clicked
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const modal = document.getElementById(targetId);
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close popup when close button is clicked
+        document.querySelectorAll('.close-btn').forEach((btn) => {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const popup = this.closest('.popup');
+                if (popup) {
+                    popup.style.display = 'none';
+                }
+            });
+        });
+    </script>
+
+
+</body>
 </html>

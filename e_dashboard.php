@@ -28,9 +28,9 @@ $stmt_posted->close();
 
 // Shortlisted candidates Count
 $query_shortlisted = "SELECT A_id, COUNT(*) AS shortlisted_candidates_count 
-                     FROM recruiter_shortlist 
-                     WHERE S_id = ? 
-                     GROUP BY A_id";
+    FROM recruiter_shortlist 
+    WHERE R_id = ? 
+    GROUP BY A_id";
 
 $stmt_shortlisted = $con->prepare($query_shortlisted);
 if (!$stmt_shortlisted) {

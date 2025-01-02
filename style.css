@@ -161,7 +161,7 @@ a:hover {
   align-items: flex-start;
   align-content: flex-start;
   flex-wrap: nowrap;
-  margin: 100px 150px 150px 50px;
+  margin: 150px;
 }
 
 .body-section h1 {
@@ -216,30 +216,44 @@ a:hover {
 /* Login and Sign up Page- Popup Styling */
 .popup {
   display: none;
-  position: fixed;
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #00000099;
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1000; /* Ensure it's above all other content */
 }
 
+/* Display when targeted */
 .popup:target {
-  display: flex;
+  display: flex; /* Ensure it appears and flex alignment works */
 }
 
+/* Popup Content Styling */
 .popup-content {
-  background: #ffffff;
+  background: #fff;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   width: 400px;
   max-width: 90%;
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+  z-index: 1001; /* Ensure it's above the overlay */
+}
+
+
+.popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.popup-header h3 {
+  margin: 0;
 }
 
 .popup .close-btn {
@@ -254,6 +268,31 @@ a:hover {
 
 .popup .close-btn:hover {
   color: #ff0000;
+}
+
+.popup-content .profile-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.popup .profile-pic img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.popup .profile-details {
+  text-align: left;
+}
+
+.popup .profile-details h4 {
+  margin: 10px 0 5px;
+}
+
+.popup .profile-details p {
+  margin: 0;
+  color: #555;
 }
 
 .popup form {
@@ -620,35 +659,6 @@ textarea {
   color: #fcfcfd;
 }
 
-/* Advanced Search */
-/* .advanced_search_collapsible {
-  margin-left: auto;
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 15px;
-  width: fit-content;
-  border: none;
-  
-  text-align: left;
-  outline: none;
-  font-size: 16px;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-/* .active, .collapsible:hover {
-  background-color: #ccc;
-} */
-
-/* Style the collapsible content. Note: hidden by default */
-/* .advanced_search_content {
-  padding: 0 2px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
-}  */
-
 /* Applied and Bookmarked Jobs */
 .jobs_content {
   margin-top: 20px;
@@ -683,41 +693,6 @@ textarea {
   background-color: #28a745; /* Green */
 }
 
-/* Advanced Search Filters
-.advanced-search-form-select {
-    display: block;
-    margin-top: 10px;
-    margin-right: auto;
-    height: 37.5px;
-    width: fit-content;
-    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #212529;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.375rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-
-.advanced-search-form-select:focus {
-    border-color: #86b7fe;
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-}
-
-.advanced-search-form-select[multiple], .form-select[size]:not([size="1"]) {
-    padding-right: 0.75rem;
-    background-image: none;
-}
-
-.advanced-search-form-select:disabled {
-    background-color: #e9ecef;
-    color: #6c757d;
-} */
-
 .remove-button {
   height: 37.5px;
   background-color: #dc3545;
@@ -731,8 +706,38 @@ textarea {
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 10px;
+  margin: 10px;
   transition: background-color 0.3s ease;
+}
+
+.accept-button {
+  height: 37.5px;
+  background-color: #28a745;
+  color: #fcfcfd;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.view-button{
+  height: 30px;
+  text-decoration: underline;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  padding: 10px;
+  font-size: 12px;
+  cursor: pointer;
+  margin: 10px;
 }
 
 .job-container {
