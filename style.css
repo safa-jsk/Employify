@@ -766,7 +766,7 @@ textarea {
   background-color: #0d6efd;
   color: #fcfcfd;
   text-decoration: none;
-  /* margin: auto; */
+  margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
