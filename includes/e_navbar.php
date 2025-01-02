@@ -11,7 +11,7 @@ $username = $_SESSION['username'];
     <div class="logo">
         <h1><a href="index.php"><img src="images/logo.png"></a></h1>
     </div>
-    <div class="nav-links">
+    <nav class="nav-links">
         <a href="e_postjob.php">Post a Job</a>
         <div class="dropdown">
             <button class="dropbtn"><?php echo htmlspecialchars($username); ?> ▾</button>
@@ -20,6 +20,5 @@ $username = $_SESSION['username'];
                 <a href="logout.php">Logout</a>
             </div>
         </div>
-    </div>
     </nav>
 </header>
