@@ -2,33 +2,35 @@
 session_start();
 require_once 'DBconnect.php';
 
-// Ensure the recruiter is logged in
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
 }
 
-$username = $_SESSION['username'];
+$recruiter_id = $_SESSION['username'];
+$A_id = $_GET['A_id'] ?? null;
+$S_id = $_GET['S_id'] ?? null;
 
-$job_id = intval($_GET['A_id']);
-$seeker_id = $_GET['S_id'];
-
-// Prepare the query to reject the candidate
-$stmt = $con->prepare("UPDATE seeker_seeks SET Status = 0 WHERE A_id = ? AND S_id = ?");
-$stmt->bind_param("is", $job_id, $seeker_id);
-$stmt->execute();
-
-if (!$stmt) {
-    die("Error in query preparation: " . $con->error);
+if (!$A_id || !$S_id) {
+    echo "Invalid request.";
+    exit;
 }
 
-if ($stmt->affected_rows > 0) {
-    // Successfully removed
-    header("Location: e_applied.php?success=candidate_rejected");
+// Remove the candidate from the shortlist or rejection process
+$reject_query = $con->prepare("
+    DELETE FROM recruiter_shortlist 
+    WHERE A_id = ? AND S_id = ? AND R_id = ?
+");
+$reject_query->bind_param("sis", $A_id, $S_id, $recruiter_id);
+
+if ($reject_query->execute()) {
+    echo "Candidate rejected successfully.";
+    header("Location: e_applied.php");
+    exit;
 } else {
-    // Failed to remove, candidate might not exist or doesn't belong to the recruiter
-    header("Location: e_applied.php?error=rejection_failed");
+    echo "Failed to reject candidate.";
 }
 
-$stmt->close();
-$con->close();
+$reject_query->close();
+mysqli_close($con);
+?>

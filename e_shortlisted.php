@@ -118,6 +118,20 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
             </thead>
             <tbody>
                 <?php while ($row = $result_shortlisted_candidates->fetch_assoc()): ?>
+                <?php
+                // Fetch the current status of the candidate for this job
+                $statusQuery = "SELECT Status FROM seeker_seeks WHERE A_id = ? AND S_id = ?";
+                $stmtStatus = $con->prepare($statusQuery);
+                $stmtStatus->bind_param("ss", $row['A_id'], $row['S_id']);
+                $stmtStatus->execute();
+                $statusResult = $stmtStatus->get_result();
+                $status = $statusResult->num_rows > 0 ? $statusResult->fetch_assoc()['Status'] : null;
+                $stmtStatus->close();
+
+                // Determine button states based on status
+                $acceptDisabled = ($status === "1") ? 'disabled' : '';
+                // $rejectDisabled = ($status === "2") ? 'disabled' : '';
+                ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['A_id']); ?></td>
                     <td><?php echo htmlspecialchars($row['Job_Name']); ?></td>
@@ -127,10 +141,16 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                     <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
                     <td><a href="?S_id=<?php echo $row['S_id']; ?>#profile-popup" class="view-button">View Profile</a>
                     </td>
-                    <td><a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                            class="status accepted">Accept</a></td>
-                    <td><a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>"
-                            class="status rejected">Reject</a></td>
+                    <td>
+                        <a href="e_accept.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" 
+                            class="status accepted <?php echo $acceptDisabled; ?>" 
+                            <?php echo $acceptDisabled; ?>>Accept</a>
+                    </td>
+                    <td>
+                        <a href="e_shortlist_reject.php?A_id=<?php echo $row['A_id']; ?>&S_id=<?php echo $row['S_id']; ?>" 
+                            class="status rejected <?php echo $rejectDisabled; ?>" 
+                            <?php echo $rejectDisabled; ?>>Reject</a>
+                    </td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
@@ -210,7 +230,6 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
         });
     });
     </script>
-
 
 </body>
 
