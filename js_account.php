@@ -46,10 +46,10 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                 <!-- Display Gender-Specific Avatar -->
                 <?php
                 $avatar_url = "https://www.w3schools.com/w3images/avatar3.png"; // Default avatar
-                if (isset($job_recruiter['Gender'])) {
-                    if (strtolower($job_recruiter['Gender']) == 1) {
+                if (isset($job_seeker['Gender'])) {
+                    if (strtolower($job_seeker['Gender']) == 1) {
                         $avatar_url = "https://www.w3schools.com/w3images/avatar2.png"; // Male avatar
-                    } elseif (strtolower($job_recruiter['Gender']) == 0) {
+                    } elseif (strtolower($job_seeker['Gender']) == 0) {
                         $avatar_url = "https://www.w3schools.com/w3images/avatar6.png"; // Female avatar
                     }
                 }
