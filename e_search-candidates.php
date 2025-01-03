@@ -104,7 +104,6 @@ $result = $stmt->get_result();
                             <td><?php echo isset($row['Skills']) ? htmlspecialchars($row['Skills']) : ''; ?></td>
                             <td><?php echo isset($row['Experience']) ? htmlspecialchars($row['Experience']) : ''; ?></td>
                             <td><?php echo isset($row['Education']) ? htmlspecialchars($row['Education']) : ''; ?></td>
-                            <td><?php echo isset($row['Contact']) ? htmlspecialchars($row['Contact']) : ''; ?></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>
