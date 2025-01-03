@@ -23,15 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     $A_id = $_POST['A_id'];
     $name = $_POST['Name'];
     $field = $_POST['Field'];
-    $posted_date = $_POST['Posted_Date'];
     $deadline = $_POST['Deadline'];
     $salary = $_POST['Salary'];
     $description = $_POST['Description'];
     $status = isset($_POST['Status']) ? 1 : 0;
 
-    $update_query = "UPDATE applications SET Name = ?, Field = ?, Posted_Date = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
+    $update_query = "UPDATE applications SET Name = ?, Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
     $stmt_update = $con->prepare($update_query);
-    $stmt_update->bind_param("ssssssss", $name, $field, $posted_date, $deadline, $salary, $description, $status, $A_id);
+    $stmt_update->bind_param("sssssss", $name, $field, $deadline, $salary, $description, $status, $A_id);
     $stmt_update->execute();
     $stmt_update->close();
 
@@ -115,7 +114,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
                             <button class="status accepted edit-job-btn" data-id="<?= $row['A_id']; ?>"
                                 data-name="<?= htmlspecialchars($row['Name']); ?>"
                                 data-field="<?= htmlspecialchars($row['Field']); ?>"
-                                data-posted-date="<?= htmlspecialchars($row['Posted_Date']); ?>"
                                 data-deadline="<?= htmlspecialchars($row['Deadline']); ?>"
                                 data-salary="<?= htmlspecialchars($row['Salary']); ?>"
                                 data-description="<?= htmlspecialchars($row['Description']); ?>"
@@ -139,7 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
                 <input type="hidden" id="jobId" name="A_id" />
                 <input type="text" id="jobName" name="Name" placeholder="Job Name" required />
                 <input type="text" id="jobField" name="Field" placeholder="Field" required />
-                <input type="date" id="jobPostedDate" name="Posted_Date" required />
                 <input type="date" id="jobDeadline" name="Deadline" required />
                 <input type="number" id="jobSalary" name="Salary" placeholder="Salary" required />
                 <textarea id="jobDescription" name="Description" placeholder="Description" rows="4" required></textarea>
@@ -163,8 +160,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
                 document.getElementById('jobId').value = this.dataset.id;
                 document.getElementById('jobName').value = this.dataset.name;
                 document.getElementById('jobField').value = this.dataset.field;
-                document.getElementById('jobPostedDate').value = this.dataset
-                    .postedDate; // Correct dataset key
                 document.getElementById('jobDeadline').value = this.dataset.deadline;
                 document.getElementById('jobSalary').value = this.dataset.salary;
                 document.getElementById('jobDescription').value = this.dataset.description;
