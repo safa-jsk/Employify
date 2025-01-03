@@ -19,11 +19,11 @@ if (isset($_POST['register_js'])) {
 
     // Check if user_id already exists
     $stmt = $con->prepare("SELECT s.S_id FROM seeker s 
-                            LEFT JOIN recruiter r ON s.email = r.email 
+                            LEFT JOIN recruiter r ON s.S_id = r.R_id 
                             WHERE s.S_id = ? 
                             UNION 
                             SELECT r.R_id FROM seeker s 
-                            RIGHT JOIN recruiter r ON s.email = r.email 
+                            RIGHT JOIN recruiter r ON s.S_id = r.R_id 
                             WHERE r.R_id = ?");
     $stmt->bind_param("ss", $username, $username);
     $stmt->execute();
