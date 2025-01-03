@@ -1,3 +1,15 @@
+<?php
+session_start();
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+require_once 'DBconnect.php';
+
+if ( $_SESSION['role'] !== 'employer') {
+    header("Location: js_account.php");
+    exit;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
