@@ -84,7 +84,7 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
             </select>
             <input type="text" name="search" placeholder="Search for candidates"
                 value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
-            <button type="submit" class="search-button">Filter</button>
+            <button type="submit" class="filter-button">Filter</button>
         </form>
 
         <?php if ($result_shortlisted_candidates->num_rows > 0): ?>
