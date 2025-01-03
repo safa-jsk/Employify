@@ -35,7 +35,11 @@ if (isset($_GET['query']) && isset($_GET['filter'])) {
         $stmt = $con->prepare("SELECT * FROM seeker WHERE education LIKE ?");
         $like_query = "%{$search_query}%";
         $stmt->bind_param("s", $like_query);
-    }
+    }    
+    } elseif ($filter === 'contact') {
+        $stmt = $con->prepare("SELECT * FROM seeker WHERE contact LIKE ?");
+        $like_query = "%{$search_query}%";
+        $stmt->bind_param("s", $like_query);
 } else {
     $stmt = $con->prepare("SELECT * FROM seeker");
 }
@@ -90,11 +94,11 @@ $result = $stmt->get_result();
                 <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
                     <td><?php echo htmlspecialchars($row['FName'] . ' ' . $row['LName']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Email']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Skills']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Experience']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Education']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Contact']); ?></td>
+                    <td><?php echo isset($row['Email']) ? htmlspecialchars($row['Email']) : ''; ?></td>
+                    <td><?php echo isset($row['Skills']) ? htmlspecialchars($row['Skills']) : ''; ?></td>
+                    <td><?php echo isset($row['Experience']) ? htmlspecialchars($row['Experience']) : ''; ?></td>
+                    <td><?php echo isset($row['Education']) ? htmlspecialchars($row['Education']) : ''; ?></td>
+                    <td><?php echo isset($row['Contact']) ? htmlspecialchars($row['Contact']) : ''; ?></td>
                 </tr>
                 <?php endwhile; ?>
             </tbody>
