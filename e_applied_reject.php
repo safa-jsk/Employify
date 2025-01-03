@@ -2,8 +2,10 @@
 session_start();
 require_once 'DBconnect.php';
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
     exit;
 }
 
@@ -34,4 +36,3 @@ if ($remove_shortlist_query->execute()) {
 
 $remove_shortlist_query->close();
 mysqli_close($con);
-?>

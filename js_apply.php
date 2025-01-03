@@ -3,9 +3,10 @@ session_start();
 
 require_once 'DBconnect.php'; // use $con
 
-// Ensure the user is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: search.php?message=" . urlencode("You need to log in to apply for a job."));
+// Ensure correct user is logged in
+$pageRole = 'job_seeker';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
     exit;
 }
 

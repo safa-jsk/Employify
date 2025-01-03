@@ -2,9 +2,10 @@
 session_start();
 require_once 'DBconnect.php';
 
-// Ensure the recruiter is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
     exit;
 }
 
