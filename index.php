@@ -120,12 +120,13 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
-                <input type="date" name="dob" placeholder="Date of Birth" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
-                <input type="text" name="skills" placeholder="Skills">
+                <input type="date" name="dob" placeholder="Date of Birth" required>
+                <input type="text" name="contact_number" placeholder="Contact Number" required>
                 <input type="text" name="experience" placeholder="Experience">
                 <input type="text" name="education" placeholder="Education">
+                <input type="text" name="skills" placeholder="Skills">
                 <button type="submit" name="register_js">Register</button>
             </form>
         </div>
@@ -145,12 +146,12 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
-                <input type="date" name="dob" placeholder="Date of Birth" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
+                <input type="date" name="dob" placeholder="Date of Birth" required>
+                <input type="text" name="contact_number" placeholder="Contact Number" required>
                 <input type="text" name="company_name" placeholder="Company Name" required>
                 <input type="text" name="company_description" placeholder="Company Description">
-                <input type="text" name="contact_number" placeholder="Contact Number" required>
                 <button type="submit" name="e_register">Register</button>
             </form>
         </div>

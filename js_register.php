@@ -15,7 +15,8 @@ if (isset($_POST['register_js'])) {
     $skills = trim($_POST['skills']);
     $experience = trim($_POST['experience']);
     $education = trim($_POST['education']);
-    $skills = trim($_POST['skills']);
+    $contact_number = trim($_POST['contact_number']);
+
 
     // Check if user_id already exists
     $stmt = $con->prepare("SELECT S_id from seeker WHERE S_id = ?
@@ -43,10 +44,10 @@ if (isset($_POST['register_js'])) {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             // Insert data
-            $stmt = $con->prepare("INSERT INTO `seeker` (`S_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `DoB`, `Experience`, `Education`, `Skills`) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt = $con->prepare("INSERT INTO `seeker` (`S_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `DoB`, `Experience`, `Education`, `Skills`, `Contact`) 
+                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-            $stmt->bind_param("sssissssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $dob, $experience, $education, $skills);
+            $stmt->bind_param("sssisssssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $dob, $experience, $education, $skills, $contact_number);
 
             if ($stmt->execute()) {
                 echo "<script>alert('Registration successful! Please login.'); window.location.href='index.php';</script>";
