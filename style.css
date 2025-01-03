@@ -265,9 +265,9 @@ a:hover {
   color: #ff0000;
 }
 
-.popup-content .profile-section {
+.popup .popup-content {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 50px;
 }
 
 .popup .profile-pic img {
