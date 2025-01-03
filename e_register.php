@@ -17,13 +17,9 @@ if (isset($_POST['e_register'])) {
     $contact_number = trim($_POST['contact_number']);
 
     // Check if user_id already exists
-    $stmt = $con->prepare("SELECT s.S_id FROM seeker s 
-                            LEFT JOIN recruiter r ON s.email = r.email 
-                            WHERE s.S_id = ? 
-                            UNION 
-                            SELECT r.R_id FROM seeker s 
-                            RIGHT JOIN recruiter r ON s.email = r.email 
-                            WHERE r.R_id = ?");
+    $stmt = $con->prepare("SELECT S_id from seeker WHERE S_id = ?
+                            UNION
+                            SELECT R_id from recruiter WHERE R_id = ?");
     $stmt->bind_param("ss", $username, $username);
     $stmt->execute();
     $stmt->store_result();
@@ -31,13 +27,9 @@ if (isset($_POST['e_register'])) {
         echo "<script>alert('User ID already exists'); window.location.href='index.php';</script>";
     } else {
         // Checking if email already exists
-        $stmt = $con->prepare("SELECT s.email FROM seeker s 
-                            LEFT JOIN recruiter r ON s.email = r.email 
-                            WHERE s.Email = ? 
-                            UNION 
-                            SELECT r.email FROM seeker s 
-                            RIGHT JOIN recruiter r ON s.email = r.email 
-                            WHERE r.Email = ?");
+        $stmt = $con->prepare("SELECT Email from seeker WHERE Email = ?
+                            UNION
+                            SELECT Email from recruiter WHERE Email = ?");
         $stmt->bind_param("ss", $email, $email);
         $stmt->execute();
         $stmt->store_result();
