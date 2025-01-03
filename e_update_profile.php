@@ -3,13 +3,12 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
-// Ensure the user is logged in
-if (!isset($_SESSION['username'])) {
-    echo "<script>alert('You must log in first.'); window.location.href = 'index.php';</script>";
-    exit();
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
+    exit;
 }
-
-
 
 // Fetch the Job Seeker ID from the session
 $user_id = $_SESSION['username'];

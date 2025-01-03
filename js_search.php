@@ -1,3 +1,16 @@
+<?php
+session_start();
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+require_once 'DBconnect.php';
+
+// Ensure correct user is logged in
+$pageRole = 'job_seeker';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,7 +71,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    require_once 'DBconnect.php'; // use $con
                     $username = $_SESSION['username']; // Assuming the user is logged in and username is in session
 
                     $criteria = isset($_GET['criteria']) ? $_GET['criteria'] : 'all';

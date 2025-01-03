@@ -4,7 +4,7 @@ require_once 'DBconnect.php';
 
 // Ensure the admin is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    echo "<script>alert('You not authorized to view this page!'); window.location.href = 'index.php';</script>";
     exit;
 }
 
@@ -60,37 +60,37 @@ if (isset($_GET['delete']) && $_GET['delete']) {
 
         <div class="filtered-section">
             <?php if ($result->num_rows > 0): ?>
-            <table class="filtered-job-list">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Date of Birth</th>
-                        <th>Company Name</th>
-                        <th>Contact</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['R_id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['FName'] . ' ' . $row['LName']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Email']); ?></td>
-                        <td><?php echo htmlspecialchars($row['DoB']); ?></td>
-                        <td><?php echo htmlspecialchars($row['CName']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Contact']); ?></td>
-                        <td>
-                            <a href="a_recruiters.php?delete=<?= $row['R_id'] ?>" class="status rejected"
-                                onclick="return confirm('Are you sure you want to delete this recruiter?');">Delete</a>
-                        </td>
-                    </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+                <table class="filtered-job-list">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Date of Birth</th>
+                            <th>Company Name</th>
+                            <th>Contact</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['R_id']); ?></td>
+                                <td><?php echo htmlspecialchars($row['FName'] . ' ' . $row['LName']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Email']); ?></td>
+                                <td><?php echo htmlspecialchars($row['DoB']); ?></td>
+                                <td><?php echo htmlspecialchars($row['CName']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Contact']); ?></td>
+                                <td>
+                                    <a href="a_recruiters.php?delete=<?= $row['R_id'] ?>" class="status rejected"
+                                        onclick="return confirm('Are you sure you want to delete this recruiter?');">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
             <?php else: ?>
-            <p>No Recruiters Found.</p>
+                <p>No Recruiters Found.</p>
             <?php endif; ?>
         </div>
     </main>

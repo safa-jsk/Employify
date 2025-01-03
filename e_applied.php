@@ -3,9 +3,10 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php'; // Include the database connection file
 
-// Ensure the recruiter is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
     exit;
 }
 
@@ -74,10 +75,10 @@ $candidates_result = $candidates_query->get_result();
                 <select id="jobFilter" name="job_id" class="search-select">
                     <option value="all" <?= $filter_job_id === 'all' ? 'selected' : '' ?>>All Jobs</option>
                     <?php while ($job = $jobs_result->fetch_assoc()) : ?>
-                    <option value="<?= htmlspecialchars($job['A_id']) ?>"
-                        <?= $filter_job_id == $job['A_id'] ? 'selected' : '' ?>>
-                        <?= htmlspecialchars($job['Name']) ?>
-                    </option>
+                        <option value="<?= htmlspecialchars($job['A_id']) ?>"
+                            <?= $filter_job_id == $job['A_id'] ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($job['Name']) ?>
+                        </option>
                     <?php endwhile; ?>
                 </select>
             </div>
@@ -99,29 +100,29 @@ $candidates_result = $candidates_query->get_result();
             </thead>
             <tbody>
                 <?php if ($candidates_result->num_rows > 0) : ?>
-                <?php while ($candidate = $candidates_result->fetch_assoc()) : ?>
-                <tr>
-                    <td><?= htmlspecialchars($candidate['A_id']) ?></td>
-                    <td><?= htmlspecialchars($candidate['JobName']) ?></td>
-                    <td><?= htmlspecialchars($candidate['S_id']) ?></td>
-                    <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
-                    <td><?= htmlspecialchars($candidate['Applied_Date']) ?></td>
-                    <td>
-                        <?php if ($candidate['IsShortlisted']) : ?>
-                        <button class="applied-button" disabled>Shortlisted</button>
-                        <?php else : ?>
-                        <a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                            class="status accepted">Shortlist</a>
-                        <?php endif; ?>
-                    </td>
-                    <td><a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                    class="status rejected">Reject</a></td>
-                </tr>
-                <?php endwhile; ?>
+                    <?php while ($candidate = $candidates_result->fetch_assoc()) : ?>
+                        <tr>
+                            <td><?= htmlspecialchars($candidate['A_id']) ?></td>
+                            <td><?= htmlspecialchars($candidate['JobName']) ?></td>
+                            <td><?= htmlspecialchars($candidate['S_id']) ?></td>
+                            <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
+                            <td><?= htmlspecialchars($candidate['Applied_Date']) ?></td>
+                            <td>
+                                <?php if ($candidate['IsShortlisted']) : ?>
+                                    <button class="applied-button" disabled>Shortlisted</button>
+                                <?php else : ?>
+                                    <a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                                        class="status accepted">Shortlist</a>
+                                <?php endif; ?>
+                            </td>
+                            <td><a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                                    class="status rejected">Reject</a></td>
+                        </tr>
+                    <?php endwhile; ?>
                 <?php else : ?>
-                <tr>
-                    <td colspan="7" class="text-center">No applicants found for the selected job.</td>
-                </tr>
+                    <tr>
+                        <td colspan="7" class="text-center">No applicants found for the selected job.</td>
+                    </tr>
                 <?php endif; ?>
             </tbody>
         </table>

@@ -4,7 +4,7 @@ require_once 'DBconnect.php';
 
 // Ensure the admin is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    echo "<script>alert('You not authorized to view this page!'); window.location.href = 'index.php';</script>";
     exit;
 }
 
@@ -60,21 +60,21 @@ if (isset($_GET['delete']) && $_GET['delete']) {
 
         <div class="filtered-section">
             <?php if ($result->num_rows > 0): ?>
-            <table class="filtered-job-list">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Recruiter</th>
-                        <th>Field</th>
-                        <th>Status</th>
-                        <th>Deadline</th>
-                        <th>Salary</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result->fetch_assoc()):
+                <table class="filtered-job-list">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Recruiter</th>
+                            <th>Field</th>
+                            <th>Status</th>
+                            <th>Deadline</th>
+                            <th>Salary</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result->fetch_assoc()):
                             //Recruiter Name
                             $recruiter = "SELECT CONCAT(FName, ' ', LName) AS Name FROM recruiter WHERE R_id = ?";
                             $stmt_recruiter = $con->prepare($recruiter);
@@ -84,29 +84,29 @@ if (isset($_GET['delete']) && $_GET['delete']) {
                             $recruiter_name = $result_recruiter->fetch_assoc()['Name'];
                             $stmt_recruiter->close();
                         ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['A_id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Name']); ?></td>
-                        <td><?php echo htmlspecialchars($recruiter_name); ?></td>
-                        <td><?php echo htmlspecialchars($row['Field']); ?></td>
-                        <td>
-                            <span
-                                class="btn <?php echo $row['Status'] == 1 ? 'status accepted' : 'status rejected'; ?>">
-                                <?php echo $row['Status'] == 1 ? 'Active' : 'Inactive'; ?>
-                            </span>
-                        </td>
-                        <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Salary']); ?></td>
-                        <td>
-                            <a href="a_applications.php?delete=<?= $row['A_id'] ?>" class="status rejected"
-                                onclick="return confirm('Are you sure you want to delete this application?');">Delete</a>
-                        </td>
-                    </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['A_id']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Name']); ?></td>
+                                <td><?php echo htmlspecialchars($recruiter_name); ?></td>
+                                <td><?php echo htmlspecialchars($row['Field']); ?></td>
+                                <td>
+                                    <span
+                                        class="btn <?php echo $row['Status'] == 1 ? 'status accepted' : 'status rejected'; ?>">
+                                        <?php echo $row['Status'] == 1 ? 'Active' : 'Inactive'; ?>
+                                    </span>
+                                </td>
+                                <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Salary']); ?></td>
+                                <td>
+                                    <a href="a_applications.php?delete=<?= $row['A_id'] ?>" class="status rejected"
+                                        onclick="return confirm('Are you sure you want to delete this application?');">Delete</a>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
             <?php else: ?>
-            <p>No Applications Found.</p>
+                <p>No Applications Found.</p>
             <?php endif; ?>
         </div>
     </main>
