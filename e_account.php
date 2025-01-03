@@ -1,14 +1,3 @@
-<?php
-session_start();
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-require_once 'DBconnect.php';
-
-if (!isset($_SESSION['username']) || $_SESSION['role'] != 'job_seeker') {
-    header("Location: e_account.php");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
