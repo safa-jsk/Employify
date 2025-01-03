@@ -135,36 +135,57 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
 
     <!-- Popup Modal for view profile -->
     <?php if (isset($_GET['S_id']) && !empty($_GET['S_id'])): ?>
-        <div id="profile-popup" class="popup">
-            <div class="popup-content">
-                <a href="#" class="close-btn">&times;</a>
+    <div id="profile-popup" class="popup">
+        <div class="popup-content">
+            <a href="#" class="close-btn">&times;</a>
+            <div class="profile-pic">
                 <?php
+                // Default avatar
+                $avatar_url = "https://www.w3schools.com/w3images/avatar3.png";
+
+                // Fetch seeker profile details
                 $seeker_id = $_GET['S_id'];
-                $stmt = $con->prepare("SELECT FName, LName, Gender, Email, Experience, Education, Skills, Contact 
-                                   FROM seeker 
-                                   WHERE S_id = ?");
+                $stmt = $con->prepare("
+                    SELECT FName, LName, Gender, Email, Experience, Education, Skills, Contact 
+                    FROM seeker 
+                    WHERE S_id = ?
+                ");
                 $stmt->bind_param("s", $seeker_id);
                 $stmt->execute();
                 $result = $stmt->get_result();
 
-                if ($result->num_rows > 0) {
+                if ($result->num_rows > 0):
                     $seeker = $result->fetch_assoc();
-                    echo "<p><strong>Name:</strong> " . htmlspecialchars($seeker['FName'] . ' ' . $seeker['LName']) . "</p>";
-                    echo "<p><strong>Gender:</strong> " . ($seeker['Gender'] == 1 ? 'Male' : 'Female') . "</p>";
-                    echo "<p><strong>Email:</strong> " . htmlspecialchars($seeker['Email']) . "</p>";
-                    echo "<p><strong>Experience:</strong> " . htmlspecialchars($seeker['Experience']) . " years</p>";
-                    echo "<p><strong>Education:</strong> " . htmlspecialchars($seeker['Education']) . "</p>";
-                    echo "<p><strong>Skills:</strong> " . htmlspecialchars($seeker['Skills']) . "</p>";
-                    echo "<p><strong>Contact:</strong> " . htmlspecialchars($seeker['Contact']) . "</p>";
-                } else {
-                    echo "<p>Profile not found.</p>";
-                }
 
-                $stmt->close();
+                    // Set avatar based on gender
+                    if ($seeker['Gender'] == 1) {
+                        $avatar_url = "https://www.w3schools.com/w3images/avatar2.png"; // Male avatar
+                    } elseif ($seeker['Gender'] == 0) {
+                        $avatar_url = "https://www.w3schools.com/w3images/avatar6.png"; // Female avatar
+                    }
                 ?>
+                <img src="<?= htmlspecialchars($avatar_url); ?>" alt="Profile Picture">
             </div>
+
+            <div class="profile-details">
+                <p><strong>Name:</strong> <?= htmlspecialchars($seeker['FName'] . ' ' . $seeker['LName']); ?></p>
+                <p><strong>Gender:</strong> <?= ($seeker['Gender'] == 1) ? 'Male' : 'Female'; ?></p>
+                <p><strong>Email:</strong> <?= htmlspecialchars($seeker['Email']); ?></p>
+                <p><strong>Experience:</strong> <?= htmlspecialchars($seeker['Experience']); ?> years</p>
+                <p><strong>Education:</strong> <?= htmlspecialchars($seeker['Education']); ?></p>
+                <p><strong>Skills:</strong> <?= htmlspecialchars($seeker['Skills']); ?></p>
+                <p><strong>Contact:</strong> <?= htmlspecialchars($seeker['Contact']); ?></p>
+            </div>
+            <?php else: ?>
+                <p>Profile not found.</p>
+            <?php 
+                endif;
+                $stmt->close();
+            ?>
         </div>
+    </div>
     <?php endif; ?>
+
 
     <script>
         // Close popups when clicking outside
