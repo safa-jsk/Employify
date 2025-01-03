@@ -18,32 +18,19 @@ $stmt_posted_jobs->execute();
 $result_posted_jobs = $stmt_posted_jobs->get_result();
 $stmt_posted_jobs->close();
 
-// Handle job editing and saving changes
-if (isset($_GET['edit'])) {
-    $A_id = $_GET['edit'];  // Get the A_id from the URL
-
-    // Fetch the job data for editing
-    $query_job = "SELECT * FROM applications WHERE A_id = ?";
-    $stmt_job = $con->prepare($query_job);
-    $stmt_job->bind_param("s", $A_id);
-    $stmt_job->execute();
-    $job = $stmt_job->get_result()->fetch_assoc();
-    $stmt_job->close();
-} elseif ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
-    // Process the form submission to update the job
+// Handle job updating via POST
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     $A_id = $_POST['A_id'];
-    $name = $_POST['name'];
-    $field = $_POST['field'];
-    $posted_date = $_POST['posted_date'];
-    $deadline = $_POST['deadline'];
-    $salary = $_POST['salary'];
-    $description = $_POST['description'];
-    $status = isset($_POST['status']) ? 1 : 0;  // Default to inactive if checkbox is not checked
+    $name = $_POST['Name'];
+    $field = $_POST['Field'];
+    $deadline = $_POST['Deadline'];
+    $salary = $_POST['Salary'];
+    $description = $_POST['Description'];
+    $status = isset($_POST['Status']) ? 1 : 0;
 
-    // Update the job in the database
-    $update_query = "UPDATE applications SET Name = ?, Field = ?, Posted_Date = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
+    $update_query = "UPDATE applications SET Name = ?, Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
     $stmt_update = $con->prepare($update_query);
-    $stmt_update->bind_param("ssssssss", $name, $field, $posted_date, $deadline, $salary, $description, $status, $A_id);
+    $stmt_update->bind_param("sssssss", $name, $field, $deadline, $salary, $description, $status, $A_id);
     $stmt_update->execute();
     $stmt_update->close();
 
@@ -70,13 +57,6 @@ if (isset($_GET['edit'])) {
     <div class="dashboard_content">
         <h2>Posted Jobs</h2>
 
-        <?php if (isset($_SESSION['msg'])): ?>
-        <div class="alert alert-info">
-            <?= $_SESSION['msg']; ?>
-        </div>
-        <?php unset($_SESSION['msg']); ?>
-        <?php endif; ?>
-
         <!-- Display Jobs List -->
         <table class="shortlisted-candidates-list">
             <thead>
@@ -96,8 +76,7 @@ if (isset($_GET['edit'])) {
             </thead>
             <tbody>
                 <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
-                <?php
-                    // Fetch total applicants for the job
+                    <?php
                     $query_total_applicants = "SELECT COUNT(*) AS total_applicants FROM seeker_seeks WHERE A_id = ?";
                     $stmt_total_applicants = $con->prepare($query_total_applicants);
                     $stmt_total_applicants->bind_param("s", $row['A_id']);
@@ -106,83 +85,108 @@ if (isset($_GET['edit'])) {
                     $total_applicants = $result_total_applicants->fetch_assoc()['total_applicants'];
                     $stmt_total_applicants->close();
                     ?>
-
-                <tr>
-                    <td><?php echo htmlspecialchars($row['A_id']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Name']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Field']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Posted_Date']); ?></td>
-                    <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
-                    <td>
-                        <?php
-                            if (is_null($row['Status'])) {
-                                echo '<span class="status on-hold">On Hold</span>';
-                            } elseif ($row['Status'] == 0) {
-                                echo '<span class="status rejected">Inactive</span>';
-                            } elseif ($row['Status'] == 1) {
-                                echo '<span class="status accepted">Active</span>';
-                            }
-                            ?>
-                    </td>
-                    <td><?php echo htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
-                    <td><?php echo htmlspecialchars($row['Description']); ?></td>
-                    <td><?php echo htmlspecialchars($total_applicants); ?></td>
-                    <td>
-                        <a href="e_posted-jobs.php?edit=<?php echo $row['A_id']; ?>" class="status accepted">Edit</a>
-                    </td>
-                    <td><a href="e_remove_job.php?A_id=<?= $row['A_id'] ?>" class="status rejected">Delete</a></td>
-                </tr>
+                    <tr>
+                        <td><?= htmlspecialchars($row['A_id']); ?></td>
+                        <td><?= htmlspecialchars($row['Name']); ?></td>
+                        <td><?= htmlspecialchars($row['Field']); ?></td>
+                        <td><?= htmlspecialchars($row['Posted_Date']); ?></td>
+                        <td><?= htmlspecialchars($row['Deadline']); ?></td>
+                        <td>
+                            <?php if (is_null($row['Status'])): ?>
+                                <span class="status on-hold">On Hold</span>
+                            <?php elseif ($row['Status'] == 0): ?>
+                                <span class="status rejected">Inactive</span>
+                            <?php else: ?>
+                                <span class="status accepted">Active</span>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
+                        <td><?= htmlspecialchars($row['Description']); ?></td>
+                        <td><?= htmlspecialchars($total_applicants); ?></td>
+                        <td>
+                            <button class="status accepted edit-job-btn" data-id="<?= $row['A_id']; ?>"
+                                data-name="<?= htmlspecialchars($row['Name']); ?>"
+                                data-field="<?= htmlspecialchars($row['Field']); ?>"
+                                data-deadline="<?= htmlspecialchars($row['Deadline']); ?>"
+                                data-salary="<?= htmlspecialchars($row['Salary']); ?>"
+                                data-description="<?= htmlspecialchars($row['Description']); ?>"
+                                data-status="<?= $row['Status']; ?>">
+                                Edit
+                            </button>
+                        </td>
+                        <td><a href="e_remove_job.php?A_id=<?= $row['A_id'] ?>" class="status rejected">Delete</a></td>
+                    </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
-
-        <?php if (isset($job)): ?>
-        <!-- Display the Edit Form -->
-        <h3>Edit Job: <?php echo htmlspecialchars($job['Name']); ?></h3>
-        <form method="POST" action="e_posted-jobs.php">
-            <input type="hidden" name="A_id" value="<?= $job['A_id'] ?>" />
-            <div class="mb-3">
-                <label for="name" class="form-label">Job Name</label>
-                <input type="text" id="name" name="name" class="form-control"
-                    value="<?= htmlspecialchars($job['Name']); ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="field" class="form-label">Field</label>
-                <input type="text" id="field" name="field" class="form-control"
-                    value="<?= htmlspecialchars($job['Field']); ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="posted_date" class="form-label">Posted Date</label>
-                <input type="date" id="posted_date" name="posted_date" class="form-control"
-                    value="<?= htmlspecialchars($job['Posted_Date']); ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="deadline" class="form-label">Deadline</label>
-                <input type="date" id="deadline" name="deadline" class="form-control"
-                    value="<?= htmlspecialchars($job['Deadline']); ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="salary" class="form-label">Salary</label>
-                <input type="number" id="salary" name="salary" class="form-control"
-                    value="<?= htmlspecialchars($job['Salary']); ?>" required>
-            </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea id="description" name="description" class="form-control"
-                    rows="5"><?= htmlspecialchars($job['Description']); ?></textarea>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="status" name="status"
-                    <?= $job['Status'] ? 'checked' : ''; ?>>
-                <label for="status" class="form-check-label" id="status-label">
-                    <?= $job['Status'] ? 'Active' : 'Inactive'; ?>
-                </label>
-            </div>
-            <button type="submit" name="update_job" class="search-button">Update Job</button>
-            <a href="e_posted-jobs.php" class="status rejected">Cancel</a>
-        </form>
-        <?php endif; ?>
     </div>
+
+    <!-- Edit Job Popup -->
+    <div id="editJobPopup" class="popup">
+        <div class="popup-content">
+            <a href="#" class="close-btn">&times;</a>
+            <h4>Edit Job</h4>
+            <form method="POST" action="e_posted-jobs.php">
+                <input type="hidden" id="jobId" name="A_id" />
+                <input type="text" id="jobName" name="Name" placeholder="Job Name" required />
+                <input type="text" id="jobField" name="Field" placeholder="Field" required />
+                <input type="date" id="jobDeadline" name="Deadline" required />
+                <input type="number" id="jobSalary" name="Salary" placeholder="Salary" required />
+                <textarea id="jobDescription" name="Description" placeholder="Description" rows="4" required></textarea>
+                <div>
+                    <label class="status-label">
+                        <input type="checkbox" id="jobStatus" name="Status" class="form-check-input" />
+                        <p class="status-text">Active Status</p>
+                    </label>
+                </div>
+
+                <button type="submit" name="update_job" class="search-button">Update Job</button>
+                <br>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script>
+        // Open Edit Job Popup and populate fields
+        document.querySelectorAll('.edit-job-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const popup = document.getElementById('editJobPopup');
+                document.getElementById('jobId').value = this.dataset.id;
+                document.getElementById('jobName').value = this.dataset.name;
+                document.getElementById('jobField').value = this.dataset.field;
+                document.getElementById('jobDeadline').value = this.dataset.deadline;
+                document.getElementById('jobSalary').value = this.dataset.salary;
+                document.getElementById('jobDescription').value = this.dataset.description;
+                document.getElementById('jobStatus').checked = this.dataset.status == "1";
+                popup.style.display = 'flex';
+            });
+        });
+
+
+        // Close popups when clicking outside
+        window.onclick = function(event) {
+            const popup = document.getElementById('editJobPopup');
+            if (event.target === popup) {
+                popup.style.display = "none";
+            }
+        };
+
+        // Close popup when close button is clicked
+        document.querySelector('.close-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('editJobPopup').style.display = 'none';
+        });
+    </script>
+
+    <?php
+    if (isset($_SESSION['msg']) && !empty($_SESSION['msg'])) {
+        $msg = htmlspecialchars($_SESSION['msg']);
+        echo "<script> alert('$msg'); </script>";
+        unset($_SESSION['msg']);
+    }
+    ?>
 </body>
 
 </html>

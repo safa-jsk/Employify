@@ -45,3 +45,5 @@ CSE370 Project To-Do
 	Add Security Question (Also add during Registration) [Used DoB]								Safa	DONE
 
 6. Index Page Fix																				Maliha	DONE
+
+7. Restrict Address Bar                                                                         Safa
