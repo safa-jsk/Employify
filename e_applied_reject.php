@@ -26,6 +26,11 @@ $remove_shortlist_query = $con->prepare("
 $remove_shortlist_query->bind_param("sis", $A_id, $S_id, $recruiter_id);
 
 if ($remove_shortlist_query->execute()) {
+
+    $stmt = $con->prepare("UPDATE seeker_seeks SET Status = 0 WHERE A_id = ? AND S_id = ?");
+    $stmt->bind_param("is", $A_id, $S_id);
+    $stmt->execute();
+
     echo "Candidate removed from shortlist and rejected successfully.";
     header("Location: e_applied.php");
     exit;
