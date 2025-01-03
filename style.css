@@ -1060,3 +1060,14 @@ textarea {
 .mb-3 {
   margin-bottom: 1rem; /* 16px */
 }
+
+/* Ensures the checkbox and text are side by side */
+.status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* Space between checkbox and text */
+}
+
+.status-text {
+  margin: 0; /* Remove default margin from <p> tag */
+}

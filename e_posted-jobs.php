@@ -133,10 +133,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
                 <input type="date" id="jobDeadline" name="Deadline" required />
                 <input type="number" id="jobSalary" name="Salary" placeholder="Salary" required />
                 <textarea id="jobDescription" name="Description" placeholder="Description" rows="4" required></textarea>
-                <label>
-                    <input type="checkbox" id="jobStatus" name="Status" class="form-check-input" />
-                    <p>Active</p>
-                </label>
+                <div>
+                    <label class="status-label">
+                        <input type="checkbox" id="jobStatus" name="Status" class="form-check-input" />
+                        <p class="status-text">Active</p>
+                    </label>
+                </div>
+                
                 <button type="submit" name="update_job" class="search-button">Update Job</button>
                 <br>
 
