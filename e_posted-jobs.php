@@ -57,13 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     <div class="dashboard_content">
         <h2>Posted Jobs</h2>
 
-        <?php if (isset($_SESSION['msg'])): ?>
-            <div class="alert alert-info">
-                <?= $_SESSION['msg']; ?>
-            </div>
-            <?php unset($_SESSION['msg']); ?>
-        <?php endif; ?>
-
         <!-- Display Jobs List -->
         <table class="shortlisted-candidates-list">
             <thead>
@@ -183,6 +176,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
             document.getElementById('editJobPopup').style.display = 'none';
         });
     </script>
+
+    <?php
+    if (isset($_SESSION['msg']) && !empty($_SESSION['msg'])) {
+        $msg = htmlspecialchars($_SESSION['msg']);
+        echo "<script> alert('$msg'); </script>";
+        unset($_SESSION['msg']);
+    }
+    ?>
 </body>
 
 </html>
