@@ -59,10 +59,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
         <h2>Posted Jobs</h2>
 
         <?php if (isset($_SESSION['msg'])): ?>
-        <div class="alert alert-info">
-            <?= $_SESSION['msg']; ?>
-        </div>
-        <?php unset($_SESSION['msg']); ?>
+            <div class="alert alert-info">
+                <?= $_SESSION['msg']; ?>
+            </div>
+            <?php unset($_SESSION['msg']); ?>
         <?php endif; ?>
 
         <!-- Display Jobs List -->
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
             </thead>
             <tbody>
                 <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
-                <?php
+                    <?php
                     $query_total_applicants = "SELECT COUNT(*) AS total_applicants FROM seeker_seeks WHERE A_id = ?";
                     $stmt_total_applicants = $con->prepare($query_total_applicants);
                     $stmt_total_applicants->bind_param("s", $row['A_id']);
@@ -92,41 +92,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
                     $result_total_applicants = $stmt_total_applicants->get_result();
                     $total_applicants = $result_total_applicants->fetch_assoc()['total_applicants'];
                     $stmt_total_applicants->close();
-                ?>
-                <tr>
-                    <td><?= htmlspecialchars($row['A_id']); ?></td>
-                    <td><?= htmlspecialchars($row['Name']); ?></td>
-                    <td><?= htmlspecialchars($row['Field']); ?></td>
-                    <td><?= htmlspecialchars($row['Posted_Date']); ?></td>
-                    <td><?= htmlspecialchars($row['Deadline']); ?></td>
-                    <td>
-                        <?php if (is_null($row['Status'])): ?>
-                        <span class="status on-hold">On Hold</span>
-                        <?php elseif ($row['Status'] == 0): ?>
-                        <span class="status rejected">Inactive</span>
-                        <?php else: ?>
-                        <span class="status accepted">Active</span>
-                        <?php endif; ?>
-                    </td>
-                    <td><?= htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
-                    <td><?= htmlspecialchars($row['Description']); ?></td>
-                    <td><?= htmlspecialchars($total_applicants); ?></td>
-                    <td>
-                        <button 
-                            class="status accepted edit-job-btn" 
-                            data-id="<?= $row['A_id']; ?>" 
-                            data-name="<?= htmlspecialchars($row['Name']); ?>" 
-                            data-field="<?= htmlspecialchars($row['Field']); ?>" 
-                            data-posted-date="<?= htmlspecialchars($row['Posted_Date']); ?>" 
-                            data-deadline="<?= htmlspecialchars($row['Deadline']); ?>" 
-                            data-salary="<?= htmlspecialchars($row['Salary']); ?>" 
-                            data-description="<?= htmlspecialchars($row['Description']); ?>" 
-                            data-status="<?= $row['Status']; ?>">
-                            Edit
-                        </button>
-                    </td>
-                    <td><a href="e_remove_job.php?A_id=<?= $row['A_id'] ?>" class="status rejected">Delete</a></td>
-                </tr>
+                    ?>
+                    <tr>
+                        <td><?= htmlspecialchars($row['A_id']); ?></td>
+                        <td><?= htmlspecialchars($row['Name']); ?></td>
+                        <td><?= htmlspecialchars($row['Field']); ?></td>
+                        <td><?= htmlspecialchars($row['Posted_Date']); ?></td>
+                        <td><?= htmlspecialchars($row['Deadline']); ?></td>
+                        <td>
+                            <?php if (is_null($row['Status'])): ?>
+                                <span class="status on-hold">On Hold</span>
+                            <?php elseif ($row['Status'] == 0): ?>
+                                <span class="status rejected">Inactive</span>
+                            <?php else: ?>
+                                <span class="status accepted">Active</span>
+                            <?php endif; ?>
+                        </td>
+                        <td><?= htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
+                        <td><?= htmlspecialchars($row['Description']); ?></td>
+                        <td><?= htmlspecialchars($total_applicants); ?></td>
+                        <td>
+                            <button class="status accepted edit-job-btn" data-id="<?= $row['A_id']; ?>"
+                                data-name="<?= htmlspecialchars($row['Name']); ?>"
+                                data-field="<?= htmlspecialchars($row['Field']); ?>"
+                                data-posted-date="<?= htmlspecialchars($row['Posted_Date']); ?>"
+                                data-deadline="<?= htmlspecialchars($row['Deadline']); ?>"
+                                data-salary="<?= htmlspecialchars($row['Salary']); ?>"
+                                data-description="<?= htmlspecialchars($row['Description']); ?>"
+                                data-status="<?= $row['Status']; ?>">
+                                Edit
+                            </button>
+                        </td>
+                        <td><a href="e_remove_job.php?A_id=<?= $row['A_id'] ?>" class="status rejected">Delete</a></td>
+                    </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
@@ -135,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     <!-- Edit Job Popup -->
     <div id="editJobPopup" class="popup-edit-posted-job">
         <div class="popup-content">
-            
+            <a href="#" class="close-btn">&times;</a>
             <h4>Edit Job</h4>
             <form method="POST" action="e_posted-jobs.php">
                 <input type="hidden" id="jobId" name="A_id" />
@@ -146,12 +144,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
                 <input type="number" id="jobSalary" name="Salary" placeholder="Salary" required />
                 <textarea id="jobDescription" name="Description" placeholder="Description" rows="4" required></textarea>
                 <label>
-                    <input type="checkbox" id="jobStatus" name="Status" />
+                    <input type="checkbox" id="jobStatus" name="Status" class="form-check-input" />
                     Active
                 </label>
-                <button type="submit" name="update_job">Update Job</button>
+                <button type="submit" name="update_job" class="search-button">Update Job</button>
                 <br>
-                <a href="#" class="close-btn">&times;</a>
+
             </form>
 
         </div>
@@ -160,12 +158,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     <script>
         // Open Edit Job Popup and populate fields
         document.querySelectorAll('.edit-job-btn').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const popup = document.getElementById('editJobPopup');
                 document.getElementById('jobId').value = this.dataset.id;
                 document.getElementById('jobName').value = this.dataset.name;
                 document.getElementById('jobField').value = this.dataset.field;
-                document.getElementById('jobPostedDate').value = this.dataset.postedDate; // Correct dataset key
+                document.getElementById('jobPostedDate').value = this.dataset
+                    .postedDate; // Correct dataset key
                 document.getElementById('jobDeadline').value = this.dataset.deadline;
                 document.getElementById('jobSalary').value = this.dataset.salary;
                 document.getElementById('jobDescription').value = this.dataset.description;
