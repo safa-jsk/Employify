@@ -1,14 +1,3 @@
-<?php
-session_start();
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-require_once 'DBconnect.php';
-
-if (!isset($_SESSION['username']) || $_SESSION['role'] != 'job_seeker') {
-    header("Location: e_account.php");
-    exit;
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +23,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != 'job_seeker') {
         <div class="profile-section">
             <div class="profile-pic">
                 <!-- Display Role based on the session role -->
-                <?php 
+                <?php
                 if (isset($_SESSION['role']) && $_SESSION['role'] == 'job_seeker') {
                     echo '<h4>Job Seeker</h4>';
                 } else {
@@ -119,49 +108,50 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != 'job_seeker') {
                 <button class="edit-button" type="submit" name="js_edit">Save Changes</button>
                 <br>
 
-            <!-- Change Password Button -->
-            <button  class="edit-button-changepass" type="button" id="changePasswordBtn">Change Password</button>
+                <!-- Change Password Button -->
+                <button class="edit-button-changepass" type="button" id="changePasswordBtn">Change Password</button>
             </form>
         </div>
 
-    <!-- Change Password Popup -->
-    <div id="changePasswordPopup" class="popup">
-        <div class="popup-content">
-            <a href="#" class="close-btn">&times;</a>
-            <h4>Change Password</h4>
-            <form method="POST" action="js_change_password.php">
-                <input type="password" name="old_password" placeholder="Current Password" required>
-                <input type="password" name="new_password" placeholder="New Password" required>
-                <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
-                <button type="submit" name="change_password">Update Password</button>
-            </form>
+        <!-- Change Password Popup -->
+        <div id="changePasswordPopup" class="popup">
+            <div class="popup-content">
+                <a href="#" class="close-btn">&times;</a>
+                <h4>Change Password</h4>
+                <form method="POST" action="js_change_password.php">
+                    <input type="password" name="old_password" placeholder="Current Password" required>
+                    <input type="password" name="new_password" placeholder="New Password" required>
+                    <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
+                    <button type="submit" name="change_password">Update Password</button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <script>
-        // Open Change Password Popup
-        document.getElementById('changePasswordBtn').addEventListener('click', function() {
-            document.getElementById('changePasswordPopup').style.display = 'flex';
-        });
-
-        // Close popups when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('changePasswordPopup');
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        };
-
-        // Close popup when close button is clicked
-        document.querySelectorAll('.close-btn').forEach((btn) => {
-            btn.addEventListener('click', function(event) {
-                event.preventDefault();
-                const popup = this.closest('.popup');
-                if (popup) {
-                    popup.style.display = 'none';
-                }
+        <script>
+            // Open Change Password Popup
+            document.getElementById('changePasswordBtn').addEventListener('click', function() {
+                document.getElementById('changePasswordPopup').style.display = 'flex';
             });
-        });
-    </script>
+
+            // Close popups when clicking outside
+            window.onclick = function(event) {
+                const modal = document.getElementById('changePasswordPopup');
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            };
+
+            // Close popup when close button is clicked
+            document.querySelectorAll('.close-btn').forEach((btn) => {
+                btn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const popup = this.closest('.popup');
+                    if (popup) {
+                        popup.style.display = 'none';
+                    }
+                });
+            });
+        </script>
 </body>
+
 </html>

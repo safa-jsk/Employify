@@ -1,7 +1,14 @@
 <?php
 session_start();
-include 'DBconnect.php';  // Include the database connection
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+include 'DBconnect.php';  // Include the database connection
+
+// Ensure correct user is logged in
+$pageRole = 'job_seeker';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
+    exit;
+}
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     $current_password = $_POST['old_password'];
@@ -13,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
         echo "Session ID not set. Please log in.";
         exit;
     }
-    $user_id = $_SESSION['username']; 
+    $user_id = $_SESSION['username'];
 
     if ($new_password !== $confirm_password) {
         echo "New passwords do not match!";
@@ -31,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
         echo "Current password cannot be empty!";
         exit;
     }
-    
+
     if (!password_verify($current_password, $row['password'])) {
         echo "Incorrect current password!";
         exit;
@@ -48,4 +55,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
         echo "<script>alert('Error changing password!'); window.history.back();</script>";
     }
 }
-?>

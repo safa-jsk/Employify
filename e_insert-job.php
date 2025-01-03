@@ -4,9 +4,10 @@ include 'DBConnect.php'; // Use $con
 session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 
-// Ensure the user is logged in
-if (!isset($_SESSION['username'])) {
-    header("Location: index.php?message=" . urlencode("You need to log in to post a job."));
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
     exit;
 }
 

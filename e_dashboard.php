@@ -3,8 +3,10 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
     exit;
 }
 
@@ -109,27 +111,27 @@ $con->close();
         <div class="dashboard_section" id="posted-jobs-section">
             <h2>Posted Jobs</h2>
             <?php if ($result_posted_jobs->num_rows > 0): ?>
-            <table class="posted-jobs-list">
-                <thead>
-                    <tr>
-                        <th>Job Name</th>
-                        <th>Field</th>
-                        <th>Posted Date</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
-                        <th>Salary</th>
-                        <th>Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($row['Name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Field']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Posted_Date']); ?></td>
-                        <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
-                        <td>
-                            <?php
+                <table class="posted-jobs-list">
+                    <thead>
+                        <tr>
+                            <th>Job Name</th>
+                            <th>Field</th>
+                            <th>Posted Date</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+                            <th>Salary</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($row['Name']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Field']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Posted_Date']); ?></td>
+                                <td><?php echo htmlspecialchars($row['Deadline']); ?></td>
+                                <td>
+                                    <?php
                                     // Status logic
                                     if (is_null($row['Status'])) {
                                         echo '<span class="status on-hold">On Hold</span>';
@@ -139,15 +141,15 @@ $con->close();
                                         echo '<span class="status accepted">Active</span>';
                                     }
                                     ?>
-                        </td>
-                        <td><?php echo htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
-                        <td><?php echo htmlspecialchars($row['Description']); ?></td>
-                    </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
+                                </td>
+                                <td><?php echo htmlspecialchars(number_format($row['Salary'])); ?> USD</td>
+                                <td><?php echo htmlspecialchars($row['Description']); ?></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
             <?php else: ?>
-            <p>No jobs have been posted yet.</p>
+                <p>No jobs have been posted yet.</p>
             <?php endif; ?>
         </div>
 

@@ -4,7 +4,7 @@ require_once 'DBconnect.php';
 
 // Ensure the admin is logged in
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    echo "<script>alert('You not authorized to view this page!'); window.location.href = 'index.php';</script>";
     exit;
 }
 

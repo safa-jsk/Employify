@@ -1,15 +1,3 @@
-<?php
-session_start();
-error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-require_once 'DBconnect.php';
-
-if ( $_SESSION['role'] !== 'employer') {
-    header("Location: js_account.php");
-    exit;
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,7 +21,7 @@ if ( $_SESSION['role'] !== 'employer') {
         <div class="profile-section">
             <div class="profile-pic">
                 <!-- Display Role based on the session role -->
-                <?php 
+                <?php
                 if (isset($_SESSION['role']) && $_SESSION['role'] == 'employer') {
                     echo '<h4>Job Recruiter</h4>';
                 } else {
@@ -108,49 +96,50 @@ if ( $_SESSION['role'] !== 'employer') {
                 <button class="edit-button" type="submit" name="e_edit">Save Changes</button>
                 <br>
 
-            <!-- Change Password Button -->
-            <button  class="edit-button-changepass" type="button" id="changePasswordBtn">Change Password</button>
+                <!-- Change Password Button -->
+                <button class="edit-button-changepass" type="button" id="changePasswordBtn">Change Password</button>
             </form>
-            </div>
+        </div>
 
-            <!-- Change Password Popup -->
-            <div id="changePasswordPopup" class="popup">
+        <!-- Change Password Popup -->
+        <div id="changePasswordPopup" class="popup">
             <div class="popup-content">
-            <a href="#" class="close-btn">&times;</a>
-            <h4>Change Password</h4>
-            <form method="POST" action="e_change_password.php">
-                <input type="password" name="old_password" placeholder="Current Password" required>
-                <input type="password" name="new_password" placeholder="New Password" required>
-                <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
-                <button type="submit" name="change_password">Update Password</button>
-            </form>
+                <a href="#" class="close-btn">&times;</a>
+                <h4>Change Password</h4>
+                <form method="POST" action="e_change_password.php">
+                    <input type="password" name="old_password" placeholder="Current Password" required>
+                    <input type="password" name="new_password" placeholder="New Password" required>
+                    <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
+                    <button type="submit" name="change_password">Update Password</button>
+                </form>
             </div>
-            </div>
+        </div>
 
-            <script>
+        <script>
             // Open Change Password Popup
             document.getElementById('changePasswordBtn').addEventListener('click', function() {
-            document.getElementById('changePasswordPopup').style.display = 'flex';
+                document.getElementById('changePasswordPopup').style.display = 'flex';
             });
 
             // Close popups when clicking outside
             window.onclick = function(event) {
-            const modal = document.getElementById('changePasswordPopup');
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
+                const modal = document.getElementById('changePasswordPopup');
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
             };
 
             // Close popup when close button is clicked
             document.querySelectorAll('.close-btn').forEach((btn) => {
-            btn.addEventListener('click', function(event) {
-                event.preventDefault();
-                const popup = this.closest('.popup');
-                if (popup) {
-                    popup.style.display = 'none';
-                }
+                btn.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const popup = this.closest('.popup');
+                    if (popup) {
+                        popup.style.display = 'none';
+                    }
+                });
             });
-            });
-            </script>
+        </script>
 </body>
+
 </html>

@@ -1,12 +1,13 @@
 <?php
-// session_start(); // Start the session
+session_start(); // Start the session
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require 'DBconnect.php'; // Ensure the connection is available
 
-// Check if the user is logged in
-if (!isset($_SESSION['username'])) {
-    header('Location: index.php'); // Redirect to login if not logged in
-    exit();
+// Ensure correct user is logged in
+$pageRole = 'job_seeker';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
+    exit;
 }
 
 // Fetch job seeker data
@@ -22,5 +23,3 @@ $job_seeker = $result->fetch_assoc();
 // Close the statement and connection
 $stmt->close();
 $con->close();
-?>
-

@@ -3,10 +3,11 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
-// Ensure only employers can access this page
-if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'employer') {
-    header("Location: index.php");
-    exit();
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
+    exit;
 }
 
 // Handle search query and filter

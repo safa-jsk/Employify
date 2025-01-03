@@ -2,6 +2,13 @@
 session_start();
 require_once 'DBconnect.php';
 
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
+    exit;
+}
+
 if (!isset($_GET['S_id']) || empty($_GET['S_id'])) {
     echo json_encode(['error' => 'Seeker ID not provided']);
     exit;
@@ -18,4 +25,3 @@ $stmt->execute();
 $result = $stmt->get_result();
 echo json_encode($result->fetch_assoc());
 $con->close();
-?>
