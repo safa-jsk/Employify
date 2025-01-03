@@ -76,6 +76,7 @@ a:hover {
 .navbar-menu a:hover {
   color: #f4d1fb;
   font-size: 17px;
+  text-decoration: none;
 }
 
 
@@ -86,7 +87,7 @@ a:hover {
 }
 
 .navbar-btn .login-btn {
-  background: #007bff;
+  background: #0195dc;
   color: #fff;
   padding: 8px 15px;
   border-radius: 5px;
@@ -1049,6 +1050,12 @@ textarea {
 .btn-primary {
   background-color: #007bff;
   color: #ffffff;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-color: #007bff;
+  
 }
 
 .btn-primary:hover {

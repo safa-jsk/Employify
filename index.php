@@ -45,11 +45,11 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
             <h1><a href="index.php"><img src="images/logo.png" alt="Employify Logo"></a></h1>
         </div>
         <nav class="navbar-menu">
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact" class="contact-btn">Contact</a></li>
+            <ul class="navbar-btn">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#" class="contact-btn">Contact</a></li>
                 <?php if (isset($_SESSION['username']) && isset($_SESSION['role'])): ?>
                     <?php if ($_SESSION['role'] === 'job_seeker'): ?>
                         <li><a href="js_dashboard.php">Dashboard</a></li>
@@ -60,7 +60,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                     <?php endif; ?>
                     <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>
-                    <li><a href="#loginModal">Login</a></li>
+                    <li><a href="#loginModal"  class="login-btn">Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
@@ -112,7 +112,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
         </div>
     </div>
 
-    <!-- Registration Popups -->
+    <!-- Registration Popup Job Seeker -->
     <div id="registerJsPopup" class="popup">
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
@@ -136,7 +136,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
             </form>
         </div>
     </div>
-
+    <!-- Registration Popup Employer  -->
     <div id="registerEmployerPopup" class="popup">
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
@@ -263,7 +263,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                     </div>
                     <input type="text" placeholder="Subject" required>
                     <textarea placeholder="Message" rows="5"></textarea>
-                    <button type="submit">Send Message</button>
+                    <button type="submit" class="btn-primary">Send Message</button>
                 </form>
             </div>
         </div>
