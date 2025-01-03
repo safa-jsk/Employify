@@ -3,8 +3,10 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require_once 'DBconnect.php';
 
-if (!isset($_SESSION['username']) || $_SESSION['role'] != 'job_seeker') {
-    header("Location: e_account.php");
+// Ensure correct user is logged in
+$pageRole = 'employer';
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
+    echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
     exit;
 }
 ?>
