@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     </div>
 
     <!-- Edit Job Popup -->
-    <div id="editJobPopup" class="popup-edit-posted-job">
+    <div id="editJobPopup" class="popup">
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
             <h4>Edit Job</h4>
@@ -136,10 +136,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
                 <div>
                     <label class="status-label">
                         <input type="checkbox" id="jobStatus" name="Status" class="form-check-input" />
-                        <p class="status-text">Active</p>
+                        <p class="status-text">Active Status</p>
                     </label>
                 </div>
-                
+
                 <button type="submit" name="update_job" class="search-button">Update Job</button>
                 <br>
 
