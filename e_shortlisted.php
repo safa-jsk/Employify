@@ -122,8 +122,12 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <a href="e_shortlist_remove.php?A_id=<?= $row['A_id']; ?>&S_id=<?= $row['S_id']; ?>"
-                                    class="status rejected">Remove</a>
+                            <?php if ($row['Status'] == "0"): ?>
+                                <button class="applied-button" disabled>Rejected</button>
+                            <?php else: ?>
+                                <a href="e_shortlist_reject.php?A_id=<?= $row['A_id']; ?>&S_id=<?= $row['S_id']; ?>"
+                                    class="status rejected">Reject</a>
+                            <?php endif; ?>
                             </td>
                         </tr>
                     <?php endwhile; ?>

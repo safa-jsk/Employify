@@ -10,19 +10,33 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 }
 
 $username = $_SESSION['username'];
-$job_id = $_GET['A_id'];
-$seeker_id = $_GET['S_id'];
+$job_id = $_GET['A_id'] ?? null;
+$seeker_id = $_GET['S_id'] ?? null;
 
-// Update the candidate's status
-$stmt = $con->prepare("UPDATE seeker_seeks SET Status = 1 WHERE A_id = ? AND S_id = ?");
-$stmt->bind_param("ss", $job_id, $seeker_id);
-$stmt->execute();
+// Validate parameters
+if (!$job_id || !$seeker_id) {
+    header("Location: e_shortlisted.php?error=invalid_parameters");
+    exit;
+}
 
-if ($stmt->affected_rows > 0) {
+// Update seeker status
+$update_query = $con->prepare("UPDATE seeker_seeks SET Status = 1 WHERE A_id = ? AND S_id = ?");
+$update_query->bind_param("is", $job_id, $seeker_id);
+$update_query->execute();
+
+if ($update_query->affected_rows > 0) {
+    // Remove from shortlist after acceptance
+    $remove_query = $con->prepare("DELETE FROM recruiter_shortlist WHERE A_id = ? AND S_id = ?");
+    $remove_query->bind_param("is", $job_id, $seeker_id);
+    $remove_query->execute();
+    $remove_query->close();
+
     header("Location: e_shortlisted.php?success=candidate_accepted");
 } else {
     header("Location: e_shortlisted.php?error=acceptation_failed");
 }
 
-$stmt->close();
+$update_query->close();
 $con->close();
+exit;
+?>

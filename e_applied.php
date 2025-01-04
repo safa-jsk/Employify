@@ -1,9 +1,8 @@
 <?php
 session_start();
 error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
-require_once 'DBconnect.php'; // Include the database connection file
+require_once 'DBconnect.php';
 
-// Ensure correct user is logged in
 $pageRole = 'employer';
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
     echo "<script>alert('You must log in first!'); window.location.href = 'index.php';</script>";
@@ -12,18 +11,19 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 
 $recruiter_id = $_SESSION['username'];
 
-// Fetch all jobs posted by the recruiter
+// Fetch jobs posted by recruiter
 $jobs_query = $con->prepare("SELECT A_id, Name FROM applications WHERE R_id = ?");
 $jobs_query->bind_param("s", $recruiter_id);
 $jobs_query->execute();
 $jobs_result = $jobs_query->get_result();
 
-$filter_job_id = $_GET['job_id'] ?? 'all'; // Default filter to 'all'
+$filter_job_id = $_GET['job_id'] ?? 'all';
 
-// Fetch candidates based on the selected job
+// Fetch candidates
 if ($filter_job_id === 'all') {
     $candidates_query = $con->prepare("
-        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) as SeekerName, a.Name as JobName, ss.Applied_Date, 
+        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) AS SeekerName, a.Name AS JobName,
+               ss.Applied_Date, ss.Status,
                CASE WHEN EXISTS (
                    SELECT 1 FROM recruiter_shortlist rs 
                    WHERE rs.S_id = ss.S_id AND rs.A_id = ss.A_id AND rs.R_id = ?
@@ -31,11 +31,13 @@ if ($filter_job_id === 'all') {
         FROM seeker_seeks ss
         JOIN seeker s ON ss.S_id = s.S_id
         JOIN applications a ON ss.A_id = a.A_id
-        WHERE a.R_id = ?");
+        WHERE a.R_id = ?
+    ");
     $candidates_query->bind_param("ss", $recruiter_id, $recruiter_id);
 } else {
     $candidates_query = $con->prepare("
-        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) as SeekerName, a.Name as JobName, ss.Applied_Date, 
+        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) AS SeekerName, a.Name AS JobName,
+               ss.Applied_Date, ss.Status,
                CASE WHEN EXISTS (
                    SELECT 1 FROM recruiter_shortlist rs 
                    WHERE rs.S_id = ss.S_id AND rs.A_id = ss.A_id AND rs.R_id = ?
@@ -43,7 +45,8 @@ if ($filter_job_id === 'all') {
         FROM seeker_seeks ss
         JOIN seeker s ON ss.S_id = s.S_id
         JOIN applications a ON ss.A_id = a.A_id
-        WHERE a.R_id = ? AND ss.A_id = ?");
+        WHERE a.R_id = ? AND ss.A_id = ?
+    ");
     $candidates_query->bind_param("ssi", $recruiter_id, $recruiter_id, $filter_job_id);
 }
 $candidates_query->execute();
@@ -57,8 +60,6 @@ $candidates_result = $candidates_query->get_result();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <title>Applied Jobs</title>
 </head>
 
@@ -89,41 +90,47 @@ $candidates_result = $candidates_query->get_result();
         <table class="shortlisted-candidates-list">
             <thead>
                 <tr>
-                    <th>Job ID</th>
                     <th>Job Name</th>
-                    <th>Candidate ID</th>
                     <th>Candidate Name</th>
-                    <th>Applied Date</th>
+                    <th>Status</th>
                     <th>Shortlist</th>
-                    <th>Reject</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                <?php if ($candidates_result->num_rows > 0) : ?>
-                    <?php while ($candidate = $candidates_result->fetch_assoc()) : ?>
-                        <tr>
-                            <td><?= htmlspecialchars($candidate['A_id']) ?></td>
-                            <td><?= htmlspecialchars($candidate['JobName']) ?></td>
-                            <td><?= htmlspecialchars($candidate['S_id']) ?></td>
-                            <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
-                            <td><?= htmlspecialchars($candidate['Applied_Date']) ?></td>
-                            <td>
-                                <?php if ($candidate['IsShortlisted']) : ?>
-                                    <button class="applied-button" disabled>Shortlisted</button>
-                                <?php else : ?>
-                                    <a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                                        class="status accepted">Shortlist</a>
-                                <?php endif; ?>
-                            </td>
-                            <td><a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                                    class="status rejected">Reject</a></td>
-                        </tr>
-                    <?php endwhile; ?>
-                <?php else : ?>
+                <?php while ($candidate = $candidates_result->fetch_assoc()) : ?>
                     <tr>
-                        <td colspan="7" class="text-center">No applicants found for the selected job.</td>
+                        <td><?= htmlspecialchars($candidate['JobName']) ?></td>
+                        <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
+                        <td>
+                            <?php
+                            if ($candidate['Status'] == 0) {
+                                echo 'Rejected';
+                            }elseif ($candidate['Status'] == 1){
+                                echo 'Accepted';
+                            } else {
+                                echo 'Shortlisted';
+                                
+                            }
+                            ?>
+                        </td>
+
+                        <td>
+                            <?php if ($candidate['IsShortlisted']): ?>
+                                <button class="applied-button" disabled>Shortlisted</button>
+                            <?php else: ?>
+                                <a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                                class="status accepted">Shortlist</a>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if ($candidate['IsShortlisted']): ?>
+                                <a href="e_applied_remove.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>" 
+                                class="status rejected">Remove</a>
+                            <?php endif; ?>
+                        </td>
                     </tr>
-                <?php endif; ?>
+                <?php endwhile; ?>
             </tbody>
         </table>
     </div>
@@ -132,8 +139,7 @@ $candidates_result = $candidates_query->get_result();
 </html>
 
 <?php
-// Close database connections
 $jobs_query->close();
 $candidates_query->close();
-mysqli_close($con);
+$con->close();
 ?>
