@@ -63,13 +63,13 @@ if (!$stmt_accepted) {
     die("Error in query preparation: " . $con->error);
 }
 
-$stmt_accepted->bind_param("s", $username); // Use recruiter ID (username)
+$stmt_accepted->bind_param("s", $username); 
 $stmt_accepted->execute();
 $result_accepted = $stmt_accepted->get_result();
 
-$total_accepted = 0; // Default value
+$total_accepted = 0; 
 if ($row = $result_accepted->fetch_assoc()) {
-    $total_accepted = $row['accepted_candidates_count']; // Get total count
+    $total_accepted = $row['accepted_candidates_count']; 
 }
 
 $stmt_accepted->close();
