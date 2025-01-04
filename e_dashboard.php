@@ -52,6 +52,28 @@ while ($row = $result_shortlisted->fetch_assoc()) {
 
 $stmt_shortlisted->close();
 
+// Accepted candidates count across all applications
+$query_accepted = "SELECT COUNT(*) AS accepted_candidates_count
+                   FROM seeker_seeks ss
+                   JOIN applications a ON ss.A_id = a.A_id
+                   WHERE a.R_id = ? AND ss.Status = 1";
+
+$stmt_accepted = $con->prepare($query_accepted);
+if (!$stmt_accepted) {
+    die("Error in query preparation: " . $con->error);
+}
+
+$stmt_accepted->bind_param("s", $username); // Use recruiter ID (username)
+$stmt_accepted->execute();
+$result_accepted = $stmt_accepted->get_result();
+
+$total_accepted = 0; // Default value
+if ($row = $result_accepted->fetch_assoc()) {
+    $total_accepted = $row['accepted_candidates_count']; // Get total count
+}
+
+$stmt_accepted->close();
+
 
 //posted Jobs List
 $query_posted_jobs = "SELECT Name, Field, Posted_Date, Deadline, Status, Salary, Description
@@ -102,6 +124,14 @@ $con->close();
                 <p id="shortlisted-candidates-count">
                     <?php
                     echo htmlspecialchars($total_shortlisted);
+                    ?>
+                </p>
+            </div>
+            <div class="job_card">
+                <h3>Accepted Candidates</h3>
+                <p id="accepted-candidates-count">
+                    <?php
+                    echo htmlspecialchars($total_accepted);
                     ?>
                 </p>
             </div>
