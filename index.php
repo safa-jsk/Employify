@@ -84,7 +84,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
             <a href="#" class="close-btn">&times;</a>
             <h4 style="margin-bottom: 10px;">Login</h4>
             <form action="login.php" method="POST">
-                <input type="email" name="username" placeholder="Username" required>
+                <input type="email" name="username" placeholder="Username" required title="Email">
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit" name="login">Login</button>
                 <div class="password-links">
@@ -115,7 +115,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
             <a href="#" class="close-btn">&times;</a>
             <h4 style="margin-bottom: 10px;">Register</h4>
             <form action="js_register.php" method="POST">
-                <input type="text" name="s_id" placeholder="Username" required>
+                <input type="text" name="s_id" placeholder="Username" required maxlength="12">
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <select name="gender" required>
@@ -127,9 +127,11 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="text" name="contact_number" placeholder="Contact Number" required>
-                <input type="text" name="experience" placeholder="Experience">
-                <input type="text" name="education" placeholder="Education">
-                <input type="text" name="skills" placeholder="Skills">
+                <input type="text" name="experience" placeholder="Experience"
+                    title="Please enter your experience in years">
+                <input type="text" name="education" placeholder="Education"
+                    title="Please enter all educational degrees earned e.g. SSC, HSC, Bachelors, Masters, PhD, etc.">
+                <input type="text" name="skills" placeholder="Skills" title="Separate Skills using commas(,).">
                 <button type="submit" name="register_js">Register</button>
             </form>
         </div>
@@ -140,7 +142,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
             <a href="#" class="close-btn">&times;</a>
             <form action="e_register.php" method="POST">
                 <h4 style="margin-bottom: 10px;">Register</h4>
-                <input type="text" name="r_id" placeholder="Username" required>
+                <input type="text" name="r_id" placeholder="Username" required maxlength="12">
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <select name="gender" required>
@@ -195,36 +197,36 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
         });
     </script>
 
-        <h5>Explore</h5>
-        <div class="feature-section-container" id="about">
-            <div class="image-grid">
-                <div class="image-item">
-                    <img src="images/about1.jpg" alt="Team Group">
-                </div>
-                <div class="image-item">
-                    <img src="images/about2.jpg" alt="Business Meeting">
-                </div>
-                <div class="image-item">
-                    <img src="images/about3.jpg" alt="Team Discussion">
-                </div>
-                <div class="image-item">
-                    <img src="images/about4.jpg" alt="Team Discussion">
-                </div>
+    <h5>Explore</h5>
+    <div class="feature-section-container" id="about">
+        <div class="image-grid">
+            <div class="image-item">
+                <img src="images/about1.jpg" alt="Team Group">
             </div>
-            <div class="content" id="about">
-                <h2>We Help To Get The Best Job And Find A Talent</h2>
-                <p>Find your next opportunity with ease on <strong> Employify!</strong><br>
-                    Explore a wide range of job listings across various industries,
-                    connect with top employers, and apply in just a few clicks.
-                </p>
-                <ul id="services">
-                    <ul><i class="material-icons">check_circle</i> Search your preferred Jobs</ul>
-                    <ul><i class="material-icons">check_circle</i> Easy to Manage Jobs</ul>
-                    <ul><i class="material-icons">check_circle</i> Top Careers</ul>
-                    <ul><i class="material-icons">check_circle</i> Search Expert Candidates</ul>
-                </ul>
+            <div class="image-item">
+                <img src="images/about2.jpg" alt="Business Meeting">
+            </div>
+            <div class="image-item">
+                <img src="images/about3.jpg" alt="Team Discussion">
+            </div>
+            <div class="image-item">
+                <img src="images/about4.jpg" alt="Team Discussion">
             </div>
         </div>
+        <div class="content" id="about">
+            <h2>We Help To Get The Best Job And Find A Talent</h2>
+            <p>Find your next opportunity with ease on <strong> Employify!</strong><br>
+                Explore a wide range of job listings across various industries,
+                connect with top employers, and apply in just a few clicks.
+            </p>
+            <ul id="services">
+                <ul><i class="material-icons">check_circle</i> Search your preferred Jobs</ul>
+                <ul><i class="material-icons">check_circle</i> Easy to Manage Jobs</ul>
+                <ul><i class="material-icons">check_circle</i> Top Careers</ul>
+                <ul><i class="material-icons">check_circle</i> Search Expert Candidates</ul>
+            </ul>
+        </div>
+    </div>
     <div class="contact-sections" id="contact">
         <h5>Contact For Any Query</h5>
         <div class="contact-info">
@@ -255,8 +257,8 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                         <input type="email" placeholder="Your Email" required>
                         <input type="text" placeholder="Subject" required>
                     </div>
-                        <textarea placeholder="Message" rows="5"></textarea>
-                        <button type="submit" class="btn-primary">Send Message</button>
+                    <textarea placeholder="Message" rows="5"></textarea>
+                    <button type="submit" class="btn-primary">Send Message</button>
                 </form>
             </div>
         </div>
