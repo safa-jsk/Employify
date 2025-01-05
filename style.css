@@ -893,7 +893,7 @@ textarea {
 
 .filtered-section th,
 .filtered-section td {
-  text-align: left;
+  text-align: center;
   padding: 12px 15px;
   border-bottom: 1px solid #ddd;
 }

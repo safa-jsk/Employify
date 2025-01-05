@@ -1,24 +1,9 @@
 <?php
 session_start();
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
+require_once 'DBconnect.php'; // use $con
 
-// Allow access to index.php without redirecting based on the session
-if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
-    if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
-        // Redirect based on the role
-        if ($_SESSION['role'] === 'job_seeker') {
-            header("Location: js_dashboard.php"); // Job seeker dashboard
-            exit();
-        } elseif ($_SESSION['role'] === 'employer') {
-            header("Location: e_dashboard.php"); // Employer dashboard
-            exit();
-        } elseif ($_SESSION['role'] === 'admin') {
-            header("Location: admin_panel.php"); // Admin dashboard
-            exit();
-        } else {
-            echo "<script>alert('Unknown role. Please contact admin.');</script>";
-        }
-    }
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -251,14 +236,14 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                 </iframe>
             </div>
             <div class="form-container">
-                <form>
+                <form action="feedback.php" method="POST">
                     <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                        <input type="email" placeholder="Your Email" required>
-                        <input type="text" placeholder="Subject" required>
+                        <input type="text" placeholder="Your Name" required name="name">
+                        <input type="email" placeholder="Your Email" required name="email">
+                        <input type="text" placeholder="Subject" required name="subject">
                     </div>
-                    <textarea placeholder="Message" rows="5"></textarea>
-                    <button type="submit" class="btn-primary">Send Message</button>
+                    <textarea placeholder="Message" rows="5" name="message"></textarea>
+                    <button type="submit" class="btn-primary" name="feedback">Send Message</button>
                 </form>
             </div>
         </div>
