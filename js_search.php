@@ -64,9 +64,9 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                         <th>Deadline</th>
                         <th>Field</th>
                         <th>Salary</th>
-                        <th>Description</th>
                         <th>Apply</th>
                         <th>Bookmark</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,7 +122,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                     $result = $stmt->get_result();
                     ?>
 
-                <tbody>
+                <tbody> 
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($items = $result->fetch_assoc()): ?>
                             <tr>
@@ -132,7 +132,6 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                                 <td><?= htmlspecialchars($items['Deadline']); ?></td>
                                 <td><?= htmlspecialchars($items['Field']); ?></td>
                                 <td><?= htmlspecialchars($items['Salary']); ?></td>
-                                <td><?= htmlspecialchars($items['Description']); ?></td>
                                 <!-- Apply Button -->
                                 <td>
                                     <?php if ($items['has_applied'] > 0): ?>
@@ -154,6 +153,9 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 
                                     <?php endif; ?>
                                 </td>
+                                <td>
+                                    <button class="details-button" type="button" data-job='<?= json_encode($items); ?>'>Details</button>
+                                </td>
 
                             </tr>
                         <?php endwhile; ?>
@@ -173,12 +175,51 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
             </table>
 
     </main>
-    <?php
-    if (isset($_GET['message']) && !empty($_GET['message'])) {
-        $message = htmlspecialchars($_GET['message']);
-        echo "<script> alert('$message'); </script>";
-    }
-    ?>
-</body>
+    <!-- Job Details Popup -->
+    <div id="jobDetailsPopup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <a href="#" class="close-btn">&times;</a>
+            <h4>Job Details</h4>
+            <div id="jobDetailsContent">
+                <!-- Job details will be dynamically populated here -->
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // Close popups when clicking outside
+        window.onclick = function(event) {
+            const modals = ['jobDetailsPopup'];
+            modals.forEach((id) => {
+                const modal = document.getElementById(id);
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        };
+
+        // Function to open popups when links are clicked
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const modal = document.getElementById(targetId);
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close popup when close button is clicked
+        document.querySelectorAll('.close-btn').forEach((btn) => {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const popup = this.closest('.popup');
+                if (popup) {
+                    popup.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
 </html>
