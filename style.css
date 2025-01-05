@@ -213,6 +213,9 @@ a:hover {
 /* Display when targeted */
 .popup:target {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 78px;
 }
 
 /* Popup Content Styling */
