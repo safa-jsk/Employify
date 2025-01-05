@@ -473,6 +473,20 @@ input[type="date"] {
   border-radius: 5px;
 }
 
+.job-recommendation-container {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+.job-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.job-details {
+  margin-top: 10px;
+}
+
 /* Applied and Bookmarked Jobs List */
 #applied-jobs-list,
 #bookmarked-jobs-list {
@@ -741,7 +755,7 @@ textarea {
 
 .job-container {
   width: 100%;
-  max-width: 1140px; /* Adjust this value for your desired container width */
+  max-width: 1140px;
   margin-left: 250px;
   margin-right: auto;
   padding-left: 15px;
