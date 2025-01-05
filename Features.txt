@@ -14,6 +14,7 @@ Safa
 	Employer Shortlist Accept and Reject
 	Job Seeker Apply & Bookmark Job
 	Job Seeker Search Jobs
+	Filter Applied Candidates by Job and Either Skill, Experience, Education
 
 Saadat
 	Employer and Seeker Account (SEE and EDIT)
