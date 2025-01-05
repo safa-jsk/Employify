@@ -10,26 +10,17 @@ body {
   padding: 0;
   width: -webkit-fill-available;
   height: fit-content;
-  font-family: "Poppins", sans-serif;
+  font-family: "Noto Sans", serif;
+  font-size: 17px;
   color: #100727;
-  /* background: url(../images/index_bg.jpg) no-repeat center center fixed; */
   z-index: -1;
   backdrop-filter: blur(2px);
   position: relative;
 }
 
-/* .background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 'images/index_bg.png'; 
-  background-size: cover;
-  background-position: center;
-  filter: blur(8px); /* Adjust the blur intensity */
-/* z-index: -1; /* Ensures it stays in the background */
-/* } */
+h2{
+  margin-bottom: 15px;
+}
 
 a {
   color: black;
@@ -141,16 +132,6 @@ a:hover {
 
 .dropdown:hover .dropdown-content {
   display: block;
-}
-
-/* Main Container index page */
-.index-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 50px 30px;
 }
 
 /* body Section - index page */
@@ -573,16 +554,16 @@ td {
 }
 
 .status.on-hold {
-  background-color: #ffc107; /* Yellow */
+  background-color: #ffc107; 
   color: #000;
 }
 
 .status.rejected {
-  background-color: #dc3545; /* Red */
+  background-color: #dc3545; 
 }
 
 .status.accepted {
-  background-color: #28a745; /* Green */
+  background-color: #28a745; 
   text-decoration: none;
 }
 
@@ -874,7 +855,7 @@ textarea {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
-  margin: 0; /* Remove extra margin */
+  margin: 0; 
 }
 
 /* Filter Button Styling */
@@ -897,7 +878,7 @@ textarea {
 /* Filtered Section Styling */
 .filtered-section {
   width: 100%;
-  overflow-x: auto; /* Handles table overflow */
+  overflow-x: auto; 
   background: #fff;
   border-radius: 5px;
 }
@@ -998,7 +979,6 @@ textarea {
 }
 
 
-
 /* Edit Job Button */
 /* General Button Styles */
 .btn {
@@ -1048,7 +1028,6 @@ textarea {
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
 }
 
-/* Disabled State */
 .btn:disabled {
     background-color: #e9ecef;
     color: #6c757d;
@@ -1056,19 +1035,15 @@ textarea {
     opacity: 0.65;
 }
 
-/* Rounded Button Variation */
 .btn-rounded {
     border-radius: 50px;
 }
 
-/* Full-Width Button Variation */
 .btn-block {
     display: block;
     width: 100%;
 }
 
-
-/* Edit Job Form */
 .mb-3 {
-    margin-bottom: 1rem; /* 16px */
+    margin-bottom: 1rem; 
 }
