@@ -30,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     $description = $_POST['Description'];
     $status = isset($_POST['Status']) ? 1 : 0;
 
-    $update_query = "UPDATE applications SET Name = ?, Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
+    $update_query = "UPDATE applications 
+                        SET Name = ?, Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
     $stmt_update = $con->prepare($update_query);
     $stmt_update->bind_param("sssssss", $name, $field, $deadline, $salary, $description, $status, $A_id);
     $stmt_update->execute();
@@ -79,7 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
             <tbody>
                 <?php while ($row = $result_posted_jobs->fetch_assoc()): ?>
                     <?php
-                    $query_total_applicants = "SELECT COUNT(*) AS total_applicants FROM seeker_seeks WHERE A_id = ?";
+                    $query_total_applicants = "SELECT COUNT(*) AS total_applicants FROM seeker_seeks 
+                                                WHERE A_id = ?";
                     $stmt_total_applicants = $con->prepare($query_total_applicants);
                     $stmt_total_applicants->bind_param("s", $row['A_id']);
                     $stmt_total_applicants->execute();

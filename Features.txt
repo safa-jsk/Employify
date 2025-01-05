@@ -21,3 +21,5 @@ Saadat
 	Change Password
 	Employer Edit & Remove Job
 	Job Seeker Remove Bookmark
+	FeedBack System
+	View_job_details_button
