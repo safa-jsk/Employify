@@ -52,8 +52,9 @@ if (isset($_GET['delete']) && $_GET['delete']) {
 <body>
     <?php include 'includes/a_navbar.php'; ?>
     <?php include 'includes/a_sidebar.php'; ?>
-
+    
     <main class="search-container">
+        <h3>Feedbacks</h3>
         <form action="a_feedback.php" method="GET" class="search-form">
             <input type="text" name="query" placeholder="Search for feedback" class="search-input"
                 value="<?php echo htmlspecialchars($search_query); ?>">
