@@ -16,13 +16,15 @@ if (isset($_GET['A_id']) && isset($_GET['S_id']) && is_numeric($_GET['A_id'])) {
     $recruiter_id = $_SESSION['username'];
 
     // Check if the recruiter owns the job
-    $ownership_check = $con->prepare("SELECT 1 FROM applications WHERE A_id = ? AND R_id = ?");
+    $ownership_check = $con->prepare("SELECT 1 FROM applications 
+                                    WHERE A_id = ? AND R_id = ?");
     $ownership_check->bind_param("is", $application_id, $recruiter_id);
     $ownership_check->execute();
     $ownership_result = $ownership_check->get_result();
 
     // Check if already shortlisted
-    $shortlist_check = $con->prepare("SELECT 1 FROM recruiter_shortlist WHERE R_id = ? AND A_id = ? AND S_id = ?");
+    $shortlist_check = $con->prepare("SELECT 1 FROM recruiter_shortlist 
+                                    WHERE R_id = ? AND A_id = ? AND S_id = ?");
     $shortlist_check->bind_param("sis", $recruiter_id, $application_id, $seeker_id);
     $shortlist_check->execute();
     $shortlist_result = $shortlist_check->get_result();
@@ -34,7 +36,8 @@ if (isset($_GET['A_id']) && isset($_GET['S_id']) && is_numeric($_GET['A_id'])) {
 
     if ($ownership_result->num_rows > 0) {
         // Add to the shortlist table
-        $shortlist_stmt = $con->prepare("INSERT INTO recruiter_shortlist (R_id, A_id, S_id) VALUES (?, ?, ?)");
+        $shortlist_stmt = $con->prepare("INSERT INTO recruiter_shortlist (R_id, A_id, S_id) 
+                                        VALUES (?, ?, ?)");
         $shortlist_stmt->bind_param("sis", $recruiter_id, $application_id, $seeker_id);
 
         if ($shortlist_stmt->execute()) {

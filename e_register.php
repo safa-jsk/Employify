@@ -28,8 +28,8 @@ if (isset($_POST['e_register'])) {
     } else {
         // Checking if email already exists
         $stmt = $con->prepare("SELECT Email from seeker WHERE Email = ?
-                            UNION
-                            SELECT Email from recruiter WHERE Email = ?");
+                                UNION
+                                SELECT Email from recruiter WHERE Email = ?");
         $stmt->bind_param("ss", $email, $email);
         $stmt->execute();
         $stmt->store_result();

@@ -19,7 +19,9 @@ if (!$A_id || !$S_id) {
 }
 
 // Remove the candidate from the shortlist table without changing their status
-$reject_query = $con->prepare("UPDATE seeker_seeks SET Status = 0 WHERE A_id = ? AND S_id = ?");
+$reject_query = $con->prepare("UPDATE seeker_seeks 
+                                SET Status = 0 
+                                WHERE A_id = ? AND S_id = ?");
 $reject_query->bind_param("is", $A_id, $S_id);
 
 if ($reject_query->execute()) {
