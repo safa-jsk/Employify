@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['js_edit'])) {
 
     // Prepare the SQL update query
     $stmt = $con->prepare("UPDATE seeker 
-              SET FName = ?, LName = ?, Email = ?, Skills = ?, Experience = ?, Education = ?, DoB = ? , Contact = ? 
-              WHERE S_id = ?");
+                            SET FName = ?, LName = ?, Email = ?, Skills = ?, Experience = ?, Education = ?, DoB = ? , Contact = ? 
+                            WHERE S_id = ?");
     $stmt->bind_param("sssssssss", $fname, $lname, $email, $skills, $experience, $education, $dob, $contact, $user_id);
 
     // Execute the query

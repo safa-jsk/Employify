@@ -12,7 +12,8 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 
 // Fetch job seeker data
 $username = $_SESSION['username'];
-$stmt = $con->prepare("SELECT FName, LName, Email, Skills, Experience, Education, DoB, Contact FROM seeker WHERE S_id = ?");
+$stmt = $con->prepare("SELECT FName, LName, Email, Skills, Experience, Education, DoB, Contact 
+                        FROM seeker WHERE S_id = ?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
