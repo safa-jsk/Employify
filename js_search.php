@@ -78,11 +78,11 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 
                     // Prepare query with additional checks for applied and bookmarked jobs
                     $query = "SELECT a.*, r.CName, 
-                                  (SELECT COUNT(*) FROM seeker_seeks ss WHERE ss.S_id = ? AND ss.A_id = a.A_id) AS has_applied,
-                                  (SELECT COUNT(*) FROM seeker_bookmarks sb WHERE sb.S_id = ? AND sb.A_id = a.A_id) AS is_bookmarked
-                                  FROM applications a 
-                                  INNER JOIN recruiter r ON a.R_id = r.R_id 
-                                  WHERE a.Status=1";
+                                    (SELECT COUNT(*) FROM seeker_seeks ss WHERE ss.S_id = ? AND ss.A_id = a.A_id) AS has_applied,
+                                    (SELECT COUNT(*) FROM seeker_bookmarks sb WHERE sb.S_id = ? AND sb.A_id = a.A_id) AS is_bookmarked
+                                    FROM applications a 
+                                    INNER JOIN recruiter r ON a.R_id = r.R_id 
+                                    WHERE 1=1";
 
                     $params = [$username, $username];
                     $types = "ss";
@@ -153,9 +153,11 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 
                                     <?php endif; ?>
                                 </td>
+                                
                                 <td>
-                                    <button class="details-button" type="button" data-job='<?= json_encode($items); ?>'>Details</button>
+                                    <a href="?A_id=<?= $items['A_id']; ?>#jobDetailsPopup" class="view-button">Details</a>
                                 </td>
+                                
 
                             </tr>
                         <?php endwhile; ?>
@@ -164,36 +166,65 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                             <td colspan="9">No Record Found</td>
                         </tr>
                     <?php endif; ?>
+
                 </tbody>
 
                 <?php
                 $stmt->close();
-                $con->close();
                 ?>
 
                 </tbody>
             </table>
+        </div>
+        
+    <!-- Popup Modal for view profile -->
+    <?php if (isset($_GET['A_id']) && !empty($_GET['A_id'])): ?>
+        <div id="jobDetailsPopup" class="view_job_popup">
+            <div class="view_job_popup-content">
+                <a href="#" class="view_job_close-btn">&times;</a>
+                
+                <?php
+                    $A_id = intval($_GET['A_id']);
+                    $stmt = $con->prepare("SELECT A.*, R.CName FROM applications A INNER JOIN recruiter R ON A.R_id = R.R_id WHERE A.A_id = ?");
+                    $stmt->bind_param("i", $A_id);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0):
+                        $job = $result->fetch_assoc();
+                ?>
+                <div class="view_job_profile-details">
+                    <h2>Job Details</h2>
+                    <p><strong>ID:</strong> <?= htmlspecialchars($job["A_id"]); ?></p>
+                    <p><strong>Name:</strong> <?= htmlspecialchars($job["Name"]); ?></p>
+                    <p><strong>Company:</strong> <?= htmlspecialchars($job["CName"]); ?></p>
+                    <p><strong>Deadline:</strong> <?= htmlspecialchars($job["Deadline"]); ?></p>
+                    <p><strong>Field:</strong> <?= htmlspecialchars($job["Field"]); ?></p>
+                    <p><strong>Salary:</strong> <?= htmlspecialchars($job["Salary"]); ?></p>
+                    <p><strong>Description:</strong> <?= htmlspecialchars($job["Description"]); ?></p>
+                </div>
 
-    </main>
-    <!-- Job Details Popup -->
-    <div id="jobDetailsPopup" class="popup" style="display: none;">
-        <div class="popup-content">
-            <a href="#" class="close-btn">&times;</a>
-            <h4>Job Details</h4>
-            <div id="jobDetailsContent">
-                <!-- Job details will be dynamically populated here -->
+            <?php else: ?>
+                <p>Profile not found.</p>
+            <?php
+                    endif;
+                    $stmt->close();
+            ?>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
+    </main>
+                    
 
-    <script>
+        <script>
         // Close popups when clicking outside
         window.onclick = function(event) {
             const modals = ['jobDetailsPopup'];
             modals.forEach((id) => {
                 const modal = document.getElementById(id);
-                if (event.target === modal) {
+                if (modal && event.target === modal) {
                     modal.style.display = "none";
+                    // Remove the hash from the URL
+                    history.pushState("", document.title, window.location.pathname);
                 }
             });
         };
@@ -206,17 +237,21 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                 const modal = document.getElementById(targetId);
                 if (modal) {
                     modal.style.display = 'flex';
+                    // Update the URL with the modal id (hash)
+                    history.pushState(null, '', '#' + targetId);
                 }
             });
         });
 
         // Close popup when close button is clicked
-        document.querySelectorAll('.close-btn').forEach((btn) => {
+        document.querySelectorAll('.view_job_close-btn').forEach((btn) => {
             btn.addEventListener('click', function(event) {
                 event.preventDefault();
-                const popup = this.closest('.popup');
+                const popup = this.closest('.view_job_popup');
                 if (popup) {
                     popup.style.display = 'none';
+                    // Remove the hash from the URL
+                    history.pushState("", document.title, window.location.pathname);
                 }
             });
         });
