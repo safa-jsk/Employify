@@ -138,10 +138,10 @@ $con->close();
         </div>
 
         <!-- Section 2: Applied Jobs List -->
-        <div class="dashboard_section" id="posted-jobs-section">
-            <h2>Posted Jobs</h2>
+        <h2>Posted Jobs</h2>
+        <div class="dashboard_section scrollable" id="posted-jobs-section">
             <?php if ($result_posted_jobs->num_rows > 0): ?>
-                <table class="posted-jobs-list">
+                <table class="posted-jobs-list" >
                     <thead>
                         <tr>
                             <th>Job Name</th>

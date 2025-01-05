@@ -12,7 +12,10 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 $recruiter_id = $_SESSION['username'];
 
 // Fetch jobs posted by recruiter
-$jobs_query = $con->prepare("SELECT A_id, Name FROM applications WHERE R_id = ?");
+$jobs_query = $con->prepare("SELECT A_id, Name 
+                            FROM applications 
+                            WHERE R_id = ?");
+
 $jobs_query->bind_param("s", $recruiter_id);
 $jobs_query->execute();
 $jobs_result = $jobs_query->get_result();

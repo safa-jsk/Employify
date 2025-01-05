@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Insert job details into the database
     $stmt = $con->prepare("INSERT INTO applications (A_id, Name, R_id, Deadline, Field, Description, Salary)
-         VALUES (?, ?, ?, ?, ?, ?, ?)");
+                            VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("isssssi", $A_id, $name, $recruiter_id, $deadline, $field, $description, $salary);
 
     if ($stmt->execute()) {
