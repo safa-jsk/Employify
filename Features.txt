@@ -1,0 +1,22 @@
+Features
+
+Maliha
+	Employer Applied Candidates (Shortlist and Reject)
+	Employer and Seeker Dashboard
+	Employer Profile View
+	Employer Search Candidates
+	Forgot Password
+	Responsive Buttons (READ Query)
+
+Safa
+	Admin Panel
+	Employer Post Job
+	Employer Shortlist Accept and Reject
+	Job Seeker Apply & Bookmark Job
+	Job Seeker Search Jobs
+
+Saadat
+	Employer and Seeker Account (SEE and EDIT)
+	Change Password
+	Employer Edit & Remove Job
+	Job Seeker Remove Bookmark
