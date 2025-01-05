@@ -25,12 +25,6 @@ $update_query->bind_param("is", $job_id, $seeker_id);
 $update_query->execute();
 
 if ($update_query->affected_rows > 0) {
-    // Remove from shortlist after acceptance
-    $remove_query = $con->prepare("DELETE FROM recruiter_shortlist WHERE A_id = ? AND S_id = ?");
-    $remove_query->bind_param("is", $job_id, $seeker_id);
-    $remove_query->execute();
-    $remove_query->close();
-
     header("Location: e_shortlisted.php?success=candidate_accepted");
 } else {
     header("Location: e_shortlisted.php?error=acceptation_failed");
@@ -39,4 +33,3 @@ if ($update_query->affected_rows > 0) {
 $update_query->close();
 $con->close();
 exit;
-?>

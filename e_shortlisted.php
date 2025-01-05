@@ -100,7 +100,7 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                         <th>Deadline</th>
                         <th>Profile</th>
                         <th>Accept</th>
-                        <th>Remove</th>
+                        <th>Reject</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,12 +122,12 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                                 <?php endif; ?>
                             </td>
                             <td>
-                            <?php if ($row['Status'] == "0"): ?>
-                                <button class="applied-button" disabled>Rejected</button>
-                            <?php else: ?>
-                                <a href="e_shortlist_reject.php?A_id=<?= $row['A_id']; ?>&S_id=<?= $row['S_id']; ?>"
-                                    class="status rejected">Reject</a>
-                            <?php endif; ?>
+                                <?php if ($row['Status'] == "0"): ?>
+                                    <button class="applied-button" disabled>Rejected</button>
+                                <?php else: ?>
+                                    <a href="e_shortlist_reject.php?A_id=<?= $row['A_id']; ?>&S_id=<?= $row['S_id']; ?>"
+                                        class="status rejected">Reject</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endwhile; ?>

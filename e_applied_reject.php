@@ -19,21 +19,17 @@ if (!$A_id || !$S_id) {
 }
 
 // Remove the candidate from the shortlist table without changing their status
-$remove_shortlist_query = $con->prepare("
-    DELETE FROM recruiter_shortlist 
-    WHERE A_id = ? AND S_id = ? AND R_id = ?
-");
-$remove_shortlist_query->bind_param("sis", $A_id, $S_id, $recruiter_id);
+$reject_query = $con->prepare("UPDATE seeker_seeks SET Status = 0 WHERE A_id = ? AND S_id = ?");
+$reject_query->bind_param("is", $A_id, $S_id);
 
-if ($remove_shortlist_query->execute()) {
-    header("Location: e_applied.php?success=removed_from_shortlist");
+if ($reject_query->execute()) {
+    header("Location: e_applied.php?success=applicant_rejected");
     exit;
 } else {
     error_log("MySQL Error: " . $con->error); // Log the error for debugging
-    header("Location: e_applied.php?error=remove_failed");
+    header("Location: e_applied.php?error=rejection_failed");
     exit;
 }
 
-$remove_shortlist_query->close();
+$reject_query->close();
 mysqli_close($con);
-?>

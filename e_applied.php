@@ -21,32 +21,26 @@ $filter_job_id = $_GET['job_id'] ?? 'all';
 
 // Fetch candidates
 if ($filter_job_id === 'all') {
-    $candidates_query = $con->prepare("
-        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) AS SeekerName, a.Name AS JobName,
-               ss.Applied_Date, ss.Status,
-               CASE WHEN EXISTS (
-                   SELECT 1 FROM recruiter_shortlist rs 
-                   WHERE rs.S_id = ss.S_id AND rs.A_id = ss.A_id AND rs.R_id = ?
-               ) THEN 1 ELSE 0 END AS IsShortlisted
-        FROM seeker_seeks ss
-        JOIN seeker s ON ss.S_id = s.S_id
-        JOIN applications a ON ss.A_id = a.A_id
-        WHERE a.R_id = ?
-    ");
+    $candidates_query = $con->prepare("SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) AS SeekerName, s.Skills, a.Name AS JobName, ss.Applied_Date, ss.Status,
+                                        CASE WHEN EXISTS (
+                                        SELECT 1 FROM recruiter_shortlist rs 
+                                        WHERE rs.S_id = ss.S_id AND rs.A_id = ss.A_id AND rs.R_id = ?
+                                        ) THEN 1 ELSE 0 END AS IsShortlisted
+                                    FROM seeker_seeks ss
+                                    JOIN seeker s ON ss.S_id = s.S_id
+                                    JOIN applications a ON ss.A_id = a.A_id
+                                    WHERE a.R_id = ?");
     $candidates_query->bind_param("ss", $recruiter_id, $recruiter_id);
 } else {
-    $candidates_query = $con->prepare("
-        SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) AS SeekerName, a.Name AS JobName,
-               ss.Applied_Date, ss.Status,
-               CASE WHEN EXISTS (
-                   SELECT 1 FROM recruiter_shortlist rs 
-                   WHERE rs.S_id = ss.S_id AND rs.A_id = ss.A_id AND rs.R_id = ?
-               ) THEN 1 ELSE 0 END AS IsShortlisted
-        FROM seeker_seeks ss
-        JOIN seeker s ON ss.S_id = s.S_id
-        JOIN applications a ON ss.A_id = a.A_id
-        WHERE a.R_id = ? AND ss.A_id = ?
-    ");
+    $candidates_query = $con->prepare("SELECT ss.S_id, ss.A_id, CONCAT(s.FName, ' ', s.LName) AS SeekerName, s.Skills, a.Name AS JobName, ss.Applied_Date, ss.Status,
+                                            CASE WHEN EXISTS (
+                                                SELECT 1 FROM recruiter_shortlist rs 
+                                                WHERE rs.S_id = ss.S_id AND rs.A_id = ss.A_id AND rs.R_id = ?
+                                            ) THEN 1 ELSE 0 END AS IsShortlisted
+                                    FROM seeker_seeks ss
+                                    JOIN seeker s ON ss.S_id = s.S_id
+                                    JOIN applications a ON ss.A_id = a.A_id
+                                    WHERE a.R_id = ? AND ss.A_id = ?");
     $candidates_query->bind_param("ssi", $recruiter_id, $recruiter_id, $filter_job_id);
 }
 $candidates_query->execute();
@@ -92,9 +86,10 @@ $candidates_result = $candidates_query->get_result();
                 <tr>
                     <th>Job Name</th>
                     <th>Candidate Name</th>
+                    <th>Skills</th>
                     <th>Status</th>
                     <th>Shortlist</th>
-                    <th>Remove</th>
+                    <th>Reject</th>
                 </tr>
             </thead>
             <tbody>
@@ -102,15 +97,17 @@ $candidates_result = $candidates_query->get_result();
                     <tr>
                         <td><?= htmlspecialchars($candidate['JobName']) ?></td>
                         <td><?= htmlspecialchars($candidate['SeekerName']) ?></td>
+                        <td><?= htmlspecialchars($candidate['Skills']) ?></td>
                         <td>
                             <?php
-                            if ($candidate['Status'] == 0) {
-                                echo 'Rejected';
-                            }elseif ($candidate['Status'] == 1){
+                            if (is_null($candidate['Status'])) {
+                                echo 'On-Hold';
+                            } elseif ($candidate['Status'] == 1) {
                                 echo 'Accepted';
+                            } elseif ($candidate['Status'] == 0) {
+                                echo 'Rejected';
                             } else {
                                 echo 'Shortlisted';
-                                
                             }
                             ?>
                         </td>
@@ -118,15 +115,19 @@ $candidates_result = $candidates_query->get_result();
                         <td>
                             <?php if ($candidate['IsShortlisted']): ?>
                                 <button class="applied-button" disabled>Shortlisted</button>
+                            <?php elseif ((!is_null($candidate['Status']) && $candidate['Status'] == 0)): ?>
+                                <button class="applied-button" disabled>Cannot be Shortlisted</button>
                             <?php else: ?>
                                 <a href="e_shortlist.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
-                                class="status accepted">Shortlist</a>
+                                    class="status accepted">Shortlist</a>
                             <?php endif; ?>
                         </td>
                         <td>
-                            <?php if ($candidate['IsShortlisted']): ?>
-                                <a href="e_applied_remove.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>" 
-                                class="status rejected">Remove</a>
+                            <?php if (!is_null($candidate['Status'])): ?>
+                                <button class="applied-button" disabled>Rejected</button>
+                            <?php else: ?>
+                                <a href="e_applied_reject.php?A_id=<?= $candidate['A_id'] ?>&S_id=<?= $candidate['S_id'] ?>"
+                                    class="status rejected">Reject</a>
                             <?php endif; ?>
                         </td>
                     </tr>
