@@ -41,5 +41,10 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
 }
 
 mysqli_close($con);
-header("Location: js_bookmarks.php?message=" . urlencode($message));
+if ($_SERVER['REQUEST_METHOD'] === 'POST' || $_SERVER['REQUEST_METHOD'] === 'GET') {
+    $criteria = isset($_GET['criteria']) ? $_GET['criteria'] : 'all';
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    header("Location: js_search.php?criteria=" . urlencode($criteria) . "&search=" . urlencode($search) . "&message=" . urlencode($message));
+    exit;
+}
 exit;

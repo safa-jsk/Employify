@@ -138,19 +138,23 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                                     <?php if ($items['has_applied'] > 0): ?>
                                         <button class="applied-button" disabled>Applied</button>
                                     <?php else: ?>
-                                        <a href="js_apply.php?A_id=<?= htmlspecialchars($items['A_id']); ?>" class="search-button"
-                                            name="apply">Apply</a>
+                                        <a href="js_apply.php?A_id=<?= htmlspecialchars($items['A_id']); ?>&criteria=<?= urlencode($criteria); ?>&search=<?= urlencode($search ?? ''); ?>"
+                                            class="search-button" name="apply">Apply</a>
+
                                     <?php endif; ?>
                                 </td>
+
                                 <!-- Bookmark Button -->
                                 <td>
                                     <?php if ($items['is_bookmarked'] > 0): ?>
                                         <button class="applied-button" disabled>Bookmarked</button>
                                     <?php else: ?>
-                                        <a href="js_bookmark.php?A_id=<?= htmlspecialchars($items['A_id']); ?>"
+                                        <a href="js_bookmark.php?A_id=<?= htmlspecialchars($items['A_id']); ?>&criteria=<?= urlencode($criteria); ?>&search=<?= urlencode($search ?? ''); ?>"
                                             class="search-button" name="bookmark">Bookmark</a>
+
                                     <?php endif; ?>
                                 </td>
+
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -169,7 +173,12 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
             </table>
 
     </main>
-
+    <?php
+    if (isset($_GET['message']) && !empty($_GET['message'])) {
+        $message = htmlspecialchars($_GET['message']);
+        echo "<script> alert('$message'); </script>";
+    }
+    ?>
 </body>
 
 </html>
