@@ -5,6 +5,5 @@
         <li><a href="e_applied.php">Applied Candidates</a></li>
         <li><a href="e_shortlisted.php">Shortlisted Candidates</a></li>
         <li><a href="e_search-candidates.php">All Candidates</a></li>
-        <li><a href="e_accepted.php">Accepted Candidates</a></li>
     </ul>
 </aside>
