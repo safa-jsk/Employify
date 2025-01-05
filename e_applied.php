@@ -154,11 +154,11 @@ $candidates_result = $candidates_query->get_result();
                         <td>
                             <?php
                             if (is_null($candidate['Status'])) {
-                                echo 'On-Hold';
+                                echo '<span style="color: #ffbe00;">On-Hold</span>';
                             } elseif ($candidate['Status'] == 1) {
-                                echo 'Accepted';
+                                echo '<span style="color: #009700;">Accepted</span>';
                             } elseif ($candidate['Status'] == 0) {
-                                echo 'Rejected';
+                                echo '<span style="color: #dc3545;">Red</span>';
                             } else {
                                 echo 'Shortlisted';
                             }
