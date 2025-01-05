@@ -21,7 +21,8 @@ if (!isset($_GET['A_id']) || !is_numeric($_GET['A_id'])) {
 $job_id = intval($_GET['A_id']);
 
 // Prepare the SQL statement to delete the job
-$stmt_delete_job = $con->prepare("DELETE FROM applications WHERE A_id = ? AND R_id = ?");
+$stmt_delete_job = $con->prepare("DELETE FROM applications 
+                                WHERE A_id = ? AND R_id = ?");
 
 if (!$stmt_delete_job) {
     die("Error in query preparation: " . $con->error);

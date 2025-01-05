@@ -31,8 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['e_edit'])) {
 
     // Prepare the SQL update query
     $stmt = $con->prepare("UPDATE recruiter 
-              SET FName = ?, LName = ?, Email = ?, CName = ?, CDescription = ?, Contact = ?
-              WHERE R_id = ?");
+                            SET FName = ?, LName = ?, Email = ?, CName = ?, CDescription = ?, Contact = ?
+                            WHERE R_id = ?");
 
     $stmt->bind_param("sssssss", $fname, $lname, $email, $company_name, $company_description, $contact, $user_id);
 
