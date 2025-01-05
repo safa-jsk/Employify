@@ -59,6 +59,85 @@ $result_accepted = $stmt_accepted->get_result();
 $total_accepted = $result_accepted->fetch_assoc()["total_accepted"] ?? 0;
 $stmt_accepted->close();
 
+// Extracting skills for recommendations
+$query_skills = "SELECT Skills FROM seeker WHERE S_id = ?";
+$stmt_skills = $con->prepare($query_skills);
+$stmt_skills->bind_param("s", $username);
+$stmt_skills->execute();
+$result_skills = $stmt_skills->get_result();
+$skillsRow = $result_skills->fetch_assoc();
+$skills = $skillsRow['Skills'] ?? ''; // Skills as a comma-separated string
+
+$skillsArray = array_map('trim', explode(',', $skills)); // Convert to array
+
+// Build query based on skills
+if (!empty($skillsArray)) {
+    $descriptionConditions = [];
+    foreach ($skillsArray as $skill) {
+        $descriptionConditions[] = "A.Description LIKE CONCAT('%', ?, '%')";
+    }
+    $descriptionQueryPart = implode(' OR ', $descriptionConditions);
+
+    $query_recommended = "SELECT DISTINCT A.A_id, A.Name, A.Field, A.deadline
+                          FROM applications A 
+                          JOIN seeker S ON S.S_id = ? 
+                          WHERE A.Status = 1 
+                          AND (FIND_IN_SET(TRIM(A.Field), TRIM(S.Skills)) > 0 
+                               OR ($descriptionQueryPart))
+                          ORDER BY A.Posted_Date DESC;";
+} else {
+    $query_recommended = "SELECT DISTINCT A.A_id, A.Name, A.Field, A.deadline
+                          FROM applications A 
+                          JOIN seeker S ON S.S_id = ? 
+                          WHERE A.Status = 1 
+                          AND FIND_IN_SET(TRIM(A.Field), TRIM(S.Skills)) > 0
+                          ORDER BY A.Posted_Date DESC;";
+}
+
+$stmt_recommended = $con->prepare($query_recommended);
+
+if (!empty($skillsArray)) {
+    $types = str_repeat('s', count($skillsArray) + 1); // 1 for S_id + skills
+    $params = array_merge([$username], $skillsArray);
+    $stmt_recommended->bind_param($types, ...$params);
+} else {
+    $stmt_recommended->bind_param("s", $username);
+}
+
+$stmt_recommended->execute();
+$result_recommended = $stmt_recommended->get_result();
+
+
+// Fetch job details based on the job_id
+$stmt = $con->prepare("SELECT A.A_id, A.Name AS Post, A.Description, A.Salary, A.Deadline, A.Field,
+                       C.CName AS Company, C.Contact, C.Email
+                       FROM applications A
+                       INNER JOIN recruiter C ON A.R_id = C.R_id 
+                       WHERE A.A_id = ? AND A.Status = 1");
+
+if (isset($_GET['data-job-id']) && !empty($_GET['data-job-id'])) {
+    $A_id = $_GET['data-job-id'];
+    $stmt->bind_param("i", $A_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+}
+
+
+if ($result->num_rows > 0) {
+    $job = $result->fetch_assoc();
+
+    $jobTitle = htmlspecialchars($job['Post']);
+    $jobField = htmlspecialchars($job['Field']);
+    $jobSalary = htmlspecialchars($job['Salary']);
+    $jobDeadline = htmlspecialchars($job['Deadline']);
+    $jobDescription = htmlspecialchars($job['Description']);
+    $companyName = htmlspecialchars($job['Company']);
+    $companyContact = htmlspecialchars($job['Contact']);
+    $companyEmail = htmlspecialchars($job['Email']);
+}
+
+$stmt->close();
+
 //Applied Jobs List
 $query_applied_list = "SELECT a.Name, r.CName,a.Deadline, ss.Applied_Date, ss.Status
                        FROM seeker_seeks ss
@@ -132,7 +211,66 @@ $con->close();
             </div>
         </div>
 
-        <!-- Section 2: Applied Jobs List -->
+        <!-- Section 2: Recommended Jobs List Based on Skills -->
+        <h2>Recommended Jobs</h2>
+        <div class="dashboard_section scrollable" id="job-recommendations-section">
+            <table class="job-recommendations">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Field</th>
+                        <th>Deadline</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if ($result_recommended->num_rows > 0): ?>
+                        <?php while ($row = $result_recommended->fetch_assoc()): ?>
+                            <tr>
+                                <td> <?= htmlspecialchars($row['A_id']); ?> </td>
+                                <td> <?= htmlspecialchars($row['Name']); ?> </td>
+                                <td> <?= htmlspecialchars($row['Field']); ?> </td>
+                                <td> <?= htmlspecialchars($row['deadline']); ?> </td>
+                                <td><a href="?data-job-id=<?= $row['A_id']; ?>#jobDetailsModal" class="view-details">View
+                                        Details</a></td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="4">No job recommendations based on your skills.</td>
+                        </tr>
+                    <?php endif; ?>
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Job Details Modal -->
+        <?php if (isset($_GET['data-job-id']) && !empty($_GET['data-job-id'])): ?>
+            <div id="jobDetailsModal" class="popup">
+                <div class="popup-content">
+                <a href="#" class="close-btn">&times;</a>
+                    <?php if (isset($job) && $job): ?>
+                        <div class="comp-info">
+                            <p><strong>Company Name :  </strong> <?= htmlspecialchars($job['Company']); ?></p>
+                            <p><strong>Contact :  </strong><?= htmlspecialchars($job['Contact']); ?></p>
+                            <p><strong>Email :  </strong><?= htmlspecialchars($job['Email']); ?></p>
+                            <p><strong>Post :  </strong><?= htmlspecialchars($job['Post']); ?></p>
+                            <p><strong>Field :  </strong><?= htmlspecialchars($job['Field']); ?></p>
+                            <p><strong>Salary :  </strong><?= htmlspecialchars($job['Salary']); ?></p>
+                            <p><strong>Deadline :  </strong><?= htmlspecialchars($job['Deadline']); ?></p>
+                            <p><strong>Description:  </strong><?= htmlspecialchars($job['Description']); ?></p>
+                        </div>
+                    <?php else: ?>
+                        <p>No job details found.</p>
+                    <?php endif; ?>
+
+                </div>
+            </div>
+        <?php endif; ?>
+
+        <!-- Section 3: Applied Jobs List -->
         <h2>Upcoming Applied Jobs</h2>
         <div class="dashboard_section scrollable" id="applied-jobs-section">
             <table class="applied-jobs-list">
@@ -170,7 +308,7 @@ $con->close();
             </table>
         </div>
 
-        <!-- Section 3: Bookmarks List -->
+        <!-- Section 4: Bookmarks List -->
         <h2>Upcoming Bookmarked Jobs</h2>
         <div class="dashboard_section scrollable" id="bookmarks-section">
             <table class="bookmarked-jobs-list">
@@ -194,8 +332,54 @@ $con->close();
                 </tbody>
             </table>
         </div>
-
     </div>
+
+    <script>
+        // Close popups when clicking outside
+        window.onclick = function(event) {
+            const modals = ['jobDetailsModal'];
+            modals.forEach((id) => {
+                const modal = document.getElementById(id);
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+                // Remove the hash from the URL
+                history.pushState("", document.title, window.location.pathname);
+            });
+        };
+
+        // Function to open popups when links are clicked
+        document.querySelectorAll('a[href^="#"]').forEach((link) => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const modal = document.getElementById(targetId);
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        });
+
+        // Close popup when close button is clicked
+        document.querySelectorAll('.close-btn').forEach((btn) => {
+            btn.addEventListener('click', function(event) {
+                event.preventDefault();
+                const popup = this.closest('.popup');
+                if (popup) {
+                    popup.style.display = 'none';
+                }
+                // Remove the hash from the URL
+                history.pushState("", document.title, window.location.pathname);
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.close-btn').forEach(btn => {
+            btn.addEventListener('click', () => history.pushState("", document.title, window.location.pathname));
+        });
+    </script>
+
 </body>
 
 </html>

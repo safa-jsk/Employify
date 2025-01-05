@@ -82,7 +82,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                                   (SELECT COUNT(*) FROM seeker_bookmarks sb WHERE sb.S_id = ? AND sb.A_id = a.A_id) AS is_bookmarked
                                   FROM applications a 
                                   INNER JOIN recruiter r ON a.R_id = r.R_id 
-                                  WHERE 1=1";
+                                  WHERE a.Status=1";
 
                     $params = [$username, $username];
                     $types = "ss";
