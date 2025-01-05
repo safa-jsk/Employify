@@ -16,7 +16,9 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
     $username = $_SESSION['username'];
 
     // Prepared statement to check if the user has already applied
-    $stmt = $con->prepare("DELETE FROM seeker_bookmarks WHERE S_id = ? AND A_id = ?");
+    $stmt = $con->prepare("DELETE FROM seeker_bookmarks 
+                            WHERE S_id = ? 
+                            AND A_id = ?");
     $stmt->bind_param("si", $username, $application_id);
     $stmt->execute();
     $check_result = $stmt->get_result();

@@ -12,7 +12,9 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
 $search_query = '';
 if (isset($_GET['query'])) {
     $search_query = trim($_GET['query']);
-    $stmt = $con->prepare("SELECT * FROM recruiter WHERE R_id LIKE ? OR FName LIKE ? OR LName LIKE ? OR Email LIKE ? OR CName LIKE ?");
+    $stmt = $con->prepare("SELECT * FROM recruiter 
+                            WHERE R_id LIKE ? OR FName LIKE ? 
+                            OR LName LIKE ? OR Email LIKE ? OR CName LIKE ?");
     $like_query = "%{$search_query}%";
     $stmt->bind_param("sssss", $like_query, $like_query, $like_query, $like_query, $like_query);
 } else {

@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     $description = $_POST['Description'];
     $status = isset($_POST['Status']) ? 1 : 0;
 
-    $update_query = "UPDATE applications SET Name = ?p Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
+    $update_query = "UPDATE applications SET Name = ?, Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
     $stmt_update = $con->prepare($update_query);
     $stmt_update->bind_param("sssssss", $name, $field, $deadline, $salary, $description, $status, $A_id);
     $stmt_update->execute();

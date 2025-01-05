@@ -30,9 +30,9 @@ $stmt_posted->close();
 
 // Shortlisted candidates Count
 $query_shortlisted = "SELECT A_id, COUNT(*) AS shortlisted_candidates_count 
-    FROM recruiter_shortlist 
-    WHERE R_id = ? 
-    GROUP BY A_id";
+                        FROM recruiter_shortlist 
+                        WHERE R_id = ? 
+                        GROUP BY A_id";
 
 $stmt_shortlisted = $con->prepare($query_shortlisted);
 if (!$stmt_shortlisted) {
@@ -63,13 +63,13 @@ if (!$stmt_accepted) {
     die("Error in query preparation: " . $con->error);
 }
 
-$stmt_accepted->bind_param("s", $username); 
+$stmt_accepted->bind_param("s", $username);
 $stmt_accepted->execute();
 $result_accepted = $stmt_accepted->get_result();
 
-$total_accepted = 0; 
+$total_accepted = 0;
 if ($row = $result_accepted->fetch_assoc()) {
-    $total_accepted = $row['accepted_candidates_count']; 
+    $total_accepted = $row['accepted_candidates_count'];
 }
 
 $stmt_accepted->close();
@@ -141,7 +141,7 @@ $con->close();
         <h2>Posted Jobs</h2>
         <div class="dashboard_section scrollable" id="posted-jobs-section">
             <?php if ($result_posted_jobs->num_rows > 0): ?>
-                <table class="posted-jobs-list" >
+                <table class="posted-jobs-list">
                     <thead>
                         <tr>
                             <th>Job Name</th>

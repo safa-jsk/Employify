@@ -20,7 +20,9 @@ if (!$job_id || !$seeker_id) {
 }
 
 // Update seeker status
-$update_query = $con->prepare("UPDATE seeker_seeks SET Status = 1 WHERE A_id = ? AND S_id = ?");
+$update_query = $con->prepare("UPDATE seeker_seeks 
+                                SET Status = 1 
+                                WHERE A_id = ? AND S_id = ?");
 $update_query->bind_param("is", $job_id, $seeker_id);
 $update_query->execute();
 

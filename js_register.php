@@ -31,8 +31,8 @@ if (isset($_POST['register_js'])) {
     } else {
         // Check if email already exists
         $stmt = $con->prepare("SELECT Email from seeker WHERE Email = ?
-                            UNION
-                            SELECT Email from recruiter WHERE Email = ?");
+                                UNION
+                                SELECT Email from recruiter WHERE Email = ?");
         $stmt->bind_param("ss", $email, $email);
         $stmt->execute();
         $stmt->store_result();
@@ -45,7 +45,7 @@ if (isset($_POST['register_js'])) {
 
             // Insert data
             $stmt = $con->prepare("INSERT INTO `seeker` (`S_id`, `FName`, `LName`, `Gender`, `Email`, `Password`, `DoB`, `Experience`, `Education`, `Skills`, `Contact`) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             $stmt->bind_param("sssisssssss", $username, $first_name, $last_name, $gender, $email, $hashed_password, $dob, $experience, $education, $skills, $contact_number);
 

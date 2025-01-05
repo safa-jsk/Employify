@@ -16,7 +16,9 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
     $username = $_SESSION['username'];
 
     // Prepared statement to check if the user has already applied
-    $stmt = $con->prepare("SELECT 1 FROM seeker_bookmarks WHERE S_id = ? AND A_id = ?");
+    $stmt = $con->prepare("SELECT 1 FROM seeker_bookmarks 
+                            WHERE S_id = ? 
+                            AND A_id = ?");
     $stmt->bind_param("si", $username, $application_id);
     $stmt->execute();
     $check_result = $stmt->get_result();
@@ -26,7 +28,8 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
         $message = "You have already bookmarked this job.";
     } else {
         // Prepared statement to insert the application
-        $stmt = $con->prepare("INSERT INTO seeker_bookmarks (S_id, A_id) VALUES (?, ?)");
+        $stmt = $con->prepare("INSERT INTO seeker_bookmarks (S_id, A_id) 
+                                VALUES (?, ?)");
         $stmt->bind_param("si", $username, $application_id);
         if ($stmt->execute()) {
             $message = "Application bookmarked successfully.";

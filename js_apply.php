@@ -16,7 +16,9 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
     $username = $_SESSION['username'];
 
     // Prepared statement to check if the user has already applied
-    $stmt = $con->prepare("SELECT 1 FROM seeker_seeks WHERE S_id = ? AND A_id = ?");
+    $stmt = $con->prepare("SELECT 1 FROM seeker_seeks 
+                            WHERE S_id = ? 
+                            AND A_id = ?");
     $stmt->bind_param("si", $username, $application_id);
     $stmt->execute();
     $check_result = $stmt->get_result();
@@ -26,7 +28,8 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
         $message = "You have already applied for this job.";
     } else {
         // Check if deadline has passed
-        $deadline_stmt = $con->prepare("SELECT Deadline FROM applications WHERE A_id = ?");
+        $deadline_stmt = $con->prepare("SELECT Deadline FROM applications 
+                                        WHERE A_id = ?");
         $deadline_stmt->bind_param("i", $application_id);
         $deadline_stmt->execute();
         $deadline_result = $deadline_stmt->get_result();
@@ -35,7 +38,8 @@ if (isset($_GET['A_id']) && is_numeric($_GET['A_id'])) {
             $message = "The deadline for this job has passed.";
         } else {
             // Prepared statement to insert the application
-            $stmt = $con->prepare("INSERT INTO seeker_seeks (S_id, A_id, Applied_Date) VALUES (?, ?, NOW())");
+            $stmt = $con->prepare("INSERT INTO seeker_seeks (S_id, A_id, Applied_Date) 
+                                    VALUES (?, ?, NOW())");
             $stmt->bind_param("si", $username, $application_id);
             if ($stmt->execute()) {
                 $message = "Application submitted successfully.";

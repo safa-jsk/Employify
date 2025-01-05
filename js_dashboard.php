@@ -13,7 +13,8 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 $username = $_SESSION['username'];
 
 //Applied Jobs Count
-$query_applied = "SELECT COUNT(*) AS applied_jobs_count FROM seeker_seeks WHERE S_id = ?";
+$query_applied = "SELECT COUNT(*) AS applied_jobs_count FROM seeker_seeks 
+                    WHERE S_id = ?";
 $stmt_applied = $con->prepare($query_applied);
 if (!$stmt_applied) {
     die("Error in query preparation: " . $con->error);
@@ -60,7 +61,8 @@ $total_accepted = $result_accepted->fetch_assoc()["total_accepted"] ?? 0;
 $stmt_accepted->close();
 
 // Extracting skills for recommendations
-$query_skills = "SELECT Skills FROM seeker WHERE S_id = ?";
+$query_skills = "SELECT Skills FROM seeker 
+                    WHERE S_id = ?";
 $stmt_skills = $con->prepare($query_skills);
 $stmt_skills->bind_param("s", $username);
 $stmt_skills->execute();

@@ -82,7 +82,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                                     (SELECT COUNT(*) FROM seeker_bookmarks sb WHERE sb.S_id = ? AND sb.A_id = a.A_id) AS is_bookmarked
                                     FROM applications a 
                                     INNER JOIN recruiter r ON a.R_id = r.R_id 
-                                    WHERE 1=1";
+                                    WHERE A.status=1";
 
                     $params = [$username, $username];
                     $types = "ss";
@@ -185,7 +185,9 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                 
                 <?php
                     $A_id = intval($_GET['A_id']);
-                    $stmt = $con->prepare("SELECT A.*, R.CName FROM applications A INNER JOIN recruiter R ON A.R_id = R.R_id WHERE A.A_id = ?");
+                    $stmt = $con->prepare("SELECT A.*, R.CName FROM applications A 
+                                            INNER JOIN recruiter R ON A.R_id = R.R_id 
+                                            WHERE A.A_id = ?");
                     $stmt->bind_param("i", $A_id);
                     $stmt->execute();
                     $result = $stmt->get_result();

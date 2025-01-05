@@ -28,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
     }
 
     // Validate current password
-    $query = $con->prepare("SELECT password FROM recruiter WHERE R_id = ?");
+    $query = $con->prepare("SELECT password 
+                            FROM recruiter 
+                            WHERE R_id = ?");
     $query->bind_param("s", $user_id);
     $query->execute();
     $result = $query->get_result();
