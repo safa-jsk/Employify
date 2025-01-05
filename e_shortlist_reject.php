@@ -10,32 +10,24 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 }
 
 $username = $_SESSION['username'];
-
-$job_id = intval($_GET['A_id']);
-$seeker_id = $_GET['S_id'];
+$A_id = intval($_GET['A_id']);
+$S_id = $_GET['S_id'];
 
 // Prepare the query to reject the candidate
-$stmt_reject_candidate = $con->prepare("DELETE FROM recruiter_shortlist WHERE A_id = ? AND S_id = ? AND R_id = ?");
+$reject_query = $con->prepare("UPDATE seeker_seeks SET Status = 0 WHERE A_id = ? AND S_id = ?");
 
-if (!$stmt_reject_candidate) {
+if (!$reject_query) {
     die("Error in query preparation: " . $con->error);
 }
 
-$stmt_reject_candidate->bind_param("iss", $job_id, $seeker_id, $username);
-$stmt_reject_candidate->execute();
+$reject_query->bind_param("is", $A_id, $S_id);
 
-if ($stmt_reject_candidate->affected_rows > 0) {
-    // Successfully removed
-
-    $stmt = $con->prepare("UPDATE seeker_seeks SET Status = 0 WHERE A_id = ? AND S_id = ?");
-    $stmt->bind_param("is", $job_id, $seeker_id);
-    $stmt->execute();
-
+if ($reject_query->execute()) {
     header("Location: e_shortlisted.php?success=candidate_rejected");
 } else {
     // Failed to remove, candidate might not exist or doesn't belong to the recruiter
     header("Location: e_shortlisted.php?error=rejection_failed");
 }
 
-$stmt_reject_candidate->close();
+$reject_query->close();
 $con->close();

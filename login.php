@@ -8,7 +8,7 @@ if (isset($_POST['login'])) {
     $username = trim($_POST['username']);
     $password = trim($_POST['password']);
 
-    if ($username == "admin@admin.admin" && $password == "ADMIN") {
+    if ($username == "info@employify.com" && $password == "ADMIN") {
         $_SESSION['username'] = "admin";
         $_SESSION['role'] = "admin";
         echo "<script>alert('Welcome to the Admin Panel'); window.location.href='admin_panel.php';</script>";

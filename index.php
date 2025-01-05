@@ -45,18 +45,21 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
-                <li><a href="#" class="contact-btn">Contact</a></li>
+                <li><a href="#">Contact</a></li>
                 <?php if (isset($_SESSION['username']) && isset($_SESSION['role'])): ?>
                     <?php if ($_SESSION['role'] === 'job_seeker'): ?>
-                        <li><a href="js_dashboard.php">Login</a></li>
+                        <li><a href="js_dashboard.php">Dashboard</a></li>
                     <?php elseif ($_SESSION['role'] === 'employer'): ?>
-                        <li><a href="e_dashboard.php">Login</a></li>
+                        <li><a href="e_dashboard.php">Dashboard</a></li>
+                    <?php elseif ($_SESSION['role'] === 'admin'): ?>
+                        <li><a href="admin_panel.php">Admin Panel</a></li>
                     <?php endif; ?>
                 <?php else: ?>
                     <li><a href="#loginModal">Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
+
     </header>
 
     <!-- Home Section -->
@@ -79,7 +82,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
     <div id="loginModal" class="popup">
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
-            <h4>Login</h4>
+            <h4 style="margin-bottom: 10px;">Login</h4>
             <form action="login.php" method="POST">
                 <input type="email" name="username" placeholder="Username" required>
                 <input type="password" name="password" placeholder="Password" required>
@@ -95,7 +98,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
     <div id="forgotPasswordPopup" class="popup">
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
-            <h4>Reset Password</h4>
+            <h4 style="margin-bottom: 10px;">Reset Password</h4>
             <form action="forgot_password.php" method="POST">
                 <input type="email" name="email" placeholder="Enter your Email" required>
                 <input type="password" name="new_password" placeholder="New Password" required>
@@ -110,7 +113,7 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
     <div id="registerJsPopup" class="popup">
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
-            <h4>Register</h4>
+            <h4 style="margin-bottom: 10px;">Register</h4>
             <form action="js_register.php" method="POST">
                 <input type="text" name="s_id" placeholder="Username" required>
                 <input type="text" name="first_name" placeholder="First Name" required>
@@ -135,8 +138,8 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
     <div id="registerEmployerPopup" class="popup">
         <div class="popup-content">
             <a href="#" class="close-btn">&times;</a>
-            <h4>Register</h4>
             <form action="e_register.php" method="POST">
+                <h4 style="margin-bottom: 10px;">Register</h4>
                 <input type="text" name="r_id" placeholder="Username" required>
                 <input type="text" name="first_name" placeholder="First Name" required>
                 <input type="text" name="last_name" placeholder="Last Name" required>

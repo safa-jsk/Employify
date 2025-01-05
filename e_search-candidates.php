@@ -77,7 +77,6 @@ $result = $stmt->get_result();
                 <option value="skills" <?= $filter === 'skills' ? 'selected' : '' ?>>Skills</option>
                 <option value="experience" <?= $filter === 'experience' ? 'selected' : '' ?>>Experience</option>
                 <option value="education" <?= $filter === 'education' ? 'selected' : '' ?>>Education</option>
-                <option value="contact" <?= $filter === 'contact' ? 'selected' : '' ?>>Contact</option>
             </select>
             <input type="text" name="query" placeholder="Search for candidates" class="search-input"
                 value="<?= htmlspecialchars($search_query); ?>">
@@ -105,6 +104,7 @@ $result = $stmt->get_result();
                             <td><?php echo isset($row['Skills']) ? htmlspecialchars($row['Skills']) : ''; ?></td>
                             <td><?php echo isset($row['Experience']) ? htmlspecialchars($row['Experience']) : ''; ?></td>
                             <td><?php echo isset($row['Education']) ? htmlspecialchars($row['Education']) : ''; ?></td>
+                            <td><?php echo isset($row['Contact']) ? htmlspecialchars($row['Contact']) : ''; ?></td>
                         </tr>
                     <?php endwhile; ?>
                 </tbody>

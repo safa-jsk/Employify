@@ -20,6 +20,10 @@ h5 {
     padding-bottom: 0px;
 }
 
+h4{
+    margin-bottom: 10px;
+}
+
 a {
     color: black;
     text-decoration: none;
@@ -360,9 +364,6 @@ footer {
     text-align: left;
 }
 
-.popup .profile-details h4 {
-    margin: 10px 0 5px;
-}
 
 .popup .profile-details p {
     margin: 0;

@@ -21,15 +21,15 @@ $result_jobs = $stmt_jobs->get_result();
 $stmt_jobs->close();
 
 // Fetch shortlisted candidates with optional filters
-$query_shortlisted_candidates = "
-    SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.Field, a.Deadline, 
-           CONCAT(s.FName, ' ', s.LName) AS Seeker_Name, s.Email,
-           ss.Status 
-    FROM recruiter_shortlist sc
-    INNER JOIN applications a ON sc.A_id = a.A_id
-    INNER JOIN seeker s ON sc.S_id = s.S_id
-    LEFT JOIN seeker_seeks ss ON sc.A_id = ss.A_id AND sc.S_id = ss.S_id
-    WHERE sc.R_id = ?";
+$query_shortlisted_candidates = "SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.Field, a.Deadline, 
+                                 CONCAT(s.FName, ' ', s.LName) AS Seeker_Name, s.Email,
+                                 ss.Status 
+                                 FROM recruiter_shortlist sc
+                                 INNER JOIN applications a ON sc.A_id = a.A_id
+                                 INNER JOIN seeker s ON sc.S_id = s.S_id
+                                 LEFT JOIN seeker_seeks ss ON sc.A_id = ss.A_id AND sc.S_id = ss.S_id
+                                 WHERE sc.R_id = ?
+                                 GROUP BY ss.Status";
 
 $parameters = [$username];
 $types = "s";
@@ -100,7 +100,7 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                         <th>Deadline</th>
                         <th>Profile</th>
                         <th>Accept</th>
-                        <th>Remove</th>
+                        <th>Reject</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,8 +122,12 @@ $result_shortlisted_candidates = $stmt_shortlisted_candidates->get_result();
                                 <?php endif; ?>
                             </td>
                             <td>
-                                <a href="e_shortlist_remove.php?A_id=<?= $row['A_id']; ?>&S_id=<?= $row['S_id']; ?>"
-                                    class="status rejected">Remove</a>
+                                <?php if ($row['Status'] == "0"): ?>
+                                    <button class="applied-button" disabled>Rejected</button>
+                                <?php else: ?>
+                                    <a href="e_shortlist_reject.php?A_id=<?= $row['A_id']; ?>&S_id=<?= $row['S_id']; ?>"
+                                        class="status rejected">Reject</a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endwhile; ?>
