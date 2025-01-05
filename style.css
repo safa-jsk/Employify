@@ -247,6 +247,22 @@ a:hover {
   z-index: 1001;
 }
 
+.popup-comp-info {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 90%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  z-index: 1001;
+}
+
+.comp-info p{
+  margin-bottom: 5px;
+}
+
 .popup-header {
   display: flex;
   justify-content: space-between;

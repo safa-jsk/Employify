@@ -250,15 +250,18 @@ $con->close();
         <?php if (isset($_GET['data-job-id']) && !empty($_GET['data-job-id'])): ?>
             <div id="jobDetailsModal" class="popup">
                 <div class="popup-content">
+                <a href="#" class="close-btn">&times;</a>
                     <?php if (isset($job) && $job): ?>
-                        <p><strong>Company Name:</strong> <?= htmlspecialchars($job['Company']); ?></p>
-                        <p><strong>Contact:</strong><?= htmlspecialchars($job['Contact']); ?></p>
-                        <p><strong>Email:</strong><?= htmlspecialchars($job['Email']); ?></p>
-                        <p><strong>Post:</strong><?= htmlspecialchars($job['Post']); ?></p>
-                        <p><strong>Field:</strong><?= htmlspecialchars($job['Field']); ?></p>
-                        <p><strong>Salary:</strong><?= htmlspecialchars($job['Salary']); ?></p>
-                        <p><strong>Deadline:</strong><?= htmlspecialchars($job['Deadline']); ?></p>
-                        <p><strong>Description:</strong><?= htmlspecialchars($job['Description']); ?></p>
+                        <div class="comp-info">
+                            <p><strong>Company Name :  </strong> <?= htmlspecialchars($job['Company']); ?></p>
+                            <p><strong>Contact :  </strong><?= htmlspecialchars($job['Contact']); ?></p>
+                            <p><strong>Email :  </strong><?= htmlspecialchars($job['Email']); ?></p>
+                            <p><strong>Post :  </strong><?= htmlspecialchars($job['Post']); ?></p>
+                            <p><strong>Field :  </strong><?= htmlspecialchars($job['Field']); ?></p>
+                            <p><strong>Salary :  </strong><?= htmlspecialchars($job['Salary']); ?></p>
+                            <p><strong>Deadline :  </strong><?= htmlspecialchars($job['Deadline']); ?></p>
+                            <p><strong>Description:  </strong><?= htmlspecialchars($job['Description']); ?></p>
+                        </div>
                     <?php else: ?>
                         <p>No job details found.</p>
                     <?php endif; ?>
