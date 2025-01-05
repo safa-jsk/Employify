@@ -105,8 +105,8 @@ require_once 'DBconnect.php'; // use $con
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <select name="gender" required>
                     <option value="" disabled selected>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
                 </select>
                 <input type="date" name="dob" placeholder="Date of Birth" required>
                 <input type="email" name="email" placeholder="Email" required>
@@ -132,8 +132,8 @@ require_once 'DBconnect.php'; // use $con
                 <input type="text" name="last_name" placeholder="Last Name" required>
                 <select name="gender" required>
                     <option value="" disabled selected>Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
                 </select>
                 <input type="date" name="dob" placeholder="Date of Birth" required>
                 <input type="email" name="email" placeholder="Email" required>
