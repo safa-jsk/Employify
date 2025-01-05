@@ -109,15 +109,19 @@ $result_recommended = $stmt_recommended->get_result();
 
 
 // Fetch job details based on the job_id
-$stmt = $con->prepare("SELECT A.Name AS Post, A.Description, A.Salary, A.Deadline, A.Field,
+$stmt = $con->prepare("SELECT A.A_id, A.Name AS Post, A.Description, A.Salary, A.Deadline, A.Field,
                        C.CName AS Company, C.Contact, C.Email
                        FROM applications A
-                       JOIN recruiter C ON A.A_id = C.R_id 
+                       INNER JOIN recruiter C ON A.R_id = C.R_id 
                        WHERE A.A_id = ? AND A.Status = 1");
-$A_id= $_GET["data-job-id"];
-$stmt->bind_param("i", $A_id);
-$stmt->execute();
-$result = $stmt->get_result();
+
+if (isset($_GET['data-job-id']) && !empty($_GET['data-job-id'])) {
+    $A_id = $_GET['data-job-id'];
+    $stmt->bind_param("i", $A_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+}
+
 
 if ($result->num_rows > 0) {
     $job = $result->fetch_assoc();
@@ -130,8 +134,6 @@ if ($result->num_rows > 0) {
     $companyName = htmlspecialchars($job['Company']);
     $companyContact = htmlspecialchars($job['Contact']);
     $companyEmail = htmlspecialchars($job['Email']);
-
-    echo 'jobs';
 }
 
 $stmt->close();
@@ -215,6 +217,7 @@ $con->close();
             <table class="job-recommendations">
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Name</th>
                         <th>Field</th>
                         <th>Deadline</th>
@@ -222,17 +225,21 @@ $con->close();
                     </tr>
                 </thead>
                 <tbody>
-                <?php if ($result_recommended->num_rows > 0): ?>
+                    <?php if ($result_recommended->num_rows > 0): ?>
                         <?php while ($row = $result_recommended->fetch_assoc()): ?>
                             <tr>
-                            <td> <?= htmlspecialchars($row['Name']); ?> </td>
-                            <td> <?= htmlspecialchars($row['Field']); ?> </td>
-                            <td> <?= htmlspecialchars($row['deadline']); ?> </td>
-                            <td><a href="?data-job-id=<?= $row['A_id']; ?>#jobDetailsModal" class="view-details">View Details</a></td>
+                                <td> <?= htmlspecialchars($row['A_id']); ?> </td>
+                                <td> <?= htmlspecialchars($row['Name']); ?> </td>
+                                <td> <?= htmlspecialchars($row['Field']); ?> </td>
+                                <td> <?= htmlspecialchars($row['deadline']); ?> </td>
+                                <td><a href="?data-job-id=<?= $row['A_id']; ?>#jobDetailsModal" class="view-details">View
+                                        Details</a></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
-                        <tr><td colspan="4">No job recommendations based on your skills.</td></tr>
+                        <tr>
+                            <td colspan="4">No job recommendations based on your skills.</td>
+                        </tr>
                     <?php endif; ?>
 
                 </tbody>
@@ -240,23 +247,25 @@ $con->close();
         </div>
 
         <!-- Job Details Modal -->
-        <div id="jobDetailsModal" class="popup">
-            <div class="popup-content">
-            <?php if (isset($job) && $job): ?>
-                <p><strong>Company Name:</strong> <?= htmlspecialchars($job['Company']); ?></p>
-                <p><strong>Contact:</strong><?= htmlspecialchars($job['Contact']); ?></p>
-                <p><strong>Email:</strong><?= htmlspecialchars($job['Email']); ?></p>
-                <p><strong>Post:</strong><?= htmlspecialchars($job['Post']); ?></p>
-                <p><strong>Field:</strong><?= htmlspecialchars($job['Field']); ?></p>
-                <p><strong>Salary:</strong><?= htmlspecialchars($job['Salary']); ?></p>
-                <p><strong>Deadline:</strong><?= htmlspecialchars($job['Deadline']); ?></p>
-                <p><strong>Description:</strong><?= htmlspecialchars($job['Description']); ?></p>
-            <?php else: ?>
-                <p>No job details found.</p>
-            <?php endif; ?>
+        <?php if (isset($_GET['data-job-id']) && !empty($_GET['data-job-id'])): ?>
+            <div id="jobDetailsModal" class="popup">
+                <div class="popup-content">
+                    <?php if (isset($job) && $job): ?>
+                        <p><strong>Company Name:</strong> <?= htmlspecialchars($job['Company']); ?></p>
+                        <p><strong>Contact:</strong><?= htmlspecialchars($job['Contact']); ?></p>
+                        <p><strong>Email:</strong><?= htmlspecialchars($job['Email']); ?></p>
+                        <p><strong>Post:</strong><?= htmlspecialchars($job['Post']); ?></p>
+                        <p><strong>Field:</strong><?= htmlspecialchars($job['Field']); ?></p>
+                        <p><strong>Salary:</strong><?= htmlspecialchars($job['Salary']); ?></p>
+                        <p><strong>Deadline:</strong><?= htmlspecialchars($job['Deadline']); ?></p>
+                        <p><strong>Description:</strong><?= htmlspecialchars($job['Description']); ?></p>
+                    <?php else: ?>
+                        <p>No job details found.</p>
+                    <?php endif; ?>
 
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
 
         <!-- Section 3: Applied Jobs List -->
         <h2>Upcoming Applied Jobs</h2>
