@@ -27,7 +27,8 @@ $result = $stmt->get_result();
 // Handle deletion
 if (isset($_GET['delete']) && $_GET['delete']) {
     $msg_id = intval($_GET['delete']);
-    $delete_stmt = $con->prepare("DELETE FROM feedback WHERE msg_id = ?");
+    $delete_stmt = $con->prepare("DELETE FROM feedback 
+                                    WHERE msg_id = ?");
     $delete_stmt->bind_param("i", $msg_id);
     if ($delete_stmt->execute()) {
         header("Location: a_feedback.php?success=deleted");

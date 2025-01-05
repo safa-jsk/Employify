@@ -13,7 +13,8 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 $username = $_SESSION['username'];
 
 // Fetch jobs posted by the logged-in user
-$query_posted_jobs = "SELECT * FROM applications WHERE R_id = ?";
+$query_posted_jobs = "SELECT * FROM applications 
+                        WHERE R_id = ?";
 $stmt_posted_jobs = $con->prepare($query_posted_jobs);
 $stmt_posted_jobs->bind_param("s", $username);
 $stmt_posted_jobs->execute();
@@ -31,7 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_job'])) {
     $status = isset($_POST['Status']) ? 1 : 0;
 
     $update_query = "UPDATE applications 
-                        SET Name = ?, Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? WHERE A_id = ?";
+                        SET Name = ?, Field = ?, Deadline = ?, Salary = ?, Description = ?, Status = ? 
+                        WHERE A_id = ?";
     $stmt_update = $con->prepare($update_query);
     $stmt_update->bind_param("sssssss", $name, $field, $deadline, $salary, $description, $status, $A_id);
     $stmt_update->execute();
