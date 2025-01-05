@@ -45,18 +45,21 @@ if (basename($_SERVER['PHP_SELF']) !== 'index.php') {
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Services</a></li>
-                <li><a href="#" class="contact-btn">Contact</a></li>
+                <li><a href="#">Contact</a></li>
                 <?php if (isset($_SESSION['username']) && isset($_SESSION['role'])): ?>
                     <?php if ($_SESSION['role'] === 'job_seeker'): ?>
-                        <li><a href="js_dashboard.php">Login</a></li>
+                        <li><a href="js_dashboard.php">Dashboard</a></li>
                     <?php elseif ($_SESSION['role'] === 'employer'): ?>
-                        <li><a href="e_dashboard.php">Login</a></li>
+                        <li><a href="e_dashboard.php">Dashboard</a></li>
+                    <?php elseif ($_SESSION['role'] === 'admin'): ?>
+                        <li><a href="admin_panel.php">Admin Panel</a></li>
                     <?php endif; ?>
                 <?php else: ?>
                     <li><a href="#loginModal">Login</a></li>
                 <?php endif; ?>
             </ul>
         </nav>
+
     </header>
 
     <!-- Home Section -->
