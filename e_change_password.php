@@ -46,7 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['change_password'])) {
 
     // Update password
     $hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
-    $update_query = $con->prepare("UPDATE recruiter SET password = ? WHERE R_id = ?");
+    $update_query = $con->prepare("UPDATE recruiter 
+                                   SET password = ? 
+                                   WHERE R_id = ?");
     $update_query->bind_param("ss", $hashed_password, $user_id);
 
     if ($update_query->execute()) {

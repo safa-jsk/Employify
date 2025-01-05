@@ -14,7 +14,8 @@ $A_id = intval($_GET['A_id']);
 $S_id = $_GET['S_id'];
 
 // Prepare the query to reject the candidate
-$reject_query = $con->prepare("UPDATE seeker_seeks SET Status = 0 WHERE A_id = ? AND S_id = ?");
+$reject_query = $con->prepare("UPDATE seeker_seeks SET Status = 0 
+                               WHERE A_id = ? AND S_id = ?");
 
 if (!$reject_query) {
     die("Error in query preparation: " . $con->error);
