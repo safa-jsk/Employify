@@ -51,10 +51,6 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
             <button type="submit" class="btn btn-primary">Post Job</button>
         </form>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFyZ6tOrX2UGjUZJhzoeF1hZeGkEe2kC7HrrxQi1RAd+0cFihkc7x9o2p6" crossorigin="anonymous">
-    </script>
 </body>
 
 </html>

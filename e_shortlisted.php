@@ -21,15 +21,14 @@ $result_jobs = $stmt_jobs->get_result();
 $stmt_jobs->close();
 
 // Fetch shortlisted candidates with optional filters
-$query_shortlisted_candidates = "
-    SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.Field, a.Deadline, 
-           CONCAT(s.FName, ' ', s.LName) AS Seeker_Name, s.Email,
-           ss.Status 
-    FROM recruiter_shortlist sc
-    INNER JOIN applications a ON sc.A_id = a.A_id
-    INNER JOIN seeker s ON sc.S_id = s.S_id
-    LEFT JOIN seeker_seeks ss ON sc.A_id = ss.A_id AND sc.S_id = ss.S_id
-    WHERE sc.R_id = ?";
+$query_shortlisted_candidates = "SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.Field, a.Deadline, 
+                                 CONCAT(s.FName, ' ', s.LName) AS Seeker_Name, s.Email,
+                                 ss.Status 
+                                 FROM recruiter_shortlist sc
+                                 INNER JOIN applications a ON sc.A_id = a.A_id
+                                 INNER JOIN seeker s ON sc.S_id = s.S_id
+                                 LEFT JOIN seeker_seeks ss ON sc.A_id = ss.A_id AND sc.S_id = ss.S_id
+                                 WHERE sc.R_id = ?";
 
 $parameters = [$username];
 $types = "s";
