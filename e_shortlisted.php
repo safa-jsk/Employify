@@ -27,7 +27,7 @@ $query_shortlisted_candidates = "SELECT sc.S_id, sc.A_id, a.Name AS Job_Name, a.
                                  FROM recruiter_shortlist sc
                                  INNER JOIN applications a ON sc.A_id = a.A_id
                                  INNER JOIN seeker s ON sc.S_id = s.S_id
-                                 LEFT JOIN seeker_seeks ss ON sc.A_id = ss.A_id AND sc.S_id = ss.S_id
+                                 INNER JOIN seeker_seeks ss ON sc.A_id = ss.A_id AND sc.S_id = ss.S_id
                                  WHERE sc.R_id = ?
                                  GROUP BY ss.Status";
 
