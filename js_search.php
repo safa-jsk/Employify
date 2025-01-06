@@ -122,7 +122,7 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                     $result = $stmt->get_result();
                     ?>
 
-                <tbody> 
+                <tbody>
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($items = $result->fetch_assoc()): ?>
                             <tr>
@@ -153,11 +153,11 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
 
                                     <?php endif; ?>
                                 </td>
-                                
+
                                 <td>
                                     <a href="?A_id=<?= $items['A_id']; ?>#jobDetailsPopup" class="view-button">Details</a>
                                 </td>
-                                
+
 
                             </tr>
                         <?php endwhile; ?>
@@ -176,14 +176,14 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                 </tbody>
             </table>
         </div>
-        
-    <!-- Popup Modal for view profile -->
-    <?php if (isset($_GET['A_id']) && !empty($_GET['A_id'])): ?>
-        <div id="jobDetailsPopup" class="view_job_popup">
-            <div class="view_job_popup-content">
-                <a href="#" class="view_job_close-btn">&times;</a>
-                
-                <?php
+
+        <!-- Popup Modal for view profile -->
+        <?php if (isset($_GET['A_id']) && !empty($_GET['A_id'])): ?>
+            <div id="jobDetailsPopup" class="view_job_popup">
+                <div class="view_job_popup-content">
+                    <a href="#" class="view_job_close-btn">&times;</a>
+
+                    <?php
                     $A_id = intval($_GET['A_id']);
                     $stmt = $con->prepare("SELECT A.*, R.CName FROM applications A 
                                             INNER JOIN recruiter R ON A.R_id = R.R_id 
@@ -193,31 +193,31 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0):
                         $job = $result->fetch_assoc();
-                ?>
-                <div class="view_job_profile-details">
-                    <h2>Job Details</h2>
-                    <p><strong>ID:</strong> <?= htmlspecialchars($job["A_id"]); ?></p>
-                    <p><strong>Name:</strong> <?= htmlspecialchars($job["Name"]); ?></p>
-                    <p><strong>Company:</strong> <?= htmlspecialchars($job["CName"]); ?></p>
-                    <p><strong>Deadline:</strong> <?= htmlspecialchars($job["Deadline"]); ?></p>
-                    <p><strong>Field:</strong> <?= htmlspecialchars($job["Field"]); ?></p>
-                    <p><strong>Salary:</strong> <?= htmlspecialchars($job["Salary"]); ?></p>
-                    <p><strong>Description:</strong> <?= htmlspecialchars($job["Description"]); ?></p>
-                </div>
+                    ?>
+                        <div class="view_job_profile-details">
+                            <h2>Job Details</h2>
+                            <p><strong>ID:</strong> <?= htmlspecialchars($job["A_id"]); ?></p>
+                            <p><strong>Name:</strong> <?= htmlspecialchars($job["Name"]); ?></p>
+                            <p><strong>Company:</strong> <?= htmlspecialchars($job["CName"]); ?></p>
+                            <p><strong>Deadline:</strong> <?= htmlspecialchars($job["Deadline"]); ?></p>
+                            <p><strong>Field:</strong> <?= htmlspecialchars($job["Field"]); ?></p>
+                            <p><strong>Salary:</strong> <?= htmlspecialchars($job["Salary"]); ?></p>
+                            <p><strong>Description:</strong> <?= htmlspecialchars($job["Description"]); ?></p>
+                        </div>
 
-            <?php else: ?>
-                <p>Profile not found.</p>
-            <?php
+                    <?php else: ?>
+                        <p>Profile not found.</p>
+                    <?php
                     endif;
                     $stmt->close();
-            ?>
+                    ?>
+                </div>
             </div>
-        </div>
-    <?php endif; ?>
+        <?php endif; ?>
     </main>
-                    
 
-        <script>
+
+    <script>
         // Close popups when clicking outside
         window.onclick = function(event) {
             const modals = ['jobDetailsPopup'];
@@ -258,5 +258,13 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] !== $pageRole) {
             });
         });
     </script>
+
+    <?php
+    if (isset($_GET['message']) && !empty($_GET['message'])) {
+        $message = htmlspecialchars($_GET['message']);
+        echo "<script> alert('$message'); </script>";
+    }
+    ?>
 </body>
+
 </html>
