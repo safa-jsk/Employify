@@ -51,7 +51,7 @@ Employify is a job-seeking platform designed to connect job seekers with employe
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/YOUR_REPOSITORY_LINK
+   git clone https://github.com/safa-jsk/Employify
    ```
 
 2. Import the database:
